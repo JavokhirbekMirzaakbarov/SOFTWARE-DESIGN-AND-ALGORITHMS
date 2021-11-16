@@ -13,7 +13,7 @@ const config = {
   favicon: 'img/favicon.ico',
   organizationName: 'epam', // Usually your GitHub org/user name.
   projectName: 'docusaurus', // Usually your repo name.
-
+  plugins: [require.resolve('docusaurus-lunr-search')],
   presets: [
     [
       '@docusaurus/preset-classic',
