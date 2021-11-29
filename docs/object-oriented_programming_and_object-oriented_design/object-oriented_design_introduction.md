@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-# 4. OBJECT-ORIENTED DESIGN INTRODUCTION
+# 4. Object-oriented Design Introduction
 
 Object-oriented design is the process of planning a system of **interacting objects** for the purpose of solving a **software problem**. It is one approach to software design.
 
@@ -10,7 +10,7 @@ Let us look at the words in bold: object interactions and no software problem-so
 
 I think you get the idea: applications that are easy to change are always fun to write and extend. Such applications will be flexible in development, adaptable to new requirements, and so on. Conversely, applications that lack such qualities as flexibility and adaptability - each change will be more expensive and more difficult.
 
-## 4.1 DESIGN SMELLS
+## 4.1 Design Smells
 
 Let us look at the criteria for the so-called bad design or the so-called bad design smells, as there are code smells, there are also bad design smells:
 - Rigidity
@@ -31,11 +31,11 @@ Needless Complexity or premature optimization - indicates that the system is unn
 
 In general, the main reason for all the above listed bad design smells is the lack of flexibility in the system. The system must be flexible, or, as per saying: software must be soft that is, it must be easy to change. And that is why we need a good design.
 
-## 4.2 WHAT IS DESIGN?
+## 4.2 What is Design?
 
 Figure 4.1 – Lifecycle of a construction project
 
-![img.png](img/Lifecycle_of_a_construction_project.png)
+![img.png](img/lifecycle_of_a_construction_project.png)
 
 Let us imagine the process of creating something. It will have three phases: the actual design phase; the process of creation or construction and the final product.
 
@@ -45,13 +45,13 @@ As you can see from the diagram, the creation or building process is much bigger
 
 Figure 4.2 – Lifecycle of a software development project
 
-![img.png](img/Lifecycle_of_a_software_development_project.png)
+![img.png](img/lifecycle_of_a_software_development_project.png)
 
 Now let us apply this constructing analogy to the architecture of a software system, just in reverse order. What will be the final product? – An application that solves some specific problems in its domain area. What will be the creation process? – The process of interpreting or compiling source code. And the design process, oddly enough, is the source code itself.
 
 So, in fact, neither diagrams, nor the relationships between them, nor drawings, and so on - they are not design, they help us structure, organize our thoughts into a specific approach and implement it in the form of source code. In this case, the design phase is much longer and more expensive than the creation phase. That is why the design phase should be iterative, gradual, with constant feedback from both the product and the client. In general, this is the main difference between software and, for example, construction. In software, we have one unbreakable constant that will never change throughout the entire time of our development - these are changes, there have always been changes, they will always occur. And this is the reason why we need design as an ongoing interactive process.
 
-## 4.3 WHY CHANGE IS HARD AND THE PROBLEM DESIGN SOLVES
+## 4.3 Why Change is Hard and the Problem Design Solves
 
 - Object-oriented application is made of parts – objects
 - Interactions are embodied in the messages that pass between the objects
@@ -60,7 +60,7 @@ So, in fact, neither diagrams, nor the relationships between them, nor drawings,
 
 Requirements, product, ecosystem, environment, customer ¬ all this will change. The system needs a design that is ready for such changes. Such design would consist of certain parts that would interact with each other to create the behavior of something whole: a class, a component, an architectural layer, or an application. As you understand parts are objects, interactions between them are implemented using messages that are sent between these objects. At the same time, sending the correct message to the correct recipient-object requires knowledge of where this object is and how to interact with it. This knowledge creates a relationship between two or three objects, or generally a huge number of objects in the system. Cross dependencies, cycle-dependency and so on arise. Accordingly, all these dependencies complicate system change. Object-oriented design is essentially dependency management. In the absence of design, unmanaged dependencies lead to chaos, because objects begin to know too much about each other, and at some point, it is easier to throw everything out and rewrite entire application than to add some next changes. Since these dependencies just become unmanageable. By changing something in one place, even if there are some tests, we do not exclude the possibility that something will not break in another place.
 
-## 4.4 THE PURPOSE OF OOD
+## 4.4 The Purpose oF OOD
 
 Software must:
 - Satisfy customer’s needs
@@ -69,7 +69,7 @@ Software must:
 Thus, the goal of object-oriented design is just two things. The first is, of course, to satisfy the needs of the customer, and the second is to be easy to change and be adaptable and ready for such changes and extensions.
 
 
-## 4.5 THE TOOLS OF DESIGN
+## 4.5 The Tools of Design
 
 - Design Principles: SOLID, DRY, KISS
 - Design Patterns: Creational, Behavioral, Structural

@@ -2,11 +2,11 @@
 sidebar_position: 3
 ---
 
-# 3. PRINCIPLES OF OOP
+# 3. Principles of OOP
 
 We are done with the introductory part, let us move on to the principles of object-oriented programming. We will consider four basic principles of OOP on which the object-oriented concept, object-oriented programming is based: abstraction, polymorphism, encapsulation, and inheritance. In some sources, more concepts are highlighted, for example, Wikipedia still refers to the fundamental concepts of object-oriented programming such concepts as class and object. But these four concepts are the classics on which the concept of object-oriented programming is based.
 
-## 3.1 ABSTRACTION
+## 3.1 Abstraction
 
 Abstraction in object-oriented programming means the highlighting of some significant parts, meaningful information from a component, no matter whether it is a class or an architectural layer in the system, or a logical unit of our system. In general, the highlighting of significant parts or exclusion of insignificant parts from consideration. In OOP, only data abstraction is considered, usually it simply called as "abstraction" implying a set of the most significant characteristics of an object available for the program. Abstraction is essential when dealing with system complexity by hiding implementation details and highlighting essential aspects of behavior. The main idea of abstraction is to describe real life objects and how they interact in a software system. Abstraction can be implemented using interfaces and abstract classes.
 
@@ -98,7 +98,7 @@ Well, you can see that we have a certain abstraction called a `CoffeeMachine`, i
 
 The `CoffeeMachine` is an abstraction, and the method `brewCoffee` is a significant behavior that we have highlighted in this abstraction. Everything else, all the settings of the coffee machine, initialization in the constructor of some configuration of everything else - for the client this is not meaningful behavior, it should not depend on it, because it is unstable, it can change. The implementation details are changed systematically, the requirements are changed systematically, the main thing is not to change the public interface on which clients depend.
 
-## 3.2 ENCAPSULATION
+## 3.2 Encapsulation
 
 If abstraction allows us to highlight the essential behavior of our component, the essential aspects of its behavior, then encapsulation is the tool that helps to hide unimportant implementation details out of sight. In the design field, there are two concepts - encapsulation and data hiding, information hiding. Encapsulation is commonly used in the context of information hiding. Public mutable data violates encapsulation, because in this case any client of the class can change the internal state of the class object without the notification of the class. To achieve encapsulation in the design, two components are distinguished, the two parts of the class that were mentioned earlier are the public part, its public interface, and the private part, not meaningful to the client behavior, implementation details. At the same time, the class interface that has encapsulation should not just take and duplicate the property of this class through accessors (getters and setters), it should provide abstract interface, a higher-level one that is needed by the client. In other words, the public part should expose more about what the class does and hide unnecessary implementation details from clients. Abstraction and encapsulation complement each other and form some more general holistic picture of the object-oriented programming paradigm.
 
@@ -160,7 +160,7 @@ The second case is also an encapsulation, in which we hide the entire management
 
 Abstraction and encapsulation also play a key role in fighting complexity, providing the ability to design at a higher level, abstracting from implementation details.
 
-## 3.3 INHERITANCE
+## 3.3 Inheritance
 
 Inheritance is the mechanism of basing an object or class upon another object (prototypical inheritance) or class (class-based inheritance), retaining similar implementation. In most class-based object-oriented languages, an object created through inheritance (a "child object") acquires all the properties and behaviors of the parent object.
 
@@ -198,7 +198,7 @@ On the Listing 3.6 you can see an example of inheritance. We have a `Person` cla
 - **Protected** – is a little wider than private, only instances of the current class and classes of descendants can work with them. From `Employee`, we can refer to `name` from `Person`. Moreover, they are also closed to the outside world.
 - **Public** - public properties and methods are those that are provided to clients in the form of a public interface, on which they will depend, which should be the most stable and the most unchangeable.
 
-## 3.4 POLYMORPHISM
+## 3.4 Polymorphism
 
 Polymorphism is the provision of a single interface to entities of different types or the use of a single symbol to represent multiple different types.
 

@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# 1. PROGRAMMING PARADIGM
+# 1. Programming Paradigm
 
 This lecture is going to be dedicated to object-oriented programming and object-oriented design. It is going to be an overview lecture of what you are going to learn in this course, but I recommend you pay close attention to it. The reason being, it is going to include a lot of basics and principles that will help you write better, cleaner, more maintainable code.
 
@@ -14,7 +14,7 @@ A programming paradigm is sort of a programming style. It is not bound to a cert
 
 We are going to touch upon 4 of the most recognized paradigms. Although [some sources suggest](https://wiki.c2.com/?ThereAreExactlyThreeParadigms) that there are only 3 of them.
 
-## 1.1 DECLARATIVE PROGRAMMING
+## 1.1 Declarative Programming
 - In declarative programming, the programmer instructs the computer on what is to be computed.
 - You do not know how it works, but you know what it does.
 - It is a very good idea to decouple DOM manipulation from app logic. This improves the testability of code.
@@ -31,7 +31,7 @@ order by name
 
 On the example above, you can see an SQL query. It is also an example of declarative programming. Here, we describe the context of the problem, a list of people and what we want to get from that list: a list of names, uppercased, where the length of the name is larger than 5. The list of names should be ordered in ascending order. We do not care what type of database we are using. We do not describe how to retrieve the data or how to go through each entry of people list. Whether the application should use quick sort or merge sort. It is all up for the application or interpreter to decide.
 
-## 1.2 IMPERATIVE PROGRAMMING
+## 1.2 Imperative Programming
 - The script is basically telling the computer how to do something.
 - Imperative phrases which change the global state of a program"
 - Not scalable
@@ -62,7 +62,7 @@ With imperative programming you know exactly what is happening. You can dial int
 
 Both approaches have their place in a programming with their strengths and weaknesses. It is also worth mentioning that all code is imperative in the end, when it is executed by the processor.
 
-## 1.3 OBJECT-ORIENTED PROGRAMMING
+## 1.3 Object-Oriented Programming
 - Program is defined by object which combine state and behavior
 - Good for structured and modular code
 - Well suited for big projects
@@ -83,7 +83,7 @@ for p in people {
 return result.sort;
 ```
 
-## 1.4 FUNCTIONAL PROGRAMMING
+## 1.4 Functional Programming
 - Treats computations as the evaluation of functions and avoids changing state and mutable data
 - Eliminating side effects, i.e., changes in state that do not depend on the function inputs, can make it much easier to understand and predict the behavior of a program
 - Emphasize using of immutable data
