@@ -21,7 +21,7 @@ When you call a shop to place a phone order, an operator is your facade to all s
 Figure 3.1 - Façade
 
 <img
-  width="500"
+  width="700"
   src={require('./img/facade.jpg').default}
   alt="Façade"
 />
@@ -102,7 +102,7 @@ When does a simple wrapper become the real decorator? As I mentioned, the wrappe
 Figure 3.2 - Decorator
 
 <img
-  width="500"
+  width="700"
   src={require('./img/decorator.jpg').default}
   alt="Decorator"
 />
@@ -200,7 +200,7 @@ Unlike Decorator, a Proxy usually manages the life cycle of its service object o
 Figure 3.3 - Proxy
 
 <img
-  width="500"
+  width="700"
   src={require('./img/proxy.jpg').default}
   alt="Proxy"
 />

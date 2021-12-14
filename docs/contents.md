@@ -8,3 +8,4 @@ sidebar_position: 1
 - [2. Building Blocks of OOP, Part 1](/docs/building_blocks_of_oop_part_1/contents)
 - [3. Building Blocks of OOP, Part 2](/docs/building_blocks_of_oop_part_2/contents)
 - [4. Design Patterns](/docs/design_patterns/contents)
+- [5. SOLID](/docs/solid/contents)

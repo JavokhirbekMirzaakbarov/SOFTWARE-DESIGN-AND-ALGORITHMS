@@ -17,7 +17,7 @@ It provides you an interface for creating objects for each class of the product 
 Figure 2.1 - Abstract Factory
 
 <img
-  width="500"
+  width="700"
   src={require('./img/abstract_factory.jpg').default}
   alt="Abstract Factory"
 />
@@ -127,7 +127,7 @@ Singleton is a creational pattern, which means, that the class has only one inst
 Figure 2.2 - Singleton
 
 <img
-  width="500"
+  width="700"
   src={require('./img/singleton.jpg').default}
   alt="Singleton"
 />
@@ -202,7 +202,7 @@ Having a director class in your program is not necessary. You can always call th
 Figure 2.3 - Builder
 
 <img
-  width="500"
+  width="700"
   src={require('./img/builder.jpg').default}
   alt="Builder"
 />

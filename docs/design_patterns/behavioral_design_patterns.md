@@ -22,7 +22,7 @@ There are three types of steps:
 Figure 4.1 - Template Method
 
 <img
-  width="500"
+  width="700"
   src={require('./img/template_method.jpg').default}
   alt="Template Method"
 />
@@ -113,7 +113,7 @@ The context is not responsible for selecting an appropriate algorithm for the jo
 Figure 4.2 - Strategy
 
 <img
-  width="500"
+  width="700"
   src={require('./img/strategy.jpg').default}
   alt="Strategy"
 />
@@ -210,7 +210,7 @@ Now, what if that behavior can be executed over objects of different classes? Fo
 Figure 4.3 - Visitor
 
 <img
-  width="500"
+  width="700"
   src={require('./img/visitor.jpg').default}
   alt="Visitor"
 />
@@ -327,7 +327,7 @@ The next step is make your commands to implement the same interface. Usually it 
 Figure 4.4 - Command
 
 <img
-  width="500"
+  width="700"
   src={require('./img/command.jpg').default}
   alt="Command"
 />
