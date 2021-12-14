@@ -37,7 +37,7 @@ Figure 4.1 - x > 5 is stronger than x > 0
     alt="x > 5 is stronger than x > 0"
 />
 
-The concept of "stronger" and "weaker" came from logic. It is said that the condition **P1** is stronger than **P2**, and **P2** is weaker than **P1** if the fulfillment of **P1** implies the fulfillment of **P2**, but they are not equivalent. For example, `x > 5` (**P1**) is stronger than `x > 0` (**P2**), since if **P1** is fulfilled, **P2** is fulfilled as well (after all, if `x` is greater than `5`, then, naturally, `x` is greater than `0`), and they are not equivalent.
+The concept of "stronger" and "weaker" came from logic. It is said that the condition `P1` is stronger than `P2`, and `P2` is weaker than `P1` if the fulfillment of `P1` implies the fulfillment of `P2`, but they are not equivalent. For example, `x > 5` (`P1`) is stronger than `x > 0` (`P2`), since if `P1` is fulfilled, `P2` is fulfilled as well (after all, if `x` is greater than `5`, then, naturally, `x` is greater than `0`), and they are not equivalent.
 
 ```ts title="Listing 4.2"
 class Stack<T> {
@@ -70,13 +70,13 @@ Each function has strict semantic properties that reflect what the function does
 
 In this case, preconditions define properties that must be met every time before function is executed, and postconditions - those properties that must be met after its execution.
 
-The precondition binds the calling code: the conditions are defined under which the program call by the client is legitimate (for example, `x > 0` for the **Sqrt** function or `count ! = 0` for the **Pop** function of the **Stack** class). In this case, the client's obligations benefit the provider class, since the class performing the operation does not need to worry about what to do if a precondition is violated: return a default value or error code, throw an exception, save information about the error to the I/O stream, or interrupt the program execution.
+The precondition binds the calling code: the conditions are defined under which the program call by the client is legitimate (for example, `x > 0` for the `Sqrt` function or `count ! = 0` for the `Pop` function of the `Stack` class). In this case, the client's obligations benefit the provider class, since the class performing the operation does not need to worry about what to do if a precondition is violated: return a default value or error code, throw an exception, save information about the error to the I/O stream, or interrupt the program execution.
 
-The postcondition binds the class: the conditions that must be met upon completion of the operation are determined (the **Stack** class must provide an increase in the number of elements by 1 after the **push** function is executed). Here, the client's benefit (the result of performing the function) turns into the supplier's obligations (he can no longer fail to fulfill his obligations, since they are spelled out in the contract).
+The postcondition binds the class: the conditions that must be met upon completion of the operation are determined (the `Stack` class must provide an increase in the number of elements by 1 after the `push` function is executed). Here, the client's benefit (the result of performing the function) turns into the supplier's obligations (he can no longer fail to fulfill his obligations, since they are spelled out in the contract).
 
 ## 4.2 Preconditions and Postconditions for Inheritance
 
-Let us review an example from Figure 4.2 where we have **C** class which contains link to a **B** class. Due to dynamic linking **D** class (or any other **B** subclass) can be used instead of **B** class after the start of program execution.
+Let us review an example from Figure 4.2 where we have `C` class which contains link to a `B` class. Due to dynamic linking `D` class (or any other `B` subclass) can be used instead of `B` class after the start of program execution.
 
 Figure 4.2 - B – C – D classes relations
 
@@ -112,10 +112,10 @@ class C {
 }
 ```
 
-**B** class has a public **foo** function with a precondition of `x > 5` (pre_b) and a postcondition `result > 0` (post_b). By checking the precondition, class **C** fulfills its part of the contract and can expect class **B** (or one of its subclasses) to fulfill the contract. According to the Liskov substitution principle, the behavior of the given code fragment should not change if we substitute any **B** subclass.
-Let us assume that the function **foo** in class **D** starts to require more (contains a stronger precondition like `x > 10`), and guarantees less (contains a weaker postcondition like `x > -5`)
+`B` class has a public `foo` function with a precondition of `x > 5` (pre_b) and a postcondition `result > 0` (post_b). By checking the precondition, class `C` fulfills its part of the contract and can expect class `B` (or one of its subclasses) to fulfill the contract. According to the Liskov substitution principle, the behavior of the given code fragment should not change if we substitute any `B` subclass.
+Let us assume that the function `foo` in class `D` starts to require more (contains a stronger precondition like `x > 10`), and guarantees less (contains a weaker postcondition like `x > -5`)
 
-In this case, although the client of class **B** fulfills its part of the contract and provides an input value to the function **foo** that satisfies the precondition, it may not get the expected result. Strengthening the precondition means that the data correct for the base class will become incorrect for its subclass (in our example, it can be the value `x` equal to `6`), and weakening the postcondition means that the result that the client of the base class expects may not be returned by the subclass (in our example, this could be the result of the function Foo equal to `-1`).
+In this case, although the client of class `B` fulfills its part of the contract and provides an input value to the function `foo` that satisfies the precondition, it may not get the expected result. Strengthening the precondition means that the data correct for the base class will become incorrect for its subclass (in our example, it can be the value `x` equal to `6`), and weakening the postcondition means that the result that the client of the base class expects may not be returned by the subclass (in our example, this could be the result of the function Foo equal to `-1`).
 
 Hence, we can conclude that when overriding methods, the precondition can be replaced only by an equal or weaker one (require less), and a postcondition - only equal to it or stronger (guarantees more). The new version of the method should not reject calls allowed in the original, and should, at a minimum, provide guarantees equivalent to those of the original version. It is free, although not obligated, to allow more calls or provide stronger guarantees.
 
@@ -139,7 +139,7 @@ contravariance(new City());       // ok       support exact type
 contravariance(new NewYork());    // error... does not support subtype
 ```
 
-We have inheritance structure built of three classes, **Locality** as a base class and **City** and **NewYork** as more specific classes. Function with name **covariance** accepts **City** instances as an argument, but it also can accept **NewYork** instances as the more specific subclass and at the same time it can not accept **City** superclass as the argument – **Locality** because covariance will be violated in such case. Everything is vice versa for the contravariance function – it can accept **City** and its supertype as the argument but cannot accept **City** subclass.
+We have inheritance structure built of three classes, `Locality` as a base class and `City` and `NewYork` as more specific classes. Function with name `covariance` accepts `City` instances as an argument, but it also can accept `NewYork` instances as the more specific subclass and at the same time it can not accept `City` superclass as the argument – `Locality` because covariance will be violated in such case. Everything is vice versa for the contravariance function – it can accept `City` and its supertype as the argument but cannot accept `City` subclass.
 
 Let us look on another example, with a more detailed implementation, to understand how contravariance works on input values:
 
@@ -164,7 +164,7 @@ class TexasShippingCalculator extends ShippingCalculator {
 }
 ```
 
-In this example, we also have an inheritance hierarchy of three classes, the base **Destination**, its **USADestination** subclass and the even more specific **TexasDestionation** class. If we want to create a **ShippingCalculator** class that will accept **USADestination** as input and return the **Price** to us, and then create its **InternationalShippingCalculator** subclass which will already accept any **Destination** as input, then this will be correct since the contravariance of the input values is observed, and we can replace the **ShippingCalculator** with **InternationalShippingCalculator**, and it will work. But if after that we want to extend the functionality of the **ShippingCalculator** by creating its **TexasShippingCalculator** subclass which will only accept **TexasDestionation** as input, then in this case we can already say that the contravariance is not observed, since the input value is more specific, and in this case we cannot replace the **ShippingCalculator** on **TexasShippingCalculator** while keeping the system working.
+In this example, we also have an inheritance hierarchy of three classes, the base `Destination`, its `USADestination` subclass and the even more specific `TexasDestionation` class. If we want to create a `ShippingCalculator` class that will accept `USADestination` as input and return the `Price` to us, and then create its `InternationalShippingCalculator` subclass which will already accept any `Destination` as input, then this will be correct since the contravariance of the input values is observed, and we can replace the `ShippingCalculator` with `InternationalShippingCalculator`, and it will work. But if after that we want to extend the functionality of the `ShippingCalculator` by creating its `TexasShippingCalculator` subclass which will only accept `TexasDestionation` as input, then in this case we can already say that the contravariance is not observed, since the input value is more specific, and in this case we cannot replace the `ShippingCalculator` on `TexasShippingCalculator` while keeping the system working.
 
 Based on the next example we will find out how to meet contravariance for the output values:
 
@@ -199,4 +199,4 @@ class Terrarium extends ZooCage {
 }
 ```
 
-We have the base **Animal** class and its three subclasses, while the **Snake** and **Wolf** classes are its direct subclasses, and the **CanisLupus** class is a **Wolf** subclass. If we want to create a **ZooCage** class that will return the contents of the cage and the expected output value will be the **Wolf** class, then to maintain covariance in the **CanisLupusCage** class, we need to return the **Wolf** or **CanisLupus** class. If we create a **Terrarium** class with an output value of the **Animal** class, then the covariance will not be met, since the **Animal** class is a superclass of the **Wolf** class.
+We have the base `Animal` class and its three subclasses, while the `Snake` and `Wolf` classes are its direct subclasses, and the `CanisLupus` class is a `Wolf` subclass. If we want to create a `ZooCage` class that will return the contents of the cage and the expected output value will be the `Wolf` class, then to maintain covariance in the `CanisLupusCage` class, we need to return the `Wolf` or `CanisLupus` class. If we create a `Terrarium` class with an output value of the `Animal` class, then the covariance will not be met, since the `Animal` class is a superclass of the `Wolf` class.

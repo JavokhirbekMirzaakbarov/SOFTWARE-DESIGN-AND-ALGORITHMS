@@ -34,7 +34,7 @@ class User {
 }
 ```
 
-We have **sayMixin** with say method which prints given phrase on the screen, we also have its extended version – **sayHiMixin**. When you need to use mixin functionality on some object, you can just add it to the object’s prototype, and this will give us the possibility to use mixins methods on this object.
+We have `sayMixin` with say method which prints given phrase on the screen, we also have its extended version – `sayHiMixin`. When you need to use mixin functionality on some object, you can just add it to the object’s prototype, and this will give us the possibility to use mixins methods on this object.
 
 ```ts title="Listing 3.2"
 Object.assign(
@@ -49,7 +49,7 @@ But such approach has some consequences, prototypes functionality is not the mos
 
 ## 3.3 Writing the Concrete Code
 
-To better understand how mixins work and what they can give us we will go back to bicycles example. Let us look on the case when we need to make our bicycles schedulable, this functionality will give as an opportunity to schedule a single bicycle on a specific period. We also need to add **leadDays** property which will store number of days required to prepare the bicycle.
+To better understand how mixins work and what they can give us we will go back to bicycles example. Let us look on the case when we need to make our bicycles schedulable, this functionality will give as an opportunity to schedule a single bicycle on a specific period. We also need to add `leadDays` property which will store number of days required to prepare the bicycle.
 
 ```ts title="Listing 3.3"
 class Schedule {
@@ -87,7 +87,7 @@ Figure 3.1 - Bicycle classes know if they are schedulable
     alt="Bicycle classes know if they are schedulable"
 />
 
-Based on the result above and UML-diagram from Figure 3.1 we can say that major part of logic is stored in **Schedule** class, this class is used in **isSchedulable** method, it needs two dates, one for the start and one for the end of booking, **Schedule** instance receives start date with subtracted **leadDays**, so we will always have enough time to prepare the bicycle for a trip. Now we can schedule a bicycle, but we also have other classes like **Mechanic** and **Driver** and each of them has its own **leadDays** value. Extracting common logic, we can create **Schedulable** duck type.
+Based on the result above and UML-diagram from Figure 3.1 we can say that major part of logic is stored in `Schedule` class, this class is used in `isSchedulable` method, it needs two dates, one for the start and one for the end of booking, `Schedule` instance receives start date with subtracted `leadDays`, so we will always have enough time to prepare the bicycle for a trip. Now we can schedule a bicycle, but we also have other classes like `Mechanic` and `Driver` and each of them has its own `leadDays` value. Extracting common logic, we can create `Schedulable` duck type.
 
 Figure 3.2 - Schedulable duck type
 
@@ -97,7 +97,7 @@ Figure 3.2 - Schedulable duck type
     alt="Schedulable duck type"
 />
 
-Let us review UML-diagram from Figure 3.2, we have new **Schedulable** instance, but relation between **Bicycle** and **Schedulable** is not _IS-A_, because **Bicycle** should not be schedulable under normal conditions. This duck type rather describes **Bicycle** specific behavior when it is required to be scheduled for the trip, or under specific conditions in other words. Other parts of our system should not even know that **Bicycle** is schedulable, these classes relations will be better to describe as _BEHAVES-AS_.
+Let us review UML-diagram from Figure 3.2, we have new `Schedulable` instance, but relation between `Bicycle` and `Schedulable` is not _IS-A_, because `Bicycle` should not be schedulable under normal conditions. This duck type rather describes `Bicycle` specific behavior when it is required to be scheduled for the trip, or under specific conditions in other words. Other parts of our system should not even know that `Bicycle` is schedulable, these classes relations will be better to describe as _BEHAVES-AS_.
 
 ```ts title="Listing 3.4"
 const SchedulableMixin = (superclass) => class extends superclass {
@@ -132,7 +132,7 @@ class Mechanic extends SchedulableMixin(Object) {
 }
 ```
 
-We have extracted common logic to **SchedulableMixin** with **isSchedulable** method, and now we can easily mix it to any class in our hierarchy, either **Bicycle**, **Mechanic** or **Driver**, so we will have schedulable behavior when we only need it. In this case decorators could be used as an alternative solution, you may know about them from TypeScript, and they solve this problem in as similar manner, so mixins are not the only solution to add a behavior. The only consequence in **Schedulable** mixin is that we need to store **leadDays** property in a target class, so it can be used in mixin.
+We have extracted common logic to `SchedulableMixin` with `isSchedulable` method, and now we can easily mix it to any class in our hierarchy, either `Bicycle`, `Mechanic` or `Driver`, so we will have schedulable behavior when we only need it. In this case decorators could be used as an alternative solution, you may know about them from TypeScript, and they solve this problem in as similar manner, so mixins are not the only solution to add a behavior. The only consequence in `Schedulable` mixin is that we need to store `leadDays` property in a target class, so it can be used in mixin.
 
 ## 3.4 Mixins: Writing Inheritable Code
 

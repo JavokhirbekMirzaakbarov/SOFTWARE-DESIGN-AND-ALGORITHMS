@@ -75,9 +75,9 @@ Each route is rated according to its difficulty. Mountain bike rides have an add
 
 Customers can rent bicycles, or they can bring their own.
 
-Should the Trip class be responsible for figuring out if there is a suitable bike for each given trip? Or more generally "Should the recipient of this message (**Trip**) be responsible for responding to this message?"
+Should the Trip class be responsible for figuring out if there is a suitable bike for each given trip? Or more generally "Should the recipient of this message (`Trip`) be responsible for responding to this message?"
 
-The Trip class will respond to the **suitable_trips** message, and the Bicycle class will respond to the **suitable_bicycle** message. The customer can get the result if it communicates with 2 objects. Asking for "What" Instead of Telling "How".
+The Trip class will respond to the `suitable_trips` message, and the Bicycle class will respond to the `suitable_bicycle` message. The customer can get the result if it communicates with 2 objects. Asking for "What" Instead of Telling "How".
 
 <div style={{display: 'flex', gap: '5%' }}>
     <div style={{width: '40%' }}>
@@ -102,13 +102,13 @@ The Trip class will respond to the **suitable_trips** message, and the Bicycle c
     </div>
 </div>
 
-1st diagram: the **Trip** is almost ready, and it needs to make sure that all the bicycles that will be participating in it are ready for it. Thus, the **Trip** must know exactly how to prepare the bike and what messages and in what sequence to send to the **Mechanic**. **Trip** each every bike, it washes it, fixes it and gives it away for a ride.
+1st diagram: the `Trip` is almost ready, and it needs to make sure that all the bicycles that will be participating in it are ready for it. Thus, the `Trip` must know exactly how to prepare the bike and what messages and in what sequence to send to the `Mechanic`. `Trip` each every bike, it washes it, fixes it and gives it away for a ride.
 
-The downside is that the **Trip** needs to know this whole big **Mechanic** interface, and secondly, if the mechanic starts implementing new behavior, we will need to update the **Trip** class.
+The downside is that the `Trip` needs to know this whole big `Mechanic` interface, and secondly, if the mechanic starts implementing new behavior, we will need to update the `Trip` class.
 
-In the 2nd diagram, **Trip** asks the **Mechanic** to prepare each bike, leaving the implementation details to the **Mechanic**.
+In the 2nd diagram, `Trip` asks the `Mechanic` to prepare each bike, leaving the implementation details to the `Mechanic`.
 
-This refactoring greatly improves support and extensibility. But this is not an ideal solution yet, because **Trip** knows about bicycles as well as about mechanics, perhaps in the future this interface can also be reduced.
+This refactoring greatly improves support and extensibility. But this is not an ideal solution yet, because `Trip` knows about bicycles as well as about mechanics, perhaps in the future this interface can also be reduced.
 
 **Using Messages to Discover Objects**
 
@@ -123,9 +123,9 @@ This refactoring greatly improves support and extensibility. But this is not an 
     />
 </div>
 
-This diagram is already based on refactoring. We have created the **TripFinder** class, which aggregates the **Trip** class and the **Bicycle** class in itself, it refers to the **Trip** class and says - tell us what are the available trips and for each available trip checks the required bike, and the user returns the list of available trips.
+This diagram is already based on refactoring. We have created the `TripFinder` class, which aggregates the `Trip` class and the `Bicycle` class in itself, it refers to the `Trip` class and says - tell us what are the available trips and for each available trip checks the required bike, and the user returns the list of available trips.
 
-At this stage, **TripFinder** implements the logic of working with our internal systems.
+At this stage, `TripFinder` implements the logic of working with our internal systems.
 
 ## 2.3 Summary: Creating a Message-Based Application
 

@@ -16,7 +16,7 @@ Figure 2.1 - Trip – Mechanic interaction
     alt="Trip – Mechanic interaction"
 />
 
-In this example, **Trip** class earlier had to do few calls of Mechanic class method, now those calls are combined into single **prepareBicycles** method call, as you can see on Figure 2.1. But if we will need to prepare something besides bicycles, then our code may look like on example below:
+In this example, `Trip` class earlier had to do few calls of Mechanic class method, now those calls are combined into single `prepareBicycles` method call, as you can see on Figure 2.1. But if we will need to prepare something besides bicycles, then our code may look like on example below:
 
 ```ts title="Listing 2.1"
 class Mechanic {}
@@ -45,7 +45,7 @@ class Trip {
 }
 ```
 
-When introducing new preparers in addition to **Mechanic**, like **TripCoordinator** and **Driver** you will notice how dramatically increased the number of dependencies in prepare method. Now it knows every class name, classes' methods' names and their arguments because it needs to prepare some specific things before the trip. What is even worse, is the fact that this type of code only will increase its size and dependencies number with time, it is the easiest way for developer to add another switch case to already existing cases.
+When introducing new preparers in addition to `Mechanic`, like `TripCoordinator` and `Driver` you will notice how dramatically increased the number of dependencies in prepare method. Now it knows every class name, classes' methods' names and their arguments because it needs to prepare some specific things before the trip. What is even worse, is the fact that this type of code only will increase its size and dependencies number with time, it is the easiest way for developer to add another switch case to already existing cases.
 
 ## 2.2 Finding the Duck
 
@@ -59,7 +59,7 @@ Figure 2.2 - Missing Preparer type
     alt="Missing Preparer type"
 />
 
-Every preparer class is responsible for preparing something for the **Trip**, so we can try to extract some **Preparer** abstraction and call it a duck type. As a result we have something similar to an interface, but actually it is just a role which can be applied to some specific class in some specific moment of time, and we cannot say that every **Preparer** class is a part of some types' hierarchy. This is the exact moment when we can extract our duck types, the next step is to review changes in code, which is required to extract the duck type. Our refactoring will be based on the UML-diagram from Figure 2.3:
+Every preparer class is responsible for preparing something for the `Trip`, so we can try to extract some `Preparer` abstraction and call it a duck type. As a result we have something similar to an interface, but actually it is just a role which can be applied to some specific class in some specific moment of time, and we cannot say that every `Preparer` class is a part of some types' hierarchy. This is the exact moment when we can extract our duck types, the next step is to review changes in code, which is required to extract the duck type. Our refactoring will be based on the UML-diagram from Figure 2.3:
 
 Figure 2.3 - Trip – Preparer interaction
 
@@ -69,7 +69,7 @@ Figure 2.3 - Trip – Preparer interaction
     alt="Trip – Preparer interaction"
 />
 
-When we finish the refactoring, every **Preparer** will have **prepareTrip** method which takes **Trip** instance as an argument so every preparer can take needed data from the instance. Below you can see the refactoring result:
+When we finish the refactoring, every `Preparer` will have `prepareTrip` method which takes `Trip` instance as an argument so every preparer can take needed data from the instance. Below you can see the refactoring result:
 
 ```ts title="Listing 2.2"
 class Trip {
@@ -97,7 +97,7 @@ class TripCoordinator {
 }
 ```
 
-**Trip** class changed the most, we have removed all the dependencies on specific implementations of other classes, now every **Preparer** only need to have **prepareTrip** method so Trip class will not change anymore with addition of new preparers.
+`Trip` class changed the most, we have removed all the dependencies on specific implementations of other classes, now every `Preparer` only need to have `prepareTrip` method so Trip class will not change anymore with addition of new preparers.
 
 ## 2.3 Writing Code that Relies on Ducks
 
@@ -108,5 +108,5 @@ To sum up the information about duck types we will try to make a list of main po
    - Checking the method exists (`if (obj.someMethod) { obj.someMethod() }`);
 2. Placing Trust in Your Ducks. Let client code trust the duck type, in lack of the trust client code means the next: "I know who you are, so I know what you do". Such knowledge transforms into tight coupling between classes which results into non extensible code. Flexible applications built on top of objects which works on trust – your goal as a developer is to make those objects reliable, to let the trust work.
 3. Documenting Duck Types. Preparer duck type and its open interface is a specific part of the design, but at the same time it is a virtual part of code, because it is neither a class nor a real interface. Preparers are an abstraction, just a convention which gives you the powerful system design tool, but this abstraction makes code less obvious. When you create a duck type, you must document and cover it with tests.
-4. Sharing Code between Ducks. In our example shared is only **prepareTrip** method, but when you start using duck types, you may notice that some part of the functionality is common for all the types. Share such functionality using mixins and other available approaches.
+4. Sharing Code between Ducks. In our example shared is only `prepareTrip` method, but when you start using duck types, you may notice that some part of the functionality is common for all the types. Share such functionality using mixins and other available approaches.
 5. Choosing Your Ducks Wisely. The last point, as always, tells us that you do not need to create duck types just to have them. You need to find a balance between resources required for the refactoring, benefit gained, support simplicity and code clarity.

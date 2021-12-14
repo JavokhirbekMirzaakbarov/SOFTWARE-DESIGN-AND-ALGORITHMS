@@ -69,13 +69,13 @@ class MountainBike extends Bicycle {
 }
 ```
 
-Currently, we have abstract class **Bicycle** and two subclasses – **RoadBike** and **MountainBike**. If you need continuously extend existing functionality, you will notice that spare parts functionality may not change all the time or will require adjustments because of specific implementations of different subclasses. It becomes too difficult to extend spare parts functionality, and we will use composition to solve this problem.
+Currently, we have abstract class Bicycle** and two subclasses – `RoadBike` and `MountainBike`. If you need continuously extend existing functionality, you will notice that spare parts functionality may not change all the time or will require adjustments because of specific implementations of different subclasses. It becomes too difficult to extend spare parts functionality, and we will use composition to solve this problem.
 
 ## 1.3 Moving from Inheritance to Composition
 
 ### 1.3.1 1st Refactoring: Composing a Bicycle of Parts: Creating a Parts Hierarchy
 
-Let us refactor current functionality, we will move spare parts to **Parts** class so inheritance will be replaced with composition. You can use UML diagram from Figure 1.1 to better understand what we will get after refactoring.
+Let us refactor current functionality, we will move spare parts to `Parts` class so inheritance will be replaced with composition. You can use UML diagram from Figure 1.1 to better understand what we will get after refactoring.
 
 Figure 1.1 – Bicycle asks Parts for spares and Bicycle has a Parts
 
@@ -110,7 +110,7 @@ abstract class Parts {
 }
 ```
 
-Now we have separate **Parts** class with all the spares functionality encapsulated inside it. With new approach **Bicycle** type depends on provided parts, when you call spares method inside **Bicycle** it is delegated to **Parts** instance, and it decides which exact parts to return.
+Now we have separate `Parts` class with all the spares functionality encapsulated inside it. With new approach `Bicycle` type depends on provided parts, when you call spares method inside `Bicycle` it is delegated to `Parts` instance, and it decides which exact parts to return.
 
 ```ts title="Listing 1.3"
 class RoadBikeParts extends Parts {
@@ -150,7 +150,7 @@ class MountainBikeParts extends Parts {
 }
 ```
 
-After refactoring you need to pass bicycle size and **Parts** instance to create a new **Bicycle**, you can see it on example below:
+After refactoring you need to pass bicycle size and `Parts` instance to create a new `Bicycle`, you can see it on example below:
 
 ```ts title="Listing 1.4"
 const roadBike = new Bicycle(
@@ -163,7 +163,7 @@ const mountainBike = new Bicycle(
 );
 ```
 
-Now **Bicycle** class is only responsible for its size and for which parts it can consume.
+Now `Bicycle` class is only responsible for its size and for which parts it can consume.
 
 ### 1.3.2 2nd Refactoring: Composing a Bicycle of Parts: Creating a Part
 
@@ -204,7 +204,7 @@ class Part {
 }
 ```
 
-Now we have three main classes: **Bicycle** class is the same as before the refactoring, **Parts** class composes separate **Part** instances, on diagram it is showed as "one-to-many" relation between **Parts** and **Part** classes. With new approach, theoretically, we can just skip Parts class and just put typed collection directly inside the **Bicycle** class, but we have more than just a collection, we have some additional logic which is related to **Parts** functionality. Each Part instance has **needsSpare** property which indicates if we need to take a spare for this instance of **Part**. If we take a closer look on the **MountainBike**, we will see that it may have rear shock, but we do not need a spare for it. This is logic which **Parts** class contains, without this part of functionality, we may choose the option described above. Below you can see an example how to use new approach.
+Now we have three main classes: `Bicycle` class is the same as before the refactoring, `Parts` class composes separate `Part` instances, on diagram it is showed as "one-to-many" relation between `Parts` and `Part` classes. With new approach, theoretically, we can just skip Parts class and just put typed collection directly inside the `Bicycle` class, but we have more than just a collection, we have some additional logic which is related to `Parts` functionality. Each Part instance has `needsSpare` property which indicates if we need to take a spare for this instance of `Part`. If we take a closer look on the `MountainBike`, we will see that it may have rear shock, but we do not need a spare for it. This is logic which `Parts` class contains, without this part of functionality, we may choose the option described above. Below you can see an example how to use new approach.
 
 ```ts title="Listing 1.6"
 const roadBike = new Bicycle(
@@ -228,7 +228,7 @@ const mountainBike = new Bicycle(
 
 ### 1.3.3 3rd Refactoring: Composing a Bicycle of Parts: Creating a Part Factory
 
-The next step will help us to further adjust **Parts** creation, as we can use Factory pattern to unify parts creation. On the one hand, this will help us to simplify new **Bicycle** instances creation, but on the other hand, we need to understand that if some functionality will be changed or extended, this may require us to review our abstraction or design pattern. In the current case, Factory can encapsulate all the **Parts** creation inside, so it will look like on example below:
+The next step will help us to further adjust `Parts` creation, as we can use Factory pattern to unify parts creation. On the one hand, this will help us to simplify new `Bicycle` instances creation, but on the other hand, we need to understand that if some functionality will be changed or extended, this may require us to review our abstraction or design pattern. In the current case, Factory can encapsulate all the `Parts` creation inside, so it will look like on example below:
 
 ```ts title="Listing 1.7"
 const roadConfig = new Set([

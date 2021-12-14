@@ -6,11 +6,11 @@ sidebar_position: 1
 
 ## 1.1 Intro
 
-JavaScript is a bit confusing for developers experienced in class-based languages (like Java or C++), as it is dynamic and does not provide a **class** implementation per se (the **class** keyword is introduced in ES2015, but is syntactical sugar, JavaScript remains prototype-based).
+JavaScript is a bit confusing for developers experienced in class-based languages (like Java or C++), as it is dynamic and does not provide a `class` implementation per se (the `class` keyword is introduced in ES2015, but is syntactical sugar, JavaScript remains prototype-based).
 
-When it comes to inheritance, JavaScript only has one construct: objects. Each object has a private property which holds a link to another object called its **prototype**. That prototype object has a prototype of its own, and so on until an object is reached with **null** as its prototype. By definition, **null** has no prototype, and acts as the final link in this **prototype** chain.
+When it comes to inheritance, JavaScript only has one construct: objects. Each object has a private property which holds a link to another object called its `prototype`. That prototype object has a prototype of its own, and so on until an object is reached with `null` as its prototype. By definition, `null` has no prototype, and acts as the final link in this `prototype` chain.
 
-Nearly all objects in JavaScript are instances of **Object** which sits on the top of a prototype chain.
+Nearly all objects in JavaScript are instances of `Object` which sits on the top of a prototype chain.
 
 While this confusion is often considered to be one of JavaScript's weaknesses, the prototypal inheritance model itself is, in fact, more powerful than the classic model. It is, for example, fairly trivial to build a classic model on top of a prototypal model.
 
@@ -58,7 +58,7 @@ bike.size; // => 'M'
 bike.spares(); // => {chain: '11-speed', tireSize: '28', tapeColor: 'red'}
 ```
 
-And we need to know what parts need to be replaced in case of a breakdown, so we added **spares** method.
+And we need to know what parts need to be replaced in case of a breakdown, so we added `spares` method.
 
 But what happens if we add another bike style? For example, a mountain bike. Now our method looks a little strange.
 
@@ -91,7 +91,7 @@ const crossCountryBike = new Bicycle({style: 'XC', size: 'M', frontShock: 'mount
 const roadBike = new Bicycle({style: 'road', size: 'M', tapeColor: 'red'});
 ```
 
-We added 2 new arguments for **MountainBike**. The new **style** property defines what the **spares** method (details) will return using the **if** statement inside the method.
+We added 2 new arguments for `MountainBike`. The new `style` property defines what the `spares` method (details) will return using the `if` statement inside the method.
 Already this code is hard to maintain, and if we need to add another type of bicycles, our code will turn into a big dump.
 It's time for an Abstract class.
 
@@ -103,9 +103,9 @@ Figure 1.1 – Abstract class
     alt="Abstract class"
 />
 
-Subclasses are specializations of their superclasses. **MountainBike** should have everything a **Bicycle** plus something else.
-The picture above shows a class diagram where **Bicycle** is a superclass for **MountainBike** and **RoadBike**. The **Bicycle** will contain general behavior, and **MountainBike** and **RoadBike** will add specializations. The public interface of the **Bicycle** should include a **spares** method and a **size** property, and the interfaces of its subclasses will add the necessary parts.
-The **Bicycle** is now an abstract class.
+Subclasses are specializations of their superclasses. `MountainBike` should have everything a `Bicycle` plus something else.
+The picture above shows a class diagram where `Bicycle` is a superclass for `MountainBike` and `RoadBike`. The `Bicycle` will contain general behavior, and `MountainBike` and `RoadBike` will add specializations. The public interface of the `Bicycle` should include a `spares` method and a `size` property, and the interfaces of its subclasses will add the necessary parts.
+The `Bicycle` is now an abstract class.
 
 ## 1.3 Creating an Abstract Superclass with Shared Abstract Behavior
 
@@ -152,7 +152,7 @@ It almost never makes sense to create an abstract superclass with a single subcl
 
 This gives subclasses the ability to inject specialization by overriding the default values set in the parent class. This technique of describing the basic structure/algorithm in a superclass and redefining parts of this structure/algorithm to those that are already specific for a particular class is called the template method.
 
-Bicycle now provides a structure, a general algorithm, for its subclasses. In those places where the base class provides the ability to influence this algorithm to the derived classes, it sends messages **default_chain** and **default_tire_size**.
+Bicycle now provides a structure, a general algorithm, for its subclasses. In those places where the base class provides the ability to influence this algorithm to the derived classes, it sends messages `defaultChain` and `defaultTireSize`.
 
 ```ts title="Listing 1.4"
 abstract class Bicycle {
@@ -174,9 +174,9 @@ class MountainBike extends Bicycle {
 }
 ```
 
-Something similar can be found in ReactJs library. When creating a component, it has methods **componentDidMount()**, **shouldComponentUpdate()** you can change their implementation yourself.
+Something similar can be found in ReactJs library. When creating a component, it has methods `componentDidMount()`, `shouldComponentUpdate()` you can change their implementation yourself.
 
-Okay, we split the **MountainBike** and the **RoadBike**, but now there are new problems:
+Okay, we split the `MountainBike` and the `RoadBike`, but now there are new problems:
 - Mountain bike and road bike classes depend on their abstract class;
 - Abstract class depends on children;
 - If you forget to call super methods – the result might not contain all data required;
@@ -184,11 +184,11 @@ Okay, we split the **MountainBike** and the **RoadBike**, but now there are new 
 
 ## 1.5 Using Hook Messages: Decoupling Subclasses
 
-This strategy removes the knowledge of the algorithm from the subclass and returns control to the superclass. Which was done by adding the **postInitialize** method.
+This strategy removes the knowledge of the algorithm from the subclass and returns control to the superclass. Which was done by adding the `postInitialize` method.
 
-**RoadBike** and **MountainBike** no longer control the initialization process, but instead bring specialization to a more abstract algorithm. This algorithm is defined in the abstract superclass **Bicycle**, which in turn is responsible for sending **postInitialize**. To achieve this result Bicycle constructor should always be called, this will happen automatically if derived classes will have no constructor.
+`RoadBike` and `MountainBike` no longer control the initialization process, but instead bring specialization to a more abstract algorithm. This algorithm is defined in the abstract superclass `Bicycle`, which in turn is responsible for sending `postInitialize`. To achieve this result Bicycle constructor should always be called, this will happen automatically if derived classes will have no constructor.
 
-This same technique can be used to remove the dispatch of super in the **spares** method.
+This same technique can be used to remove the dispatch of super in the `spares` method.
 
 ```ts title="Listing 1.5"
  abstract class Bicycle {
