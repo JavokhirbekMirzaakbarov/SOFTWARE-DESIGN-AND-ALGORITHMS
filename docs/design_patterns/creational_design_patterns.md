@@ -278,7 +278,7 @@ If the client code needs to assemble a special, fine-tuned model of a car, it ca
 
 ### 2.3.3 When to Apply, Pros and Cons
 
-- to get rid of a “telescopic constructor” – the pattern lets you build objects step by step, using only those steps that you really need. After implementing the pattern, you do not have to cram dozens of parameters into your constructors anymore
+- to get rid of a "telescopic constructor" – the pattern lets you build objects step by step, using only those steps that you really need. After implementing the pattern, you do not have to cram dozens of parameters into your constructors anymore
 - to construct complex objects – a builder does not expose the unfinished product while running construction steps. This prevents the client code from fetching an incomplete result
 
 Pros

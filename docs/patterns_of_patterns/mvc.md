@@ -19,7 +19,7 @@ MVC is primarily a set of architectural ideas / principles / approaches that can
 
 ## 2.1 Passive/Active Model
 
-MVC schemas can be divided into two types: passive and active view (Figure 2.1). Your view needs to get the data from model, and it can be achieved in two ways. In first case view knows about model, and it gets the data directly from it. In second case, data from model is provided by controller so view knows nothing about the model, which makes it more modular. Crossed line between Controller and View on “Active View” schema means that this relation is not required.
+MVC schemas can be divided into two types: passive and active view (Figure 2.1). Your view needs to get the data from model, and it can be achieved in two ways. In first case view knows about model, and it gets the data directly from it. In second case, data from model is provided by controller so view knows nothing about the model, which makes it more modular. Crossed line between Controller and View on "Active View" schema means that this relation is not required.
 
 Figure 2.1
 

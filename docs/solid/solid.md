@@ -447,7 +447,7 @@ class Administrator implements ManagerStaff {
 
 ### 2.4.2 ISP Summary
 
-As you can see fat interfaces lead to inadvertent coupling between classes, and you should avoid them. When designing interfaces, you should always ask yourself the question “Do really need all the methods on this interface I’m using? If not, how can I break them into smaller interfaces?”. **Treat interface segregation with certain pragmatism and use common sense.**
+As you can see fat interfaces lead to inadvertent coupling between classes, and you should avoid them. When designing interfaces, you should always ask yourself the question "Do really need all the methods on this interface I’m using? If not, how can I break them into smaller interfaces?". **Treat interface segregation with certain pragmatism and use common sense.**
 
 ## 2.5 Dependency Inversion Principle (DIP)
 
