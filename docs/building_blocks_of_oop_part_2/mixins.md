@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # 3. Mixins
 
-## 3.1 Sharing Role Behavior With Mixins
+## 3.1 Sharing Role Behavior with Mixins
 
 Mixins is another OOD tool, inheritance is not the only way to share a behavior, every problem which we solve using inheritance also can be solved using other tools, and one of such tools are mixins. But each tool has its pros and cons so let us look on what mixins can give us and what the price we must pay to use them.
 

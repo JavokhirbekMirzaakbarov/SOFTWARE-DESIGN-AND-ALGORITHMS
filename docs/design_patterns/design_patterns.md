@@ -10,7 +10,7 @@ Patterns are often misconstrued as algorithms, since both concepts represent com
 
 There is an analogy for better understanding the difference between these two concepts. Just imagine that algorithm is a cooking recipe with predefined steps and measures while design pattern is a blueprint or scheme of the solution without any direct steps or instructions.
 
-## 1.1 History Of Patterns
+## 1.1 History of Patterns
 
 Who has invented patterns? It’s a good but not quite accurate question, since patterns are not being invented. More likely, that they are being explored. Patterns are not extraordinary solutions, but opposite. Most typical, often used solutions for common problems.
 

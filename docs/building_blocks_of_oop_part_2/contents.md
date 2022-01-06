@@ -22,7 +22,7 @@ sidebar_position: 1
   - [2.2 Finding the Duck](/docs/building_blocks_of_oop_part_2/duck_typing#22-finding-the-duck)
   - [2.3 Writing Code that Relies on Ducks](/docs/building_blocks_of_oop_part_2/duck_typing#23-writing-code-that-relies-on-ducks)
 - [3. Mixins](/docs/building_blocks_of_oop_part_2/mixins)
-  - [3.1 Sharing Role Behavior With Mixins](/docs/building_blocks_of_oop_part_2/mixins#31-sharing-role-behavior-with-mixins)
+  - [3.1 Sharing Role Behavior with Mixins](/docs/building_blocks_of_oop_part_2/mixins#31-sharing-role-behavior-with-mixins)
   - [3.2 Understanding Roles](/docs/building_blocks_of_oop_part_2/mixins#32-understanding-roles)
   - [3.3 Writing the Concrete Code](/docs/building_blocks_of_oop_part_2/mixins#33-writing-the-concrete-code)
   - [3.4 Mixins: Writing Inheritable Code](/docs/building_blocks_of_oop_part_2/mixins#34-mixins-writing-inheritable-code)

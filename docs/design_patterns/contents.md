@@ -5,7 +5,7 @@ sidebar_position: 1
 # Design Patterns: Contents
 
 - [1. Design Patterns](/docs/design_patterns/design_patterns)
-  - [1.1 History Of Patterns](/docs/design_patterns/design_patterns#11-history-of-patterns)
+  - [1.1 History of Patterns](/docs/design_patterns/design_patterns#11-history-of-patterns)
   - [1.2 Types of Patterns](/docs/design_patterns/design_patterns#12-types-of-patterns)
 - [2. Creational Design Patterns](/docs/design_patterns/creational_design_patterns)
   - [2.1 Abstract Factory](/docs/design_patterns/creational_design_patterns#21-abstract-factory)

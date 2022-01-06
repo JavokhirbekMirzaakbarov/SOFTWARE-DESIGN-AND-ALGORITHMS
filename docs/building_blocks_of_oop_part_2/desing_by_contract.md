@@ -33,7 +33,7 @@ Figure 4.1 - x > 5 is stronger than x > 0
 
 <img
     width="700"
-    src={require('./img/x>5_is_stronger_than_x>0.png').default}
+    src={require('./img/x_greater_than_5_is_stronger_than_x_greater_than_0.png').default}
     alt="x > 5 is stronger than x > 0"
 />
 
