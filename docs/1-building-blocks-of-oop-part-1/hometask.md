@@ -6,6 +6,10 @@ sidebar_position: 8
 
 The home task can be done using Typescript or less preferable (try to avoid) Vanilla JS.
 
+:::info
+The starter code for the home task is located in _docs/1-building-blocks-of-oop-part-1/hometask_ folder
+:::
+
 Check the UML representation of a set of classes that represent the inventory and various types of items. Methods and classes where you are providing an implementation are shown in bold.
 
 The classes in italics represent abstract classes or interfaces. The concrete child classes must implement all methods from the abstract parent classes. `Item`, `Consumable`, `and` Weapon are the abstract classes.
@@ -119,10 +123,6 @@ You feel sick."
 6. `Pizza` class:
    - example of `eat()` method:
    ![usage](img/eat_usage.png)
-
-:::info
-The starter code for the home task is located in _docs/1-building-blocks-of-oop-part-1/hometask/code_ folder
-:::
 
 ## Evaluation criteria
 
