@@ -1,29 +1,17 @@
-# Website
-
-This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
+## Software Designs and Algorithms
 
 ### Installation
+
+You need to have [Node >= 14.0.0 and npm >= 5.6](https://nodejs.org/en/) on your machine. Once you have it run the command below in your terminal to install project dependencies and build the project:
 
 ```
 $ npm i
 ```
 
-### Local Development
+Once it is done start the project by running the command bellow:
 
 ```
-$ npm start
+$ npm run serve
 ```
 
-This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
-
-### Build
-
-```
-$ npm run build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-## Search
-
-Search is supported by [docusaurus-lunr-search](https://github.com/lelouch77/docusaurus-lunr-search). Search is only available after the `npm run build` command is run and then the build folder is served by using `npm run serve` command.
+That is it, enjoy the course by navigating to the [http://localhost:3000](http://localhost:3000) in your preferred browser.
