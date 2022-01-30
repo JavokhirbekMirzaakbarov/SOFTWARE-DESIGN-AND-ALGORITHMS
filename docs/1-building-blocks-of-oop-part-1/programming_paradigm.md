@@ -1,0 +1,106 @@
+---
+sidebar_position: 2
+---
+
+# 1. Programming Paradigm
+
+This lecture is going to be dedicated to object-oriented programming and object-oriented design. It is going to be an overview lecture of what you are going to learn in this course, but I recommend you pay close attention to it. The reason being, it is going to include a lot of basics and principles that will help you write better, cleaner, more maintainable code.
+
+During development, you probably asked yourself questions like: "how do I write this class, to make it maintainable?", "how do I design my system so that when requirements change, we don't have to rewrite it from ground up?". Principles of object-oriented programming might not give you an exact answer to those questions, but they will help you along the way of discovery of "good" design.
+
+Before we dive deeper, let us go back in time for a little bit. In 1938 Alan Turing was the one to start it all. He established what, in future will be called "computer programming". Since then, a lot of breakthroughs have happened. One of them was creation of different programming languages. First, came assembly language, in 1951 Grace Hopper created a first compiler. After that, languages were created one by one: COBOL, Lisp, C, C++, Java, Pascal etc. This explosion of languages has inevitably led to creation of programming paradigms.
+
+A programming paradigm is sort of a programming style. It is not bound to a certain programming language. It provides us with means and structure for execution of a program. It is a complex of concepts, instruments, principles that define the fundamentals of programming style.
+
+We are going to touch upon 4 of the most recognized paradigms. Although [some sources suggest](https://wiki.c2.com/?ThereAreExactlyThreeParadigms) that there are only 3 of them.
+
+## 1.1 Declarative Programming
+- In declarative programming, the programmer instructs the computer on what is to be computed.
+- You do not know how it works, but you know what it does.
+- It is a very good idea to decouple DOM manipulation from app logic. This improves the testability of code.
+- Improves readability of a code
+
+First programming paradigm we are going to talk about is **Declarative Programming**. In this paradigm we must define the specification for solving a task, i.e., we describe what the problem's field and how what kind of result we expect. The order of execution and the method of achieving results does not matter. A common example of declarative programming is HTML. It describes the contents of the page, but not the way it should be rendered.
+
+```js title="Listing 1.1 - Example of declarative code"
+select upper(name)
+from people
+where length(name) > 5
+order by name
+```
+
+On the example above, you can see an SQL query. It is also an example of declarative programming. Here, we describe the context of the problem, a list of people and what we want to get from that list: a list of names, uppercased, where the length of the name is larger than 5. The list of names should be ordered in ascending order. We do not care what type of database we are using. We do not describe how to retrieve the data or how to go through each entry of people list. Whether the application should use quick sort or merge sort. It is all up for the application or interpreter to decide.
+
+## 1.2 Imperative Programming
+- The script is basically telling the computer how to do something.
+- Imperative phrases which change the global state of a program"
+- Not scalable
+
+With imperative programming, we describe the system as a process of execution of instructions that change the state of the system. It is commonly considered to be less extensible than the others. Examples of languages with imperative programming support are C++, C, Go, JavaScript. You should always remember that you cannot always categorize a certain language to a single programming paradigm. Usually, the languages support 2 or even 3 paradigms at the same time. For example, JavaScript supports imperative, functional, and object-oriented paradigms at the same time.
+
+```js title="Listing 1.2 - Example of imperative code"
+    result = []
+    i = 0
+start:
+    numPeople = length(people)
+    if i >= numPeople goto finished
+    p = people[i]
+    nameLength = length(p.name)
+    if nameLength <= 5 goto nextOne
+    upperName = toUpper(p.name)
+    addToList(result, upperName)
+nextOne:
+    i = i + 1
+    goto start
+finished:
+    return sort(result)
+```
+
+Above you can see an example of code written in imperative style. We precisely describe the sequence of actions to achieve the desired result. To get the expected result we must know how to achieve it. We know exactly in which order should those instructions be arranged in. Opposite to the previous example from declarative programming, here you can see that we have variables with state. One variable has an Integer type, the other is an array. To achieve the result, we must add conditions, loops, gotos.
+
+With imperative programming you know exactly what is happening. You can dial into the execution of a program and easily debug it. While with declarative, the exact path of a program is not deterministic from the perspective of executed code.
+
+Both approaches have their place in a programming with their strengths and weaknesses. It is also worth mentioning that all code is imperative in the end, when it is executed by the processor.
+
+## 1.3 Object-Oriented Programming
+- Program is defined by object which combine state and behavior
+- Good for structured and modular code
+- Well suited for big projects
+
+Object-oriented paradigm describes the computer program as a set of specific objects, that are instances of a class. The objects communicate by sending, receiving, and processing the messages. The messages may include parameters. The objects have state, which they can change when processing a message. Objects may create other objects or may send messages when processing a message.
+
+It is safe to say that object-oriented paradigm is well-suited for big projects that require having a state within the application. It is message-oriented approach provides a way for objects to be replaced by other objects of a same type. This means that the behavior of a program can be changed just by replacing an object. Also, same objects as building blocks could be reused in other parts of the same system.
+
+```js title="Listing 1.3 - Example of object-oriented code"
+result = []
+
+for p in people {
+  if p.name.length > 5 {
+    result.add(p.name.toUpper);
+  }
+}
+
+return result.sort;
+```
+
+## 1.4 Functional Programming
+- Treats computations as the evaluation of functions and avoids changing state and mutable data
+- Eliminating side effects, i.e., changes in state that do not depend on the function inputs, can make it much easier to understand and predict the behavior of a program
+- Emphasize using of immutable data
+
+Last, but not least, **Functional paradigm** describes the program as a set of functions (not objects or procedures) that are used as building blocks to manipulate data. It forces us to use function in their mathematical sense, as they just declare a relationship between two entities. Functions do not change the state of a program (also known as pure), they simply pipe the data through them to produce a result. There are no variables, only constants.
+
+```js title="Listing 1.4 - Example of functional code"
+sort(
+  filter(λs. length s > 5,
+    map(λp. to_upper(name p),
+      people)))
+```
+
+In the example we have a certain nesting of certain functions, where the result of the function can be expressed as a list of arguments that are passed to this function. However, arguments can also be functions. By the way, not all programming languages can pass a function as a parameter to another function, this is the so-called first-class citizen function. JavaScript has this capability, that is why it has some concepts of functional programming.
+
+A program in functional programming is not represented by a specific state, but by a combination of function calls at a certain point in time.
+
+Functional programming pushes us towards the idea that it would be nice to use immutable data. Since immutable data is faster, because we put them into memory once, and they do not change. There are disadvantages and advantages to this, but this is how it works in functional programming.
+
+There are so-called pure functions in functional programming, that is, functions without side effects. When you have a list of parameters as function arguments, a certain logic for handling them and a certain result in return. The function does not change data and state outside its scope. In fact, if you change a variable outside the scope of the function, this already indicates that the function is impure, that is, it has a side effect. This is neither bad nor good, these are just different approaches. Functional programming assumes that the functions are just pure and should follow the principle of single responsibility, that is, each function should have single responsibility. Because the essence of functional programming is in the combination of various functions with different responsibilities to achieve the result.
