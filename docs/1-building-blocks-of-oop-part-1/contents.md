@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Building Block of OOP, Part 1: Contents
+# Building Blocks of OOP, Part 1: Contents
 
 - [1. Programming Paradigm](/docs/building-blocks-of-oop-part-1/programming_paradigm)
   - [1.1 Declarative Programming](/docs/building-blocks-of-oop-part-1/programming_paradigm#11-declarative-programming)
