@@ -1,0 +1,34 @@
+{
+  "data": [
+    {
+      "userID": "1",
+      "username": "John40",
+      "country": "USA",
+      "name": "John"
+    },
+    {
+      "userID": "2",
+      "username": "Luke123",
+      "country": "Sweden",
+      "name": "Luke"
+    },
+    {
+      "userID": "3",
+      "username": "Lora123",
+      "country": "Finland",
+      "name": "Lora"
+    },
+    {
+      "userID": "4",
+      "username": "MIKE",
+      "country": "GB",
+      "name": "Mike"
+    },
+    {
+      "userID": "5",
+      "username": "Emmi1990",
+      "country": "Finland",
+      "name": "Emmi"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+.control {
+    position: relative;
+    background-color: white;
+    cursor: pointer;
+
+    .label {
+        padding: 16.5px;
+        border: 1px solid gray;
+        border-radius: 5px;
+        width: max-content;
+        display: flex;
+        cursor: pointer;
+    }
+
+    .group {
+        top: 57px;
+        background-color: white;
+        position: absolute;
+        display: none;
+        z-index: 1;
+        border: 1px solid gray;
+        border-radius: 5px;
+        padding: 9px;
+        width: 127px;
+    }
+
+    &:hover .group {
+        display: block;
+    }
+}

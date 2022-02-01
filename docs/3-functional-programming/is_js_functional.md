@@ -85,7 +85,7 @@ Currying is a technique that has to be supported in the language. So functions w
 
 ### 4.3.1 Ramda
 
-The library is designed specifically for a functional programming style, one that makes it easy to create functional pipelines, one that never mutates user data. Ramda includes all favorite list-manipulation functions you expect, e.g. map, filter, reduce, find, etc. Ramda methods are automatically curried. For example, _Listing 4.5_. The function `multiply` returns another function, remembers the first arguments, and multiplies the first argument with the second one.
+The library is designed specifically for a functional programming style, one that makes it easy to create functional pipelines, one that never mutates user data. Ramda includes all of the favorite list-manipulation functions you expect, e.g. map, filter, reduce, find, etc. Ramda methods are automatically curried. For example, _Listing 4.5_. The function `multiply` returns another function, remembers the first arguments, and multiplies the first argument with the second one.
 
 ```js title="Listing 4.5 - curried multiplication"
 const double = R.multiply(2);

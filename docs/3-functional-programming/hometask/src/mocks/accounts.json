@@ -1,0 +1,45 @@
+{
+    "data": [
+      {
+        "userID": "1",
+        "posts": 10,
+        "payments": [
+          { "totalSum": 10, "date": "Thu Jan 13 2022" },
+          { "totalSum": 15, "date": "Wed Jan 12 2022" },
+          { "totalSum": 5, "date": "Mon Jan 10 2022" }
+        ]
+      },
+      {
+        "userID": "2",
+        "posts": 100,
+        "payments": [
+          { "totalSum": 20, "date": "Thu Jan 13 2022" },
+          { "totalSum": 15, "date": "Wed Jan 12 2022" },
+          { "totalSum": 5, "date": "Mon Jan 10 2022" }
+        ]
+      },
+      {
+        "userID": "3",
+        "posts": 0,
+        "payments": []
+      },
+      {
+        "userID": "4",
+        "posts": 200,
+        "payments": [
+          { "totalSum": 34, "date": "Thu Jan 13 2022" },
+          { "totalSum": 15, "date": "Wed Jan 12 2022" },
+          { "totalSum": 5, "date": "Mon Jan 10 2022" }
+        ]
+      },
+    {
+        "userID": "5",
+        "posts": 50,
+        "payments": [
+            { "totalSum": 15, "date": "Thu Jan 13 2022" },
+            { "totalSum": 15, "date": "Wed Jan 12 2022" },
+            { "totalSum": 5, "date": "Mon Jan 10 2022" }
+        ]
+    }
+    ]
+}
