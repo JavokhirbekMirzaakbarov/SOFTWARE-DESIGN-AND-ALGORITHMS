@@ -1,0 +1,31 @@
+.group {
+  position: relative;
+  background-color: white;
+  cursor: pointer;
+
+  .title {
+    width: max-content;
+    display: flex;
+    padding: 18.5px;
+    border: 1px solid gray;
+    border-radius: 5px;
+  }
+
+  .list {
+    margin: 0;
+    background-color: white;
+    position: absolute;
+    z-index: 1;
+    display: none;
+    list-style: none;
+    padding-left: 0;
+    border: 1px solid gray;
+    border-radius: 5px;
+    padding: 9px;
+    width: 200px;
+  }
+
+  &:hover .list {
+    display: block;
+  }
+}

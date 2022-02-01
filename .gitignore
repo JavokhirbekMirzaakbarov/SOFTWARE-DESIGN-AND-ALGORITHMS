@@ -1,8 +1,10 @@
 # Dependencies
 /node_modules
+/docs/3-functional-programming/hometask/node_modules
 
 # Production
 /build
+/docs/3-functional-programming/hometask/build
 
 # Generated files
 .docusaurus
