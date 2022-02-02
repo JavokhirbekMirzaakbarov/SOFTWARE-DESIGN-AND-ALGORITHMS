@@ -31,3 +31,7 @@ html[data-theme='dark'] .docusaurus-highlight-code-line {
 html[data-theme='dark'] .formula {
   filter: invert(100%);
 }
+
+.navbar__search {
+  margin-left: 10px;
+}

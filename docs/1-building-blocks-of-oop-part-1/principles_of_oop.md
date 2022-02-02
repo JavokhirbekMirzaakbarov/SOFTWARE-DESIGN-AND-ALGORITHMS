@@ -66,7 +66,9 @@ class CoffeeMachine {
 
   public brewCoffee(selection: CoffeeSelection): Coffee {
     const coffee = new Coffee(selection, 100);
+
     console.log("Making coffee...");
+
     return coffee;
   }
 }
@@ -104,10 +106,10 @@ If abstraction allows us to highlight the essential behavior of our component, t
 
 ```ts title="Listing 3.4 – Encapsulation is violated"
 class Paystub {
-  private readonly _employees: Array<Employee>;
+  private readonly employees: Employee[];
 
-  public getEmployees(): Array<Employee> {
-    return this._employees;
+  public getEmployees(): Employee[] {
+    return this.employees;
   }
 
   public computePayroll(): number {
@@ -127,16 +129,16 @@ p1.computePayroll();
 
 ```ts title="Listing 3.5 – Encapsulation is not violated"
 class Paystub2 {
-    private readonly _employees: Array<Employee>;
+  private readonly employees: Employee[];
 
-    public addEmployee(employee: Employee): void {
-        this._employees.push(employee);
-    }
+  public addEmployee(employee: Employee): void {
+      this.employees.push(employee);
+  }
 
-    public computePayroll(): number {
-        // using this._employees for calculation
-        return 42;
-    }
+  public computePayroll(): number {
+      // using this._employees for calculation
+      return 42;
+  }
 }
 
 const p2 = new Paystub2();
@@ -168,26 +170,28 @@ Here, I hope things should be much easier because you are most familiar with thi
 
 ```ts title="Listing 3.6 – Inheritance example"
 class Person {
-    protected name: string;
-    constructor(name: string) {
-        this.name = name;
-    }
+  protected name: string;
+
+  constructor(name: string) {
+      this.name = name;
+  }
 }
 
 class Employee extends Person {
-    private department: string;
+  private department: string;
 
-    constructor(name: string, department: string) {
-        super(name);
-        this.department = department;
-    }
+  constructor(name: string, department: string) {
+    super(name);
+    this.department = department;
+  }
 
-    public getDetails() {
-        return `Hello, my name is ${this.name} and I work in ${this.department}.`;
-    }
+  public getDetails() {
+    return `Hello, my name is ${this.name} and I work in ${this.department}.`;
+  }
 }
 
 const howard = new Employee("Howard", "Sales");
+
 console.log(howard.getDetails()); // ok
 console.log(howard.name); // error
 console.log(howard.department) // error
@@ -214,35 +218,34 @@ Method overloading differs from one language to another because TypeScript makes
 
 ```ts title="Listing 3.7 – Static polymorphism example"
 interface Hero {
-    name: string;
-    skill: string;
-    weakness: string;
+  name: string;
+  skill: string;
+  weakness: string;
 }
 
 class HeroService {
-    protected heroes: Array<Hero> = [
-        { name: "Superman", skill: "fly", weakness: "cryptonit" },
-        { name: "Spiderman", skill: "spider-sense", weakness: "MJ" },
-        { name: "Batman", skill: "superhuman power", weakness: "law" },
-        { name: "Flash", skill: "run", weakness: "unknown" },
-    ];
+  protected heroes: Hero[] = [
+    { name: "Superman", skill: "fly", weakness: "cryptonit" },
+    { name: "Spiderman", skill: "spider-sense", weakness: "MJ" },
+    { name: "Batman", skill: "superhuman power", weakness: "law" },
+    { name: "Flash", skill: "run", weakness: "unknown" },
+  ];
 
-    public getHero(name: string);
-    public getHero(name: string, skill: string);
+  public getHero(name: string);
+  public getHero(name: string, skill: string);
 
-    public getHero(name: string, skill?: string): Hero {
-        if (!skill) {
-            return this.heroes.find((hero) => hero.name === name);
-        }
-
-        return this.heroes.find(
-            (hero) => hero.name === name && hero.skill === skill
-        );
+  public getHero(name: string, skill?: string): Hero {
+    if (!skill) {
+      return this.heroes.find((hero) => hero.name === name);
     }
+
+    return this.heroes.find(
+      (hero) => hero.name === name && hero.skill === skill
+    );
+  }
 }
 
 const heroService = new HeroService();
-
 const hero1 = heroService.getHero("Flash");
 const hero2 = heroService.getHero("Superman", "fly");
 ```
@@ -251,13 +254,13 @@ Dynamic polymorphism. Everything is simple here; this is a usual method overridi
 
 ```ts title="Listing 3.8 – Dynamic polymorphism example"
 class HeroService {
-    // implementation of HeroService
+  // implementation of HeroService
 }
 
 class AntiHeroService extends HeroService {
-    public getHero(weakness: string): Hero {
-        return this.heroes.find((hero) => hero.weakness === weakness);
-    }
+  public getHero(weakness: string): Hero {
+    return this.heroes.find((hero) => hero.weakness === weakness);
+  }
 }
 
 const antiHeroService = new AntiHeroService();

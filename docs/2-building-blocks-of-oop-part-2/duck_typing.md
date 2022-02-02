@@ -73,7 +73,7 @@ When we finish the refactoring, every `Preparer` will have `prepareTrip` method 
 
 ```ts title="Listing 2.2"
 class Trip {
-  prepare(prepares: Array<{ prepareTrip(trip: Trip) }>) {
+  prepare(prepares: { prepareTrip(trip: Trip) }[]) {
     prepares.map((preparer) => {
       preparer.prepareTrip(this);
     });

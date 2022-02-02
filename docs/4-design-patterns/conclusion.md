@@ -1,8 +1,8 @@
 ---
-sidebar_position: 7
+sidebar_position: 6
 ---
 
-# Conclusion
+# 5. Conclusion
 
 You may successfully code without having an idea of what patterns are. Moreover, you might have implemented some of them without even noticing. But conscious usage of tool differs is an important step from a beginner level to professional. You may hammer a nail, and you may hit it with a drill as well, if you make enough effort. Professional developer understands, that it's not a purpose of a drill.
 

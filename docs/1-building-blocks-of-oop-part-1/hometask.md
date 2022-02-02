@@ -28,7 +28,7 @@ The `Item` class is the common ancestor to the various types of items that can e
 
 - `Item.toString()`: for an `Item` with the name of "ring", a value of 3000, and a weight of 0.013, the method must return a string in the following format (excluding the quotes):
 
-  ```js
+  ```
   "ring − Value: 3000, Weight: 0.01"
   ```
 
@@ -43,25 +43,25 @@ We provide several implemented methods that include:
 - `Weapon.getDurability()`: Returns the effective durability of the Weapon.
 - `Weapon.toString()`: for a `Weapon` with the name of "hammer", a value of 300, a weight of 2.032, a `baseDamage` value of 30.4219, a `damageModifier` of 0.05, a `baseDurability` of 0.7893, and a `durabilityModifier` of 0.05, the method returns a string in the following format:
 
-  ```js
+  ```
   "hammer − Value: 300, Weight: 2.03, Damage: 30.47, Durability: 83.93%"
   ```
 
 - `Weapon.use()`: This method returns a string describing what happens when a `Weapon` is used. For a `Weapon` with the name of "hammer", and an effective damage of 30.4725, the method should return the following:
 
-  ```js
+  ```
   "You use the hammer, dealing 30.47 points of damage."
   ```
 
 - "Using" a `Weapon` lowers (subtracts) its effective durability by `Weapon.MODIFIER_CHANGE_RATE`. If the effective durability of the `Weapon` hits or drops below 0, the `Weapon` will "break". If the `Weapon` "breaks", the method should output the previous string, but additionally with a newline character and the additional text "The hammer breaks.":
 
-  ```js
+  ```
   "You use the hammer, dealing 34.05 points of damage. The hammer breaks."
   ```
 
 - For a `Weapon` with the name of "hammer", if it is "broken" (The effective durability is 0 or less), calling its `use()` method returns the following:
 
-  ```js
+  ```
   "You can't use the hammer, it is broken."
   ```
 
@@ -85,18 +85,18 @@ The `Inventory` class is a container for items in this fantasy game. You need to
 The `Consumable` class describes those items that can be eaten by the player. `Consumables` can be marked as consumed, and can be spoiled. These properties are stored in the instance variables consumed and spoiled, respectively. A newly-created `Consumable` object should have its consumed field set to false.
 
 - `Consumable.use()`: If a `Consumable` is not spoiled and is not consumed, calling this simply returns the value from a call to `Consumable.eat()`. For a `Consumable` with the name of "bread" that has already been consumed, this method returns the following:
-  ```js
+  ```
   "There is nothing left of the bread to consume."
   ```
 
 Assuming for this `Consumable` named "bread" that the value returned by a call to its `eat()` method is the following:
-```js
+```
 "You eat the bread."
 ```
 
 If this "bread" were to be spoiled, the method returns this string, appended with a newline and the text "You feel sick.":
 
-```js
+```
 "You eat the bread.
 You feel sick."
 ```
@@ -116,7 +116,7 @@ You feel sick."
 3. `Consumable` class:
    - consumed is `false` when create new instance
 4. `Inventory` class:
-   - `items` - `Array<Item>`
+   - `items` - `Item[]`
    - `sort()` method is polymorphic and has 2 declarations: `sort()` and `sort(comparator: ItemComparator)`
 5. `Weapon` class:
    - don't forget to use `super` in `constructor` (note that parent classes can require extra fields, such as `name`)

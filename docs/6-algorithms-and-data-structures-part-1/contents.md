@@ -28,3 +28,4 @@ sidebar_position: 1
 - [5. Sorting in Linear Time](/docs/algorithms-and-data-structures-part-1/sorting_in_linear_time)
   - [5.1 Counting Sort](/docs/algorithms-and-data-structures-part-1/sorting_in_linear_time#51-counting-sort)
   - [5.1 Bucket Sort](/docs/algorithms-and-data-structures-part-1/sorting_in_linear_time#51-bucket-sort)
+- [6. Home Task](/docs/algorithms-and-data-structures-part-1/hometask)

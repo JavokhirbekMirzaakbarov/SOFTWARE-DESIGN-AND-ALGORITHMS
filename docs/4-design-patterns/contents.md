@@ -51,4 +51,5 @@ sidebar_position: 1
     - [4.4.2 Command structure](/docs/design-patterns/behavioral_design_patterns#442-command-structure)
     - [4.4.3 Command example](/docs/design-patterns/behavioral_design_patterns#443-command-example)
     - [4.4.4 When to apply, pros and cons](/docs/design-patterns/behavioral_design_patterns#444-when-to-apply-pros-and-cons)
-- [Conclusion](/docs/design-patterns/conclusion)
+- [5. Conclusion](/docs/design-patterns/conclusion)
+- [6. Home Task](/docs/design-patterns/hometask)
