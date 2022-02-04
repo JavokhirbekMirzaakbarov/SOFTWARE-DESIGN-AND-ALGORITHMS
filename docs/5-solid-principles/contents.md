@@ -27,4 +27,4 @@ sidebar_position: 1
     - [2.5.2 DIP Summary](/docs/solid-principles/solid#252-dip-summary)
 - [3. Anti SOLID](/docs/solid-principles/anti_solid)
 - [4. Conclusion](/docs/solid-principles/conclusion)
-- [5. Home Task](/docs/solid-principles/hometask)
+- [Home Task](/docs/solid-principles/hometask)

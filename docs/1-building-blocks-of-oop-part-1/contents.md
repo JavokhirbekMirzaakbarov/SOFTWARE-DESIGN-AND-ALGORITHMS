@@ -37,4 +37,4 @@ sidebar_position: 1
   - [6.3 Why Change is Hard and the Problem Design Solves](/docs/building-blocks-of-oop-part-1/object-oriented_design_introduction#63-why-change-is-hard-and-the-problem-design-solves)
   - [6.4 The Purpose of OOD](/docs/building-blocks-of-oop-part-1/object-oriented_design_introduction#64-the-purpose-of-ood)
   - [6.5 The Tools of Design](/docs/building-blocks-of-oop-part-1/object-oriented_design_introduction#65-the-tools-of-design)
-- [7. Home Task](/docs/building-blocks-of-oop-part-1/hometask)
+- [Home Task](/docs/building-blocks-of-oop-part-1/hometask)

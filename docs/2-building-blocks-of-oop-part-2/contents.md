@@ -32,4 +32,4 @@ sidebar_position: 1
   - [5.1 Correctness](/docs/building-blocks-of-oop-part-2/desing_by_contract#51-correctness)
   - [5.2 Preconditions and Postconditions for Inheritance](/docs/building-blocks-of-oop-part-2/desing_by_contract#52-preconditions-and-postconditions-for-inheritance)
   - [5.3 Covariance and Contravariance](/docs/building-blocks-of-oop-part-2/desing_by_contract#53-covariance-and-contravariance)
-- [6. Home Task](/docs/building-blocks-of-oop-part-2/hometask)
+- [Home Task](/docs/building-blocks-of-oop-part-2/hometask)

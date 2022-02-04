@@ -20,4 +20,4 @@ sidebar_position: 1
   - [5.2 DFS](/docs/algorithms-and-data-structures-part-2/graphs#52-dfs)
   - [5.3 Finding the Shortest Path](/docs/algorithms-and-data-structures-part-2/graphs#53-finding-the-shortest-path)
   - [5.4 Dijkstra's Algorithm](/docs/algorithms-and-data-structures-part-2/graphs#54-dijkstras-algorithm)
-- [6. Home Task](/docs/algorithms-and-data-structures-part-2/hometask)
+- [Home Task](/docs/algorithms-and-data-structures-part-2/hometask)

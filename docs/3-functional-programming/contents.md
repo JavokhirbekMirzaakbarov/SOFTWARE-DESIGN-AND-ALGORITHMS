@@ -29,4 +29,4 @@ sidebar_position: 1
     - [4.3.2 Lodash](/docs/functional-programming/is_js_functional#432-lodash)
     - [4.3.3 React](/docs/functional-programming/is_js_functional#433-react)
   - [4.4 Pros and Cons of FP](/docs/functional-programming/is_js_functional#44-pros-and-cons-of-fp)
-- [5. Home Task](/docs/functional-programming/hometask)
+- [Home Task](/docs/functional-programming/hometask)
