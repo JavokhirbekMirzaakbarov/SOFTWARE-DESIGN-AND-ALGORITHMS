@@ -126,7 +126,7 @@ You feel sick."
 
 ## Evaluation criteria
 
-2. Only some classes were not implemented.
+2. Only some classes were implemented.
 3. Some classes were not implemented.
 4. Some required methods are missing.
 5. All tasks are implemented to a full extend.

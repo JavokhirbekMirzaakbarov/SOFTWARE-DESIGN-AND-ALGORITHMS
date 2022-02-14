@@ -28,12 +28,13 @@ so that for a graph
 you can use your implementation of `WeightedGraph` interface to represent it in code
 
 ```ts
-  const vertex1 = new Vertex('1');
-  const vertex2 = new Vertex('2');
-  const vertex3 = new Vertex('3');
-  const vertex4 = new Vertex('4');
-  const vertex5 = new Vertex('5');
-  const vertices = [vertex1, vertex2, vertex3, vertex4, vertex5];
+  const vertices = [
+    new Vertex('1'),
+    new Vertex('2'),
+    new Vertex('3'),
+    new Vertex('4'),
+    new Vertex('5')
+  ];
   const edges = [
     new Edge(vertex1, vertex4, 3),
     new Edge(vertex1, vertex2, 5),

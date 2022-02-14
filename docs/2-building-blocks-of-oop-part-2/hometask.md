@@ -52,3 +52,10 @@ Implement `PageFactory`, so it will incapsulate pages creation logic.
 ## Usage
 
 You also can run jasmine tests using `test` script from `package.json` to make sure that main requirements are met.
+
+## Evaluation criteria
+
+2. Only some classes were implemented.
+3. Some classes were not implemented.
+4. Some required methods are missing.
+5. All tasks are implemented to a full extend.
