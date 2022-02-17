@@ -113,7 +113,7 @@ class Paystub {
   }
 
   public computePayroll(): number {
-    // using this._employees for calculation
+    // using this.employees for calculation
     return 42;
   }
 }
@@ -136,13 +136,12 @@ class Paystub2 {
   }
 
   public computePayroll(): number {
-      // using this._employees for calculation
+      // using this.employees for calculation
       return 42;
   }
 }
 
 const p2 = new Paystub2();
-const employee = p1.getEmployees();
 
 p2.addEmployee(new Employee());
 p2.addEmployee(new Employee());
@@ -150,7 +149,7 @@ p2.addEmployee(new Employee());
 p2.computePayroll();
 ```
 
-Here we have two classes. The first class on the Listing 3.4 is `Paystub`, the other class is `Paysbub2` (Listing 3.5). In both examples, we have the private data `_employees`, which is an array that can contain a certain number of instances of the `Employee` class. In the example on the Listing 3.4, the `getEmployees` method returns `this._employees` array so the client can access and modify the data (add and remove items). In the second example, the designer of our system, in which this class appears, made a certain assumption that the client would be able to add `Employee` to `Paysbub2`, in what way - the client should not be interested. It should not depend on implementation details, how exactly `Employees` will be added to the `Paysbub2` class, it should only depend on the abstract public interface, that is, on the `addEmployees` method. It should be enough for the client to call the `addEmployees` method with instances of the `Employee` class, it no longer depends on the data structure, an object or a linked list can be used instead of an array. In the second case, the client will not break, everything will work as before, only the implementation of the `addEmployees` method will change. In the first case, everything will break, because the client knows that this is an array, he works with this data as with an array, when we change it to an object, and we cannot push data there, if you will need to add new records there - the client will break. This is bad, because there can be not one, but a thousand such clients, and the half of the system will collapse because this system depends on the internal implementation in which there is pseudo encapsulation.
+Here we have two classes. The first class on the Listing 3.4 is `Paystub`, the other class is `Paystub2` (Listing 3.5). In both examples, we have the private data `employees`, which is an array that can contain a certain number of instances of the `Employee` class. In the example on the Listing 3.4, the `getEmployees` method returns `this.employees` array so the client can access and modify the data (add and remove items). In the second example, the designer of our system, in which this class appears, made a certain assumption that the client would be able to add `Employee` to `Paystub2`, in what way - the client should not be interested. It should not depend on implementation details, how exactly `Employees` will be added to the `Paystub2` class, it should only depend on the abstract public interface, that is, on the `addEmployees` method. It should be enough for the client to call the `addEmployees` method with instances of the `Employee` class, it no longer depends on the data structure, an object or a linked list can be used instead of an array. In the second case, the client will not break, everything will work as before, only the implementation of the `addEmployees` method will change. In the first case, everything will break, because the client knows that this is an array, he works with this data as with an array, when we change it to an object, and we cannot push data there, if you will need to add new records there - the client will break. This is bad, because there can be not one, but a thousand such clients, and the half of the system will collapse because this system depends on the internal implementation in which there is pseudo encapsulation.
 
 As mentioned earlier, class members do not just have to be duplicated through setters and getters, and `getEmployees` is, in fact, a regular getter. And the abstraction should provide some high-level interface for working with itself.
 
