@@ -24,11 +24,7 @@ Figure 5.1 - Interface
 - Are unsafe for others to depend on.
 - May not even be referenced in the tests.
 
-What do interfaces give us? The presence of interfaces allows you to think about the task in a more abstract way, ignoring minor details.
-
-There are different levels of abstraction or ignorance of details.
-
-Every concrete class is abstract and has hidden behavior. And the class will be implemented, some interface will depend not on the requirement of abstraction, but on the model.
+What do interfaces give us? The presence of interfaces allows you to think about the task in a more abstract way, ignoring minor details. There are different levels of abstraction or ignorance of details.
 
 ## 5.1 When Should a Class Implement an Interface?
 

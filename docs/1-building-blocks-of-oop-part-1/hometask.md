@@ -10,9 +10,9 @@ The home task can be done using Typescript or less preferable (try to avoid) Van
 The starter code for the home task is located in _docs/1-building-blocks-of-oop-part-1/hometask_ folder
 :::
 
-Check the UML representation of a set of classes that represent the inventory and various types of items. Methods and classes where you are providing an implementation are shown in bold.
+Check the UML representation of a set of classes that represent the inventory and various types of items.
 
-The classes in italics represent abstract classes or interfaces. The concrete child classes must implement all methods from the abstract parent classes. `Item`, `Consumable`, `and` Weapon are the abstract classes.
+The classes and methods in italics are abstract. The concrete child classes must implement all methods from the abstract parent classes. `Item`, `Consumable`, and `Weapon` are the abstract classes.
 
 The line from `Item` to `Comparable` indicates that `Item` must implement the `Comparable` interface. Similarly, the `ItemWeightComparator` class must implement the `ItemComparator` interface, which extends the `Comparator` interface. `ItemWeightComparator` compares items based on their weight.
 
@@ -36,10 +36,10 @@ The `ItemWeightComparator` class implements the `ItemComparator` interface, mean
 
 - The `compare(first: Item, second: Item)` method of `ItemWeightComparator` should function similarly to the `compareTo(other: Item)` method of the `Item` class, but for the weight field of the `Items`. If the weights are equal, this method should call the `compareTo(other: Item)` method of the first `Item` and return the resulting value.
 
-The `Weapon` class is an abstract implementation of `Item` and describes items that can deal damage and break from use. The implementation of this class is provided for you. All instances of `Weapon` have a base damage value `baseDamage` and a modifier to that value `damageModifier`. The sum of these two values determines the effective damage that this `Weapon` can do on a single use. In addition, `Weapons` have a base durability value `baseDurability`, and a modifier to that value `durabilityModifier`. The sum of these two values determines the effective durability of the `Weapon`. When this sum reaches zero or less, the effective durability is zero and the `Weapon` is considered to be broken and cannot be used.
+The `Weapon` class is an abstract implementation of `Item` and describes items that can deal damage and break from use. All instances of `Weapon` have a base damage value `baseDamage` and a modifier to that value `damageModifier`. The sum of these two values determines the effective damage that this `Weapon` can do on a single use. In addition, `Weapons` have a base durability value `baseDurability`, and a modifier to that value `durabilityModifier`. The sum of these two values determines the effective durability of the `Weapon`. When this sum reaches zero or less, the effective durability is zero and the `Weapon` is considered to be broken and cannot be used.
 
-We provide several implemented methods that include:
-- `Weapon.getDamage()`: Returns the effective damage of the `Weapon`.
+You need to implement the next methods:
+- `Weapon.getDamage()`: Returns the effective `Weapon` damage.
 - `Weapon.getDurability()`: Returns the effective durability of the Weapon.
 - `Weapon.toString()`: for a `Weapon` with the name of "hammer", a value of 300, a weight of 2.032, a `baseDamage` value of 30.4219, a `damageModifier` of 0.05, a `baseDurability` of 0.7893, and a `durabilityModifier` of 0.05, the method returns a string in the following format:
 
