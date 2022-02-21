@@ -124,7 +124,7 @@ class RoadBike extends Bicycle {
     spares() {
         return {
             ...super.spares(),
-            tapeColor: this.tapaColor,
+            tapeColor: this.tapeColor,
         };
     };
 }
