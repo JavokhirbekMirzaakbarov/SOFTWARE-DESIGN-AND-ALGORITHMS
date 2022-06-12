@@ -4,24 +4,29 @@ sidebar_position: 7
 
 # 6. 📚 Home Task
 
-The home task can be done using TypeScript or Vanilla JS.
+The home task should be done using TypeScript.
+
+:::info
+To complete the home task you need to complete each of the steps described below one by one.
+Create at least one commit for each step so your mentor will be able to verify the solution.
+:::
 
 ### Step 1: Starting Simply
 
-You are coding up the business objects for a Package Handling system. Another team is creating a graphical user interface (GUI), but this is not ready yet. Yet another team is working on a persistence layer which, among other things, will be able to generate unique Shipment ID's for you when needed (see below), but this is also not yet ready.
+You are coding up the back-end for a Package Handling system. Another team is creating a front-end part, but this is not ready yet. Yet another team is working on a persistence layer which, will be able to generate unique Shipment ID's for you when needed (see below), but this is also not yet ready.
 
-You will need, at minimum, two objects. One will represent the controlling, or `Client` object that will interact with the `GUI`, when it is available. The other will represent the object being shipped.
+You will need, at minimum, two objects. One will represent the controlling, or `Client` object that will interact with the front-end, when it is available. The other will represent the object being shipped.
 
-State that will come from the end user via the `GUI` is:
+State that will come from the end user via the front-end part is the next:
 
-- `ShipmentID` (a number that represents an existing ID, or 0, which means you have to generate a new, unique ID at construction time)
-- `ToAddress` (a string containing street, city, and state) – should be changeable
-- `FromAddress` (a string containing street, city, and state) – should be changeable
-- `ToZipCode` (a string containing exactly 5 characters) – should be changeable
-- `FromZipCode` (a string containing exactly 5 characters) – should be changeable
-- `Weight` (a number, storing the weight of the item in ounces)
+- `ShipmentID` - a number that represents an existing ID, or 0, which means you have to generate a new, unique ID at construction time
+- `Weight` - a number, storing the weight of the item in ounces
+- `FromAddress` - a string containing street, city, and state, should be changeable
+- `FromZipCode` - a string containing exactly 5 characters, should be changeable
+- `ToAddress` - a string containing street, city, and state, should be changeable
+- `ToZipCode` - a string containing exactly 5 characters, should be changeable
 
-The client object will obtain a single instance of the object which represents the item being shipped, and then ask it to "ship itself". The return from this request will be a single string indicating the shipment ID, where the item was sent from, where it is going, and how much the cost was.
+The client object will obtain a single instance of the object which represents the item being shipped, and then ask it to 'ship itself' (calls its `ship` method). The return from this request will be a single string indicating the shipment ID, where the item was sent from, where it is going, and how much the cost was.
 
 The cost will be determined by the weight. The rate of 39 cents per ounce will be applied.
 
@@ -31,7 +36,7 @@ Things to note:
 
 • Make sure you follow good practices. Always program by intention, and always encapsulate the construction of instances.
 
-• Since you don't have the actual `GUI` to call upon for the state, you'll have to dummy that up somewhere. Just make sure it's somewhere that is easy to change.
+• Since you don't have the actual front-end part to get the shipment data, you need to create a mock for it. Just make sure it will be easy to replace the mock with the real implementation in the future.
 
 :::tip
 Remember programming by intention tends to produce cohesive methods, which are easier to change and move from place to place.
@@ -75,13 +80,13 @@ Figure 6.2 - Shipment using Shipper as Strategy
 
 ### Step 3: Different Kinds of Shipments
 
-Now there are three types of items being shipped: Letters, Packages, and Oversized. The way you know which type of thing is being shipped is determined by weight2.
+Now there are three types of items being shipped: Letters, Packages, and Oversize. The way you know which type of thing is being shipped is determined by weight2.
 
 Regardless of which shipper is being used, the following rules apply:
 
 - A Letter is anything up to and including 15 ounces (less than a pound)
 - A Package is anything up to and including 160 ounces
-- An Oversized package is anything heavier than 160 ounces
+- An Oversize package is anything heavier than 160 ounces
 
 The various shippers have different actions to take, depending on what sort of item is being shipped:
 
@@ -120,5 +125,12 @@ Figure 6.4 - Shipper being decorated
 ![img.png](img/shipper_being_decorated.jpg)
 
 :::note
-You may not strictly follow every UML-diagram. If you want to replace some design pattern to another one, which you think fit better, or you suppose some pattern is redundant here you may not use it (please, add comments why it's redundant). In case of implementation `Shipment` and `Shipper` classes as `Singletons` you may face with issue where `Singleton` can't play role of Base/Abstract class. In such case you can consider using composition instead of inheritance or just to not make those classes as `Singletons` at all.
+You may not strictly follow every UML-diagram. If you want to replace some designs pattern to another one, which you think fit better, or you suppose some pattern is redundant here you may not use it (please, add comments why it's redundant). In case of implementation `Shipment` and `Shipper` classes as `Singletons` you may face with issue where `Singleton` can't play role of Base/Abstract class. In such case you can consider using composition instead of inheritance or just to not make those classes as `Singletons` at all.
 :::
+
+## Evaluation criteria
+
+2. Only the step 1 is completed.
+3. Steps 3 and 4 are not completed.
+4. The last step is not completed.
+5. All the steps are completed.

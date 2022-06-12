@@ -4,7 +4,7 @@ sidebar_position: 7
 
 # 6. 📚 Home Task
 
-The home task can be done using TypeScript or Vanilla JS.
+The home task should be done using TypeScript.
 
 ## Graph generator
 
