@@ -1,0 +1,14 @@
+.main {
+  background-color: #282c34;
+  height: calc(100vh - 267px);
+  padding: 3rem
+}
+
+.linksContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
