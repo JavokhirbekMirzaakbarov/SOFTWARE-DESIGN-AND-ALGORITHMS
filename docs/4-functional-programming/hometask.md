@@ -4,10 +4,10 @@ sidebar_position: 5
 
 # 5. 📚 Home Task
 
-The home task needs to be done using Typescript.
+The home task should be done using TypeScript.
 
 :::info
-The starter code for the home task is located in _docs/3-functional-programming/hometask_ folder
+The starter code for the home task is located in _docs/4-functional-programming/hometask_ folder
 :::
 
 ## Start the project

@@ -14,7 +14,7 @@
   --ifm-color-primary-lighter: rgb(102, 212, 189);
   --ifm-color-primary-lightest: rgb(146, 224, 208);
   --ifm-code-font-size: 95%;
-  --doc-sidebar-width: 350px !important;
+  --doc-sidebar-width: 360px !important;
 }
 
 .docusaurus-highlight-code-line {
