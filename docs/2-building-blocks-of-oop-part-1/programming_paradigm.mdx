@@ -89,12 +89,14 @@ Listing 1.3 - Example of OOP code
 
 Last, but not least, **Functional paradigm** describes the program as a set of functions (not objects or procedures) that are used as building blocks to manipulate data. It forces us to use function in their mathematical sense, as they just declare a relationship between two entities. Functions do not change the state of a program (also known as pure), they simply pipe the data through them to produce a result. There are no variables, only constants.
 
-```js title="Listing 1.4 - Example of functional code"
-sort(
-  filter(λs. length s > 5,
-    map(λp. to_upper(name p),
-      people)))
-```
+Listing 1.4 - Example of FP code
+
+````mdx-code-block
+<CodeEmbedLink
+  title="Example of FP code"
+  src="https://codesandbox.io/embed/example-of-fp-code-f799i2?expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark"
+/>
+````
 
 In the example we have a certain nesting of certain functions, where the result of the function can be expressed as a list of arguments that are passed to this function. However, arguments can also be functions. By the way, not all programming languages can pass a function as a parameter to another function, this is the so-called first-class citizen function. JavaScript has this capability, that is why it has some concepts of functional programming.
 
