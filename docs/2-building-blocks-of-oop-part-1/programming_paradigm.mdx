@@ -2,6 +2,8 @@
 sidebar_position: 2
 ---
 
+import CodeEmbedLink from '@site/src/components/CodeEmbedLink';
+
 # 1. Programming Paradigm
 
 This lecture is going to be dedicated to object-oriented programming and object-oriented design. It is going to be an overview lecture of what you are going to learn in this course, but I recommend you pay close attention to it. The reason being, it is going to include a lot of basics and principles that will help you write better, cleaner, more maintainable code.
@@ -71,17 +73,14 @@ Object-oriented paradigm describes the computer program as a set of specific obj
 
 It is safe to say that object-oriented paradigm is well-suited for big projects that require having a state within the application. It is message-oriented approach provides a way for objects to be replaced by other objects of a same type. This means that the behavior of a program can be changed just by replacing an object. Also, same objects as building blocks could be reused in other parts of the same system.
 
-```js title="Listing 1.3 - Example of object-oriented code"
-result = []
+Listing 1.3 - Example of OOP code
 
-for p in people {
-  if p.name.length > 5 {
-    result.add(p.name.toUpper);
-  }
-}
-
-return result.sort;
-```
+````mdx-code-block
+<CodeEmbedLink
+  title="Example of OOP code"
+  src="https://codesandbox.io/embed/example-of-oop-code-48mtqp?expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark"
+/>
+````
 
 ## 1.4 Functional Programming
 - Treats computations as the evaluation of functions and avoids changing state and mutable data
