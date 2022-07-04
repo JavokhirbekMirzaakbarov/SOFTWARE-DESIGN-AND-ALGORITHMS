@@ -2,7 +2,7 @@
 
 ### Installation
 
-You need to have [Node >= 14.0.0 and npm >= 5.6](https://nodejs.org/en/) on your machine. Once you have it run the command below in your terminal to install project dependencies and build the project:
+You need to have [Node version](https://nodejs.org/en/) on your machine that matches [the requirements](node_modules/@docusaurus/core/package.json) of the `docusaurus` packages ("engines" field in package.json) that is used for building the documentation. Once you have it run the command below in your terminal to install project dependencies and build the project:
 
 ```
 $ npm i
