@@ -1,3 +1,3 @@
 export abstract class Shape {
-    abstract getType(): string;
+  abstract getType(): string;
 }
