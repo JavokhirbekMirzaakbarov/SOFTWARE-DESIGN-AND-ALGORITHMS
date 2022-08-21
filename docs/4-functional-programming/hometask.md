@@ -2,12 +2,21 @@
 sidebar_position: 5
 ---
 
+import CodeEmbedLink from '@site/src/components/CodeEmbedLink';
+
 # 5. 📚 Home Task
 
 The home task should be done using TypeScript.
 
 :::info
-The starter code for the home task is located in _docs/4-functional-programming/hometask_ folder
+The starter code for the home task is located in the sandbox bellow:
+
+````mdx-code-block
+<CodeEmbedLink
+  title="FP hometask"
+  src="https://codesandbox.io/embed/fp-hometask-442k6t?fontsize=14&hidenavigation=1&theme=dark"
+/>
+````
 :::
 
 ## Start the project
@@ -34,7 +43,7 @@ The backend work is already done, and you have three requests with the needed da
 
 On UI, you already have implemented components so what you need is to pass data from API to the component and implement some business logic.
 
-![general UI](./img/mock.png)
+![general UI](img/mock.png)
 
 ## Input parameters
 
@@ -111,13 +120,13 @@ You need to implement:
    In the future, we will have a lot of data in the table, so it would be hard to find something in there. That is why we need to have a possibility to sort, filter, and search on the page. `Sort`, `Search` and `Filter` have to work as **OR**. For example,
 
    - if the **More than 100 posts** filter is active, and you type SWEDEN in the `Search` input, the result will be MIKE and Luke123.
-     ![If one filter is selected and country is typed in Search](./img/first-case.png)
+     ![If one filter is selected and country is typed in Search](img/first-case.png)
 
    - if **Without posts** and **More than 100 posts** filters are chosen and Sweden is typed in `Search` input, the result will be Lora123, Luke123 and MIKE.
-     ![If both filters are selected and country is typed in Search](./img/second-case.png)
+     ![If both filters are selected and country is typed in Search](img/second-case.png)
 
    - if **Without posts** and **More than 100 posts** filters are active, Sweden is typed in `Search` input and **desc** is selected sorting, the result will be MIKE, Luke123, Lora123.
-     ![If both filters are selected and country is typed in Search and sorting is selected](./img/third-case.png)
+     ![If both filters are selected and country is typed in Search and sorting is selected](img/third-case.png)
 
 ## Specific instructions
 
