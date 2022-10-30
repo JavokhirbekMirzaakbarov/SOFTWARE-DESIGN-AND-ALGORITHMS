@@ -22,6 +22,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl: undefined,
+          exclude: ['**/hometask/node_modules/**']
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),

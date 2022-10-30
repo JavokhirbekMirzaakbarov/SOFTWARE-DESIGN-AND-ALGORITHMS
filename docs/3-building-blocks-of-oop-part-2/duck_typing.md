@@ -4,6 +4,12 @@ sidebar_position: 3
 
 # 2. Duck Typing
 
+:::info
+Duck typing in computer programming is an application of the duck test — "If it walks like a duck and it quacks like a duck, then it must be a duck" — to determine whether an object can be used for a particular purpose.
+
+[Wikipedia](https://en.wikipedia.org/wiki/Duck_typing)
+:::
+
 ## 2.1 If It Walks Like a Duck and Talks Like a Duck Then It's a Duck
 
 To better understand the meaning of this phrase let us analyze it using one of previous examples based on the UML-diagram below: 

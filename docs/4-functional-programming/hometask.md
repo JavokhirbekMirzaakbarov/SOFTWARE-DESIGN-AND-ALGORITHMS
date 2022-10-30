@@ -138,4 +138,4 @@ You need to implement:
 2. All tasks are implemented partially, or one task is not implemented at all.
 3. Two tasks have major issues or functional principles are not followed at all.
 4. One of the tasks does not have a major part of its implementation.
-5. All tasks are implemented to a full extend and functional principles are followed.
+5. All tasks are implemented to a full extent and functional principles are followed.
