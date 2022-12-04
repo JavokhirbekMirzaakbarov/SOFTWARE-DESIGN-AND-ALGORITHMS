@@ -62,7 +62,8 @@ You need to implement the next methods:
   If the effective durability of the `Weapon` reaches 0 or less, the `Weapon` will break. In this case, the method should output the previous string, but additionally with a newline character and the additional text "The sword breaks.":
 
   ```
-  "You use the sword, dealing 0.05 points of damage. The sword breaks."
+  "You use the sword, dealing 0.05 points of damage.
+  The sword breaks."
   ```
 
   For a `Weapon` with the name of "sword", if it is broken, calling its `use()` method returns the following:
@@ -94,7 +95,7 @@ The `Inventory` class is a container for items. You need to add the following me
 
 ### Consumable
 
-The `Consumable` class describes those items that can be eaten by the player. `Consumable`s can be marked as consumed, and can be spoiled. These properties are stored in the instance variables `isConsumed` and `isSpoiled`, respectively. A newly-created `Consumable` object should have its `isConsumed` field set to false.
+The `Consumable` class describes items that can be consumed. `Consumable`s also can be spoiled. This information is stored in the instance variables `isConsumed` and `isSpoiled`, respectively. A newly-created `Consumable` object should have its `isConsumed` field set to false.
 - `use()`: For a `Consumable` with the name of "bread" that has already been consumed, should return the following:
   ```
   "There is nothing left of the bread to consume."
@@ -115,8 +116,7 @@ The `Consumable` class describes those items that can be eaten by the player. `C
 
 ## Specific instructions
 
-1. Start from creating `Item`, `Consumable`, and `Inventory` classes
-2. Create the `Sword`, `Bow` and `ItemWeightComparator` classes
+1. Start from implementation of `Item`, `Consumable`, and `Inventory` classes
 
 ## Implementation details
 
@@ -128,10 +128,12 @@ The `Consumable` class describes those items that can be eaten by the player. `C
    - `sort()` method is polymorphic and has 2 declarations: `sort()` and `sort(comparator: ItemComparator)`
 3. `Weapon` class:
    - don't forget to use `super` in `constructor` (note that parent classes can require extra fields, such as `name`)
+4. `Pizza` class:
+   - Use UML diagram and tests for implementation
 
 ## Evaluation criteria
 
 2. Only some classes were implemented.
 3. Some classes were not implemented.
-4. Some required methods are missing. All `@ts-nocheck` comments are removed.
-5. All tasks are implemented to a full extent and all tests are passed successfully (`npm run test`). All `@ts-nocheck` comments are removed.
+4. Some required methods are missing. All `@ts-nocheck` comments are removed and there are no TypeScript warnings exist after that.
+5. All tasks are implemented to a full extent and all tests are passed successfully (`npm run test`). All `@ts-nocheck` comments are removed and there are no TypeScript warnings exist after that.

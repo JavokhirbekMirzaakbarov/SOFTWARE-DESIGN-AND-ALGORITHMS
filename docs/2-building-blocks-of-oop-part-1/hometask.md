@@ -55,5 +55,5 @@ The starter code for the home task is located in _docs/2-building-blocks-of-oop-
 
 2. Only some classes were implemented.
 3. Some classes were not implemented.
-4. Some required methods are missing.
-5. All tasks are implemented to a full extent and all tests are passed successfully (`npm run test`).
+4. Some required methods are missing. All `@ts-nocheck` comments are removed and there are no TypeScript warnings exist after that.
+5. All tasks are implemented to a full extent and all tests are passed successfully (`npm run test`). All `@ts-nocheck` comments are removed and there are no TypeScript warnings exist after that.

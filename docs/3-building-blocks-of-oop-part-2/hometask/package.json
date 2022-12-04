@@ -2,9 +2,6 @@
   "name": "building-blocks-of-oop-part-2",
   "version": "1.0.0",
   "description": "",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "test": "jest"
   },
