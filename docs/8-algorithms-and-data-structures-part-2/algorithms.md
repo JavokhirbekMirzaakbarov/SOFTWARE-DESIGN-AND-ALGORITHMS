@@ -62,7 +62,7 @@ Next comes the order of log n, which is called logarithmic time. And a typical e
 
 The next is linear time, which corresponds to Big-O of `n`, and this level of time complexity corresponds to a typical example of finding an element in an unsorted array.
 
-We also have an order of `n` times `logn` or the so-called logarithmic time complexity. Examples would be some sorting algorithms such as heap sort and merge sort.
+We also have an order of `n` times `logn` or the so-called linearithmic time complexity. Examples would be some sorting algorithms such as heap sort and merge sort.
 
 And finally, the order of `n` squared, which is called the quadratic time complexity, and as you probably guessed, this is not a very good level of performance, because it means that as the number of elements in the dataset increases, the time it takes to process they increase in the square of this number. An example would be several simpler sorting algorithms such as bubble sort and selective sort.
 

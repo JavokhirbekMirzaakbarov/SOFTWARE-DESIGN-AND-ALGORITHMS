@@ -199,7 +199,7 @@ Figure 3.5
 
 ![Node insertion](img/node_insertion2.jpg)
 
-At first (a), we insert a node `z` with value 4. It's inserted red, the parent of it is red and the uncle `t` is red too. To fix this red-red violation, we recolor the parent of `z` and `y` to black and make the parent red (transition a-b).
+At first (a), we insert a node `z` with value 4. It's inserted red, the parent of it is red and the uncle `y` is red too. To fix this red-red violation, we recolor the parent of `z` and `y` to black and make the parent red (transition a-b).
 
 Now, we have a red-red violation, and we assume the previous grandparent node of `z` (7) as `z`. At this point, the uncle of `z` – `y` would be node 14. To fix this red-red violation, we perform a left-rotate on parent of the node `z` (transition b-c).
 

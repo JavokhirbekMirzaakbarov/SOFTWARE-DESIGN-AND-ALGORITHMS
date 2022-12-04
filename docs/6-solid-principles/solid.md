@@ -174,7 +174,7 @@ Let Q(x) be a property provable about objects x of type T. Then Q(y) should be t
 
 To be honest, such a scientific definition might be necessary, but it does not help a lot in our daily work as software developers. So, what does it mean for our code?
 
-The principle defines that **objects of a superclass should be replaceable with objects of its subclasses without breaking the application**. That requires the objects of your subclasses to behave in the same way as the objects of your superclass. Clients can reliably use any type or subtype, always expecting consistent behavior or, in other words, that the contract will be kept. A simple formulation of the principle is as follows: it should be possible to substitute any subtype for base type.
+The principle defines that **objects of a superclass should be replaceable with objects of its subclasses without breaking the application**. That requires the objects of your subclasses to behave in the same way as the objects of your superclass. Clients can reliably use any type or subtype, always expecting consistent behavior or, in other words, that the contract will be kept. A simple formulation of the principle is as follows: it should be possible to substitute any base type for subtype.
 
 There are several "rules" that must be followed for LSP compliance: contract rules and variance rules.
 
@@ -462,7 +462,7 @@ The general idea of this principle is as simple as it is important: **High-level
 Let us dive deep into dependency inversion principle by having a look at the example below. Suppose we are working on an application that uses MySQL database. We have `UserTransaction` class that will be used to query `User` table in the database. It contains `init()` method that takes instance of MySQLDatabase class and two base operations: `insert()` and `delete()`.
 
 ```ts title="Listing 2.13"
-interface Database {
+interface MySQLDatabase {
   insert(entity: object): object
   delete(entity: object): object
   get(entity: object): object
@@ -479,7 +479,7 @@ class UserTransaction {
 
 `MySQLDatabase` is a low-level module, `UserTransaction` is a high-level one. But based on the definition of the Dependency Inversion Principle, which says to separate abstractions from the implementation, this fragment of code violates it, because the `UserTransaction` class depends on the `MySQLDatabase` class.
 
-But what if at some point we decided to replace MySQL to PostgreSQL database, which has a completely different interface compared to MySQL? We would not only need to create **PostgreSQLDatabase** class, but also update **UserTransaction** class implementation.
+But what if at some point we decided to replace MySQL to PostgreSQL database, which has a completely different interface compared to MySQL? We would not only need to create `PostgreSQLDatabase` class, but also update `UserTransaction` class implementation.
 
 ```ts title="Listing 2.14"
 class PostgreSQLDatabase {
@@ -489,7 +489,7 @@ class PostgreSQLDatabase {
 }
 ```
 
-There should be low coupling between classes used. **UserTransaction** class does not have to worry about the database being used. To fix that, we have to create an interface so that the low-level and high-level modules depend on the abstraction (interface).
+There should be low coupling between classes used. `UserTransaction` class does not have to worry about the database being used. To fix that, we have to create an interface so that the low-level and high-level modules depend on the abstraction (interface).
 
 ```ts title="Listing 2.15"
 interface Database {

@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # 4. B-Trees
 
-B-trees are an immensely powerful tools that are used in SQL and in filesystems. They inherited a loft from red-black trees. Let us figure out what they are and how they work.
+B-trees are an immensely powerful tools that are used in SQL and in filesystems. They inherited a lot from red-black trees. Let us figure out what they are and how they work.
 
 B-trees are balanced search trees designed to work well on disks or other direct-access secondary storage devices. B-trees are like red-black trees, but they are better at minimizing disk I/O operations. Many database systems use B-trees, or variants of B-trees, to store information.
 
