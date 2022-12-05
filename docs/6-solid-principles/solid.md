@@ -205,7 +205,7 @@ class WorldWideShipping extends ShippingCalculator {
   // correct destination type passed: Destination
   public calculate(weight: number, size: number, destination: Destination) {
     // preconditions are strengthened
-    if  (weight < 10 && size < 10) {
+    if  (weight >= 10 || size >= 10) {
       throw new Error('No international shipping for you')
     }
 
