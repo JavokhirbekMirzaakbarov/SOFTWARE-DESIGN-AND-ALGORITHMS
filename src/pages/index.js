@@ -22,7 +22,7 @@ export default function Home() {
             <Oop />
           </Link>
           <Link
-            url="/docs/functional-programming/general_fp"
+            url="/docs/functional-programming/fp_introduction"
             title="Functional Programming"
           >
             <Fx />
