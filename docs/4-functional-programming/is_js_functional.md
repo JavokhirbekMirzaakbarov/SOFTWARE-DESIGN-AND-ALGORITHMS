@@ -1,93 +1,31 @@
 ---
-sidebar_position: 4
+sidebar_position: 5
 ---
 
-# 4. Functional programing in JS
+# 5. Functional programming in JS/TS
 
-## 4.1 Functional concepts in JS
+As we have seen from examples before - JS supports main functional principles, but not static types. So, we would talk about the features that TS supports:
 
-Based on the concepts of FP let's see if we can say that JS is implementing a functional programming paradigm.
+* Functions are first-class citizens
+* Lexical scope
+* Anonymous functions (lambdas)
+* Parametric and ad-hoc polymorphism
+* Possibility to implement type-classes, algebraic structures (Functors, Monads, Setoids), and algebraic data types (tuples, records, unions)
 
-The first concept is **immutability** - JavaScript has built-in methods which follow this rule.
-For example, `filter`, `reduce`, `map`. For more information you can check [JS Array methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#).
+But, some features are missed:
 
-```js title="Listing 4.1 - Array mutation"
-const fruit = ["banana", "orange"];
-fruit.push("kiwi");
+* Higher kinded types
+* Tail call optimizations
+* Built-in pattern matching
+* Built-in algebraic data types
 
-console.log(fruit); // ["banana", "orange", "kiwi"]
-```
+## 5.1 Widespread functional JS libraries
 
-_Not a functional approach_
+### 5.1.1 Ramda
 
-In the _Listing 4.1_ array of fruit was mutated by adding new fruit to it.
+Ramda is a library of functions which is written in a purer functional style. Functions are automatically curried. Does not provide any new abstractions or methodologies, just utils.
 
-```js title="Listing 4.2 - immutable Array"
-const fruit = ["banana", "orange"];
-const newFruit = [...fruit, "kiwi"];
-
-console.log(fruit); // ["banana", "orange"]
-console.log(newFruit); // ["banana", "orange", "kiwi"]
-```
-
-_Functional approach_
-
-In _Listing 4.2_ it is obvious that we do not mutate the original array (Immutability). So there is a possibility in JavaScript to follow the immutability principle.
-
-The second concept is **No shared state**
-
-In order to avoid a shared state in JS, you can use such a library like [Redux](https://redux.js.org/), any other similar library, or all suggested approaches in the [How to avoid shared state](/docs/functional-programming/main_concepts#322-how-to-avoid-it) part could be used.
-
-You might already notice that all of these principles could be applied in JS.
-
-The third concept is **Composition**.
-
-The main idea of inheritance is to make code more reusable. With the functional way, as was mentioned before in [Composition part](/docs/functional-programming/main_concepts#33-composition) we can do it without inheritance by using the composition of small functions. It has some advantages over inheritance - it is more flexible, does not require thinking in advance, and is easier to test.
-
-## 4.2 Functional possibilities in JS
-
-What about language possibilities?
-
-**First class function** is implemented in JS, so we can use it for our purpose.
-
-```js title="Listing 4.3 - functions are called one by one"
-const foo = (a, b) => a + b;
-const buzz = (c) => console.log(c);
-const res = foo(4, 5);
-buzz(res); // 9
-```
-
-_Not a functional approach_
-
-In the _Listing 4.3_ there are two functions, `foo` adds two numbers, and `buzz` logs the input value in the console. In this case, in order to log the result in the console, we create the additional variable `res` which contains the result of `foo` and the pass `res` as an argument in the `buzz`.
-
-```js title="Listing 4.4 - passing function as an argument"
-const foo = (a, b) => a + b;
-const buzz = (c) => console.log(c);
-buzz(foo(4, 5)); // 9
-```
-
-_Functional approach_
-
-In the _Listing 4.4_ there are two functions, `foo` adds two numbers, and `buzz` logs the input value in the console. In this case, in order to log the result in the console, we pass `foo` called with the arguments in the `buzz`.
-This code will be executed in the next order:
-
-- `foo` will be executed with `4, 5`
-- result of execution `foo` will be passed to the `buzz` as a parameter
-
-In _Listing 4.4_, there is an implementation of how a function can be passed as a parameter to another function, and that is definitely a possibility of functional language.
-
-Currying is a technique that has to be supported in the language. So functions with more than one argument can be divided into several functions with one argument. The part [Currying](/docs/functional-programming/language_possibilities#22-currying) tells in detail about supporting this possibility in JavaScript.
-
-**Conclusion**: it might look like JS is a strict functional programming language, because it follows all functional rules. However, JS includes some OOP principles as well. Such as inheritance. So, it will not be completely right to say that it is a functional programming language. It is rather both. So we can combine the best features of both approaches in order to achieve good results.
-
-## 4.3 Widespread functional JS libraries
-
-### 4.3.1 Ramda
-
-The library is designed specifically for a functional programming style, one that makes it easy to create functional pipelines, one that never mutates user data. Ramda includes all of the favorite list-manipulation functions you expect, e.g. map, filter, reduce, find, etc. Ramda methods are automatically curried. For example, _Listing 4.5_. The function `multiply` returns another function, remembers the first arguments, and multiplies the first argument with the second one.
-
-```js title="Listing 4.5 - curried multiplication"
+```js title="Listing 5.1.1 - curried multiplication"
 const double = R.multiply(2);
 double(3); // 6
 ```
@@ -96,16 +34,17 @@ In order to run _Listing 4.5_ open [Try ramda](https://ramdajs.com/repl/)
 
 More info - [Ramda](https://ramdajs.com/)
 
-### 4.3.2 Lodash
+### 5.1.2 Lodash
 
-The lodash/fp module promotes more functional programming (FP) friendly style by exporting an instance of `lodash` with its methods wrapped to produce immutable auto-curried iteratee-first data-last methods. Lodash makes JavaScript easier by taking the hassle out of working with arrays, numbers, objects, strings, etc.
+The lodash/fp module promotes a more functional programming (FP) friendly style by exporting an instance of `lodash` with its methods wrapped to produce immutable auto-curried iterate-first data-last methods. Lodash makes JavaScript easier by taking the hassle out of working with arrays, numbers, objects, strings, etc.
+
 Lodash modular methods are great for:
 
 - Iterating arrays, objects, & strings
 - Manipulating & testing values
 - Creating composite functions
 
-```js title="Listing 4.6 - array filtering"
+```js title="Listing 5.1.2 - array filtering"
 var users = [
   { user: "barney", age: 36, active: true },
   { user: "fred", age: 40, active: false },
@@ -116,76 +55,127 @@ _.filter(users, function (o) {
 }); // [{ user: "fred", age: 40, active: false }]
 ```
 
-In order to run _Listing 4.6_ open [lodash docs](https://lodash.com/docs/4.17.15) and press the **Try in PERL** button on any code example.
+To run _Listing 5.1.2_ open [lodash docs](https://lodash.com/docs/4.17.15) and press the **Try in REPL** button on any code example.
 
-More info - [Lodash](https://lodash.com/)
+More info - [Lodash](https://lodash.com/).
 
-### 4.3.3 React
+### 5.1.3 FP-TS
 
-As you know, React is one of the most popular JavaScript libraries to create Web user interfaces. Its success is due to several factors, but maybe one of them is the clean and effective approach to programming.
-In the React environment, every piece of a UI is a component. Components can be composed together to create other components. The application itself is a component: a composition of components. For example, _Listing 4.7_. The task is to create a user form.
+fp-ts provides developers with popular patterns and reliable abstractions from typed functional languages in TypeScript. Allows you to make from TypeScript full-featured FP language, provides a lot of new abstractions and implements a full set of algebraic data structures.
 
-```js title="Listing 4.7 - user form"
-const Input = (props) => {
-  const { value } = props;
+```ts title="Listing 5.1.3 - transform first element of array"
+import * as O from 'fp-ts/Option';
+import { flow } from 'fp-ts/function';
+
+const double = n => n * 2;
+const head = <A>(as: ReadonlyArray<A>): O.Option<A> => (as.length === 0 ? O.none : O.some(as[0]));
+const inverse = (n: number): O.Option<number> => (n === 0 ? O.none : O.some(1 / n));
+
+const main = flow<ReadonlyArray<number>>(
+  head, // get first element
+  O.map(double), // double it
+  O.chain(inverse), // 1 / n
+  O.match(
+    () => 'no result', // onNone handler
+    (head) => `Result is ${head}` // onSome handler
+  ),
+);
+
+main([5, 2, 3]); // Result is 0.1
+main([]); // no result
+main([0]); // no result
+```
+
+### 5.1.4 React
+
+As you know, React is one of the most popular JavaScript libraries to create Web user interfaces. Its success is due to several factors, but maybe one of them is the clean and effective approach to programming. In the React environment, every piece of a UI is a component. Components can be composed together to create other components. The application itself is a component: a composition of components. For example, _Listing 4.7_. The task is to create a user form.
+
+```jsx title="Listing 5.1.4 - user form"
+import React, { useCallback, useState } from 'react';
+import ReactDOM from 'react-dom';
+
+const Input = ({ value, label, onChange }) => (
+  <div>
+    <label>
+      {label}: <input value={value} onChange={(event) => onChange(event.target.value)}></input>
+    </label>
+  </div>
+);
+
+const ShowButton = ({ onClick, isShowing }) => {
+  return (
+    <button onClick={onClick}>
+      {isShowing ? 'Hide values' : 'Show values'}
+    </button>
+  );
+};
+
+const App = () => {
+  const [formState, setFormState] = useState({
+    name: '',
+    lastName: '',
+    email: ''
+  });
+  const [showValues, setShowValues] = useState(false);
+  const toggleValues = useCallback(
+    () => setShowValues((isShowing) => !isShowing),
+    []
+  );
+
+  const setStateFor = (field) => (value) =>
+    setFormState((state) => ({ ...state, [field]: value }));
+
   return (
     <div>
-      <input></input>
-      {value}
+      <Input
+        value={formState.name}
+        label="Name"
+        onChange={setStateFor('name')}
+      />
+      <Input
+        value={formState.lastName}
+        label="Last name"
+        onChange={setStateFor('lastName')}
+      />
+      <Input
+        value={formState.email}
+        label="Email"
+        onChange={setStateFor('email')}
+      />
+      <ShowButton onClick={toggleValues} isShowing={showValues}/>
+      {showValues ? (
+        <ul>
+          {Object.entries(formState).map(([field, value]) => (
+            <li key={field}>
+              {field}: {value}
+            </li>
+          ))}
+        </ul>
+      ) : null}
     </div>
   );
 };
 
-const Button = () => {
-  return <button> Click me! </button>;
-};
-
-const Main = () => {
-  return (
-    <>
-      <Input value="Name" />
-      <Input value="Last Name" />
-      <Input value="email" />
-      <Button />
-    </>
-  );
-};
-
-// ReactDOM.render(
-//   <Main />,
-//   document.getElementById('root')
-// );
+const rootElement = document.getElementById('root');
+ReactDOM.render(<App/>, rootElement);
 ```
 
-Figure 4.1 - _Listing 4.7_ result
+In the code above, there are three components `Input`, `ShowButton`, and `Main`. By composing components in the `Main` component a variety of screens can be created. For example, to create different types of `Input` the props have to be passed instead of creating three different `Input` elements. The state is immutable and changed only by calling callbacks which re-renders components with just a new state. It is pretty reusable.
 
-<img
-width="500"
-src={require('./img/sample.png').default}
-alt="Abstract class"
-/>
+You can run this code here: https://codesandbox.io/s/app-zi9cxr.
 
-In the code above, there are three components `Input`, `Button`, and `Main`. By composing components in the `Main` component a variety of screens can be created. For example, in order to create different types of `Imput` the props have to be passed instead of creating three different `Input` elements. It is pretty reusable.
-
-There are two ways how to run this code:
-
-- to use configured [code pan](https://codepen.io/pen?&editors=0010) that supports babel and react.
-- to run `npx create-react-app` locally.
-
-In both cases commented code should be uncommented.
-
-More info - [React](https://reactjs.org/)
+More info - [React](https://reactjs.org/).
 
 ## 4.4 Pros and Cons of FP
 
 Pros
-- No side effects (if they are not necessary) - because we are following the immutability principle.
-- Pure functions are easier to understand because they depend only on the given input and don't change any states. With the same input, they always give the same output. Their function signature gives all the information about them.
-- The ability of functional programming languages to treat functions as values and pass them to functions as parameters make the code more readable and easily understandable.
-- Testing and debugging are easier. Since pure functions take only arguments and produce output, they don't produce any changes don't take input, or produce some hidden output. They use immutable values, so it becomes easier to check some problems in programs written using pure functions.
-- It is used to implement concurrency/parallelism because pure functions don't change variables or any other data outside it.
-- It adopts lazy evaluation which avoids repeated evaluation because the value is evaluated and stored only when it is needed.
+- Due to limitations and strict rules applications written in FP manner are much more stable, and fault-tolerant and have almost zero number of runtime errors
+- Code becomes more straightforward and self-explanatory because of high abstractions and declarative
+- Easier testing and debugging
+- High-modularity
+- Much easier to write high cohesion and low coupled code
 
 CONS
-- The readability can be reduced by a lot of pure functions.
-- Loss of performance could take place, because of the immutability principle.
+- Some languages are not optimized for functional programming and code might be less effective
+- The very steep learning curve
+- It is not so widespread as imperative programming, so it's way harder to find novice-friendly resources

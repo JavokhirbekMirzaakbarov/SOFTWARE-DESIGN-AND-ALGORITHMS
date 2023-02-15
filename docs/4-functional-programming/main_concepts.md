@@ -1,346 +1,215 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 ---
 
-# 3. Main concepts
+# 2. Main Concepts
 
-## 3.1 Immutability
+As we reviewed earlier, there are rules that the program should follow to be purely functional. Let's look a closer at these main FP concepts.
 
-The main rule of an immutable object is it cannot be modified after creation. Conversely, a mutable object is each object which can be modified after creation.
+## 2.1 First-class functions
 
-The data flow in the program is lossy if the immutability principle is not followed, that is why it is the main concept of functional programming. For example, _Listing 3.1_. Data mutations can lead to hard-to-find bugs.
+In computer science, a programming language supports first-class functions if it treats functions as first-class citizens. To be a first-class citizen, the function must be able to:
 
-```js title="Listing 3.1"
-const stats = [
-  { name: "John", score: 1.003 },
-  { name: "Lora", score: 2 },
-  { name: "Max", score: 3.76 },
+1. Be assigned to a variable
+2. Accept other functions as a parameter
+3. Return other function
+
+In simple words, be treated as any other data type, in case of JavaScript - function is an object.
+
+### 2.1.1 Higher order function
+
+There is also such a concept as a **high-order function**. The high-order function can also take a function as a parameter and return it. The distinction between the two is very subtle: **"High-order"** describes a mathematical concept where one **entity** can operate on another **entity** of the same **category**. While **first-class citizen** is a computer science term for programming language entities that have no restriction on their usage (numbers, strings and objects types are also first-class citizens)
+
+```ts title="Listing 2.1 - Functions are first-class citizens"
+const multiply = (a: number) => (b: number) => a * b;
+const add = (a: number) => (b: number) => a + b;
+
+[1, 2, 3].map(multiply(2)); // [2, 4, 6]
+[1, 2, 3].map(add(2)); // [3, 4, 5]
+```
+
+Here, `multiply` and `add` are high-order functions. They take a number as a parameter, and return a new function. `map` function returns a new array based on the function passed as a parameter.
+
+## 2.2 Currying
+
+The technique above `const multiply = (a: number) => (b: number) => a * b`, is named **curring**. It means splitting a function of two or more parameters into a sequence of high-order functions, so parameters are passed one by one.
+
+For example:
+
+Try in the playground: [Listing 2.2 - Usage of currying](https://www.typescriptlang.org/play?jsx=0#code/MYewdgzgLgBAhgEwTAvDAFADwFwzAVwFsAjAUwCcAaGAT1wJIoEpUA+GTGAaloG4AofqEggANqQB0okAHN0iBOgCs1ACxMmAoeGjwkAYXzlyAS1LI0WekTLkWKdujp4bzNh259BwiGMnS5BUNjM0UlJnR1TW8dWBBiACtSYCgIACEaVBgAHgB5agBpGFJMKFIwBAgYAGtSGhAAMxhcrNr6ptzWdAazUQRcAvtHeISAQVx8mBG0iaGMfhgpxNGAbR7SPoBdVBQ0abXehE2FxZgAfhgABhPF3BHV9a2Ydn3Ho5vTxYuARg-P3AAtL9ovwTGAyuQGnBgKQYABlKD4BDlWAAbxOYDghFIuGgpjAMgEizgMhxLkY5CJMAgoHIZIYtgEAF8tD5YMQaHDabC9olkqkMtkEUiUV0AOQ0kB0sXRNkwDmjUlZEb89I0IWI5Hg8Uk0gy1mxamalEQXCjYxwdXCrVQdhoFYnVF4LFksUAKRAAAswGLqLrcAAmS7USV03BKS4wJmUR3O7G4d0uiC++CkwMBkPc8MAZijMcWTsx8ZgYoA4qQpaSU-6YAGVNSszAABwANjzsaLro93uradr30zUrJAHYlO3NgaROIpLJ0CsJAvoCLwRBNhJfOQoOgOVyhxpeDAAPSH+FSsrIDkNofaKf+WfzxfGldrjdbhWk-dHk9ws-meWZXUgA)
+
+```ts title="Listing 2.2 - Usage of currying"
+const add = (x: number, y: number) => x + y;
+
+add(5, 4);
+
+// into
+const addCurried = (x: number) => (y: number) => x + y;
+
+addCurried(5)(4);
+
+// Or a more natural example from Listing 1.2
+
+const objectsBy = <O, K extends keyof O = keyof O>(field: K) => (objA: O, objB: O) => (
+  objA[field] === objB[field]
+    ? 0
+    : objA[field] > objB[field]
+        ? 1
+        : -1
+);
+
+interface Student {
+  name: string;
+  age: number;
+  score: number;
+};
+
+const byScore = objectsBy<Student>('score');
+const byAge = objectsBy<Student>('age');
+
+const students: Array<Student> = [
+  { name: 'John', age: 20, score: 50 },
+  { name: 'James', age: 22, score: 53 },
+  { name: 'George', age: 25, score: 86 },
+  { name: 'John', age: 21, score: 75 },
 ];
 
-const formattedStats = stats.map((entry) => { // (1)
-  entry.score = Math.floor(entry.score); // (2)
-  entry.name = entry.name; // (3)
-
-  return entry; // (4)
-});
-
-console.log(stats); // [{ name: "John", score: 1 }, { name: "Lora", score: 2 }, { name: "Max", score: 3 }]
-console.log(formattedStats); // [{ name: "John", score: 1 }, { name: "Lora", score: 2 }, { name: "Max", score: 3 }]
+console.log([...students].sort(byScore)); // Sorted by score
+console.log([...students].sort(byAge)); // Sorted by age
 ```
 
-In the `Listing 3.1` the `stats` array includes actual data from a database. It has player `name` and `score` that shows win percentage. The task is to display the `score` to the user as a rounded down integer. In lines from _(1)_ to _(4)_ it goes through array and modifies `score` in a needed way and the result of this operation is `formattedStats` array. The last step is to console two arrays `stat` and `formattedStats` and the result is unexpected. Both arrays are equal. That is because inside the `map` the `stats` entry was modified. These kinds of bugs are hard to find and can lead to undesired outcome. Immutability helps to avoid such behavior. Let's see how to avoid mutation in _Listing 3.2_.
+Curring is not so common in imperative programming, which is the opposite in functional programming.
 
-```js title="Listing 3.2"
-const stats = [
-  { name: "John", score: 1.003 },
-  { name: "Lora", score: 2 },
-  { name: "Max", score: 3.76 },
-];
+## 2.3 Composition
 
-const formattedStats = stats.map(entry => {
-  return { ...entry, score: Math.floor(entry.score) };
-});
+Let's start from the beginning: what is the function (not procedure)? It's an algorithm that have some input of **A** and returns some output of **B**. Sometimes it's called `morphism`. Let's imagine three functions:
 
-console.log(stats); // [{ name: "John", score: 1.003 }, { name: "Lora", score: 2 }, { name: "Max", score: 3.76 }]
-console.log(formattedStats); // [{ name: "John", score: 1 }, { name: "Lora", score: 2 }, { name: "Max", score: 3 }]
+```ts title="Listing 2.3.1 - Functions can be represented as an arrow from A type to B type"
+// Some bunch of different types
+type A = void;
+type B = void;
+type C = void;
+type D = void;
+
+const ab = (a: A) => B;
+const bc = (b: B) => C;
+const cd = (c: C) => D;
 ```
 
-There are two arrays `stats` and `formattedStats` in _Listing 3.2_. The difference is in the `map` function. Instead of modifying `stats` entry it creates a new entry with copied data and modified `score` value. As a result, there are two arrays with different values.
+We don't care what these functions do and what real types they take. This is an abstraction. Actually, in FP, we are always thinking in **abstractions**.
 
-In JavaScript, it might be easy to confuse `const` with immutability. The variable which cannot be redeclared is created by using `const` but immutable objects are not created by `const`. You can't change the object that the binding refers to, but you can still change the properties of the object, which means that bindings created with `const` are mutable.
+We pass some value `A` to the function `ab`, and as result, we get the `B` value. `const b = ab(a)`. But what if we want to pass this value further, and receive `C` from `bc`? We can pass the result of `ab` directly to `bc`: `bc(ab(a))`. We can go further to receive `D` from `cd`: `cd(bc(ab(a)))`.
 
-Immutable objects can't be changed at all. You can make a value truly immutable by deep-freezing the object. JavaScript has a method that freezes an object one-level deep (in order to freeze an object deeply, recursion could be used to freeze each property and nested objects):
+Here is a diagram of this process (but there are other names in use, `X` is for an `A`, and `f` is for an `ab`):
+![commutative diagram](img/commutative_diagram_for_morphism.svg)
 
-```js title="Listing 3.3"
-const student = Object.freeze({
-  greeting: "Hello",
-  subject: "student",
-  mark: "!",
-});
+This becomes a little complex. Let's imagine something more real based on `Listing 1.2`:
 
-student.greeting = "Goodbye";
-// Error: Cannot assign to read only property 'foo' of object Object
+Try in the playground: [Listing 2.3.2 - Sequence of arrows](https://www.typescriptlang.org/play?jsx=0#code/JYOwLgpgTgZghgYwgAgMpgK4BMLmQbwChlkQ4BbCALmQGcwpQBzAbmLoQHsprSNyARtDYkEAGzi1aNeoxCtCAXzZcQ9OphzhpyAIJQocAJ4AedNlxgAfMgC8yANrt8pCrwDkAKU4ALEO4AaZHFJHXddQI5uXgBWAAZkRQDnV0oaLzdaSJCpdIig2i4eGhiAZkTkkhcyNOR3AHEIbiYIbIlcuvyo4uQADgA2CpSaj28-NtD0gCFIwuiaAHYYoYBdNkJCAHpNkl29-YPDg90D2xsDqeRCVXUYYDFIKCmjAGF22hP7AAp6C20afSGUzmLTWACUAIMxjMmksNjOGj+YFoADo7g9oD9YXgEb9QSicrQ7LZ7OF3GC2NtkABNCC0IInOAgLDIS4IJnIITIMA+FC0NzcowABwgQWAYHcRLgYjEyAAVhh1By4AJZIgwMBOCANlSjnr9SRLvsEQcXtctepaNwwM9UEUUN88ZYdIDoSC4RC9FDgdjrHYbA4UUGndoViirVAwF8sUiAIwFX0AJjB-sRoNj4ftyAAtGnLInM9EKVsdgay+X9i9TucDgARc1qMDIFpgABiwCg9F0zIAMpIwO7tCRHb6Xd6YUirJ6HIOwEFZytUw4Q8iHHEVgmkbRl6OUWJcEweTnkLGVmsdaWK1frzfkLW9iZc3sqw+n3sjbtH7tdA31A4xJwADudIDvas5BD4wBMLy9B2tEC52M2EBth2Xa9v2s60D81q2vaXzoo8zxvKEugxqCtBgpRKgWpw+57pwTBfABwGwWBvoQVBMGgfBvpgkAA)
+
+```ts title="Listing 2.3.2 - Sequence of arrows A -> B -> C -> D"
+//                                 A      =>       B 
+const filterByClassA = (students: Array<Student>): Array<Student> => students.filter(student => student.class === 'A');
+// Yes, A and B can be the same type, it's all just an abstraction
+
+//                              B      =>       C
+const sortByScore = (students: Array<Student>): Array<Student> => [...students].sort((student1, student2) => student1.score - student2.score);
+//                                          C      =>        D
+const getFirstAndLastStudents  = (students: Array<Student>): [Student, Student] => [students[0], students[students.length - 1]];
+
+//                                                                 D    <-     C     <-      B     <-   A
+const [lowestScoreStudent, highestScoreStudent] = getFirstAndLastStudents(sortByScore(filterByClassA(students)));
 ```
 
-There are several libraries in JavaScript which try to follow this principle, for example, [Immutable.js](https://immutable-js.com/) or [immer](https://github.com/immerjs/immer).
+Here's another diagram representation of this process:
+![composition of two functions](img/composition_of_two_functions.svg)
 
-### 3.1.1 Side effects
+But from the example above, what if we want to create one new function, for directly mapping from `A` to `D`? (from `Array<Student>` to filtered, sorted tuple of `[lowestScoreStudent, highestScoreStudent]`). Can we do this? Yes, we can! This would be a composition! In mathematics, the operator `∘` is used for creating a composition, and functions(morphisms) are written from right to left (just like how we did it above):
 
-If state changes are observable outside the called function and they are not returned value of the function it is a side effect.
+```title="Listing 2.3.3 - For A -> B -> C -> D sequence we can create a composition from A -> D"
+ad = cd ∘ bc ∘ ab
+ad(a) -> D
 
-Side effects include:
+getLowestAndHighestScoreStudents = getFirstAndLastStudents ∘ sortByScore ∘ filterByClassA
+getLowestAndHighestScoreStudents(students) -> [Student, Student]
+``` 
 
-- Modifying any external variable or object property (e.g., a global variable, or a variable in the parent function scope chain)
-- Logging to the console
-- Alert
-- Writing to the screen, in other words, replacing the content of a specific tag (querySelector(), getElementById(), etc.)
-- Writing to a file
-- The HTTP request might have side effects - therefore the function that triggers the request transitively have side effects
-- Triggering any external process
-- Calling any other functions with side effects
+Let's try to implement this in TypeScript:
 
-In functional programming side effects are mostly avoided. It makes a program much easier to understand, and much easier to test.
+```ts title="Listing 2.3.4 - \"compose\" function"
+type AnyFunction = (...args: Array<any>) => any;
 
-That is important to understand that a program without side effects does nothing. If the code does not write to or read from a database, does not make any requests, does not change UI, etc., it does not bring any value. So we cannot completely avoid side effects.
-
-What we can do is isolate side effects from the rest of your software. In case of keeping side effects separately from the rest of the software, the application will be much easier to extend, refactor, debug, test, and maintain.
-
-That is why a lot of front-end frameworks suggest using state management tools along with the library. Because it separates components rendering from state management, and they are loosely coupled modules. ReactJS and Redux are examples of that.
-
-### 3.1.2 Pure functions
-
-A function is called **pure** if it has the following properties:
-- Given the same input, always returns the same output
-- Function without side effects
-
-A pure function also can be called a **deterministic** function.
-
-Such JS arrays methods as: `map`, `filter`, `reduce` etc., are examples of pure function. A pure function does not depend on any state, it only depends on input parameters.
-
-Let's look on the example:
-
-```js title="Listing 3.4"
-const doublePrice = (price) => price * 2;
-
-doublePrice(2);
+// For two functions:     B -> C           A -> B            the composition from A -> C
+function compose<A, B, C>(bc: (b: B) => C, ab: (a: A) => B): (a: A) => C;
+function compose<A, B, C, D>(cd: (c: C) => D, bc: (b: B) => C, ab: (a: A) => B): (a: A) => D;
+function compose(...fns: Array<AnyFunction>) {
+  return (a) => (
+    fns.reduceRight(
+      (acc, fn) => fn(acc),
+      a,
+    )
+  );
+};
 ```
 
-In this case, there are no side effects because `price` comes as an argument. Also, the result will always be 4 if the `price` is 2.
+Now we can rewrite our example:
 
-Just to compare let's check another example:
+```ts title="Listing 2.3.5 - Usage of \"compose\" function"
+const getLowestAndHighestScoreStudents = compose(
+  getFirstAndLastStudents,
+  sortByScore,
+  filterByClassA,
+);
 
-```js title="Listing 3.5"
-let price = 2;
-
-const doublePrice = () => (price = price * 2);
-
-doublePrice();
+const [lowestScore, highestScore] = getLowestAndHighestScoreStudents(students);
 ```
 
-You might have already noticed the difference. There is a side effect in this case. The `price` is changed inside the function, but `price` is declared outside the `doublePrice` function scope.
+## 2.4 Pure functions
 
-## 3.2 No shared state
+Let's start with the definition of a `pure` function. It's a function that:
 
-**Shared state** is a memory space (could be an object or simple variable) that is reachable from all program parts. In other words, it is global and exists in shared scope. It also could be passed as a property between scopes. If two or more application parts change the same data, then the data is a shared state.
+1. Always return the same value for the same properties
+2. Do not cause side effects
+3. Do not modify the outer state
 
-### 3.2.1 Problems with shared state
+Before moving on, lets one more time discuss what is the side effect. It is anything that happens outside the application and changes the state of anything in the computer. Printing something on the screen, sending the request, reading from the keyboard etc. Almost everything that makes programs meaningful.
 
-If the state is changing from more than one place in the application, there is a risk of one modification preventing another part of the application to work with the actual data. So it might lead to strange hard to track bugs.
+But why do we have an interest in such functions? Because it makes our application more stable and predictable. But if all application is built up from pure function, how to perform any operation to show some result? Is it impossible?
 
-```ts title="Listing 3.6"
-const shoppingList = ["bread", "milk", "wine"];
+Absolutely possible! We just need a little _"tricks"_. There are couple technics to add side effects to our pure application. The most simple of them - put the effect out of the function, and pass it as a parameter:
 
-function logItems<T>(items: T[]) {
-  while (items.length) {
-    console.log(items.shift());
-  }
-}
+```ts title="Listing 2.4.1 - Impure code"
+const appConfig = { timesToRepeat: 2 };
 
-function functionA() {
-  // some code
-  logItems(shoppingList);
-}
-
-function functionB() {
-  // some code
-  logItems(shoppingList);
-}
-
-functionA();
-functionB();
-
-// bread
-// milk
-// wine
-// undefined (1)
-```
-
-Let's analyse the code:
-
-- Functions `functionA()` and `functionB()` do something and log `groceryItems`.
-- Function `logItems()` logs elements into `console`. However, it removes elements from the array while logging them. So when `logItems()` is executed as a result of `functionB()` call there is nothing to log and that's why there is `undefined` in a line (1).
-
-### 3.2.2 How to avoid it
-
-#### By copying data
-
-Until we are reading from a shared state without any modification we are safe. Before doing some modifications we need to "un-share" our state.
-
-Let's try to fix the previous example:
-
-```ts title="Listing 3.7"
-const shoppingList = ["bread", "milk", "wine"];
-
-// this is contrived example as normally we would want to use `map` function of the array
-// sometimes though such sitations happen and copying the passed in array before making modifications is vital
-function logItems<T>(items: T[]) {
-  const copiedItems = [...arr];
-
-  while (copiedItems.length) {
-    console.log(copiedItems.shift());
-  }
-}
-
-function functionA() {
-  // some code
-  logItems(shoppingList);
-}
-
-function functionB() {
-  // some code
-  logItems(shoppingList);
-}
-
-functionA();
-functionB();
-
-// bread
-// milk
-// wine
-// bread
-// milk
-// wine
-```
-
-Let's analyse the code:
-
-- Functions `functionA()` and `functionB()` do something and logs  `groceryItems`.
-- Function `logItems()` logs elements into `console`. The code creates a new variable `copiedItems`, a copy of `items`. Changes to `copiedItems` won't affect `items` so everything works as expected.
-
-#### By updating non-destructively
-
-Let's imagine that we have to add some fruit to our shopping list.
-
-```js title="Listing 3.8"
-const shoppingList = ["bread", "milk", "wine"];
-
-function addToShoppingList(shoppingList, item) {
-  return [...shoppingList, item];
-}
-
-console.log(addToShoppingList(shoppingList, "fruit")); // ['bread', 'milk', 'wine', 'fruit']
-console.log(shoppingList); // ['bread', 'milk', 'wine']
-```
-
-#### By making data immutable
-
-We can prevent mutations of shared data by making that data immutable. If data is immutable, it can be shared without any risks. In particular, there is no need to copy defensively.
-
-## 3.3 Composition
-
-**Function composition** is a combination of two or more functions. The single function does a small piece which is not valuable for an application, so in order to achieve the desired result, small functions have to be combined. You can imagine composing functions as pipes of functions that data has to go through, so that outcome is reached. In functional programming, it is preferable to use composition over inheritance.
-
-### 3.3.1 Composition over inheritance
-
-Let's check the example with object composition in JavaScript. This approach combines the power of objects and functional programming. For example, let's create an animal that can talk and eat. Previously, using inheritance we would have abstract class `Animal` and a child class `TalkingAnimal`. Imagine we had to add more and more animals. In this case, the hierarchy could become messy, since abilities are shared between animals.
-
-Composition helps to solve the problem:
-
-```js title="Listing 3.9"
-const createDog = (name) => {
-  // (1)
-  const self = { name };
-
-  return self;
+const impureMultiply = (str: string) => {
+  console.log(str.repeat(appConfig.timesToRepeat));
 };
 
-const buddy = createDog("Buddy");
+impureMultiply('hello '); // logs: "hello hello "
 ```
 
-The first step in _Listing 3.9_ _(1)_ is to create a function that creates an animal (e.g. `createDog`).
+This function is not pure because it fires a side effect, and relies on the outer variable. So, how to make this function pure? Let's inject the dependencies as function parameters:
 
-The internal variable `self` represents the prototype using classes or prototypes.
-
-The next step _(2)_ (_Listing 3.10_ _(2)_) is defining behaviors, it will be created as functions receiving the `self`. Because they are functions it is easy to combine them. And finally _(3)_, all of these functions have to be merged. `Object.assign` or the spread operator `({...a, ...b})` can be used for this purpose.
-
-```js title="Listing 3.10"
-const canSayHi = (self) => ({
-  // (1)
-  sayHi() { console.log(`Hi! I'm ${self.name}`) },
-});
-
-const canEat = () => ({
-  eat(food) { console.log(`Eating ${food}...`) },
-});
-
-const behaviors = (self) => Object.assign({}, canSayHi(self), canEat()); // (2)
-
-const createDog = (name) => {
-  const self = { name };
-
-  const dogBehaviors = (self) => ({
-    bark() { console.log("Ruff!") },
-  });
-
-  return Object.assign(self, behaviors(self), dogBehaviors(self)); // (3)
+```ts title="Listing 2.4.2 - \"Pure\" code"
+const appConfig = {
+  timesToRepeat: 2,
 };
 
-const buddy = createDog("Buddy");
+const pureMultiply = (log: (message: any) => void, timesToRepeat: number, str: string) => {
+  log(str.repeat(timesToRepeat));
+};
 
-buddy.sayHi(); // Hi! I'm Buddy
-buddy.eat("Petfood"); // Eating Petfood...
-buddy.bark(); // Ruff!
+pureMultiply(console.log, appConfig.timesToRepeat, 'hello '); // logs: "hello hello "
 ```
 
-The different behaviors were defined by using the prefix `can`. Also, some behavior was combined _Listing 3.10, 2_ by **composition**.
+You can argue: "But it still fires an effect! Just not implicitly!". And you will be right, but the `pureMultiply` function is still pure because it doesn't know anything about the function you passed into! How you can be so sure that the `log` function fires a side effect?
 
-Let's create another animal, for example, a cat. The cat can talk and, it can eat as all animals do:
+```ts title="Listing 2.4.3 - Pure code"
+const assert = (expect: string) => (actual: string) => expect === actual;
 
-```js title="Listing 3.11"
-const createCat = (name) => {
-  const self = { name };
-
-  const catBehaviors = (self) => ({
-    meow() { console.log("Meow!") },
-    haveLunch(food) {
-      self.eat(food);
-    },
-  });
-
-  return Object.assign(self, catBehaviors(self), canEat());
-};
-
-const kitty = createCat("Kitty");
-
-kitty.haveLunch("fish"); // Eating fish...
-kitty.meow(); // Meow!
+pureMultiply(assert('hello hello '), appConfig.timesToRepeat, 'hello');
 ```
 
-Keep in mind that all functionality was added in the same `self` reference, that is a reason why `self.eat` can be called within `haveLunch`. That allows us to create `catBehaviors` on top of other `behaviors`.
+And now everything is truly pure, without any changes in `pureMultiply`. We're just lying everything is pure and there are no side effects. And everyone is happy, every law is kept. So, it means, that `pureMultiply` fits all requirements for being a pure function. And most importantly - it's referentially transparent.
 
-So composition is easier in maintenance and for reusability purposes. It is easy to refactor the code if needed. Composition is a simple _mental model_, so there is no need to think in advance of hierarchy, and we can combine all small pieces in the way that we need them to be. For example, _Listing 3.12_. The task is to create a statistic board with the possibility to sort and perform searches by different criteria.
-
-```js title="Listing 3.12"
-const stats = [
-  { name: "Lora", score: 1.003 },
-  { name: "Lora", score: 1.003 },
-  { name: "Lora", score: 2 },
-  { name: "Max", score: 3.76 },
-];
-
-const sortStats = (stats) => {
-  return arr.sort((a, b) => b.score - a.score);
-};
-
-const findStatsByName = (name) => {
-  return (arr) => arr.filter((item) => item.name === name);
-};
-
-const findStatsByScore = (score) => {
-  return (arr) => arr.filter((item) => item.score === score);
-};
-
-const compose = (...funcs) => {
-  return (arr) => {
-    return funcs.reverse().reduce((acc, func) => func(acc), arr);
-  };
-};
-
-console.log(compose(findStatsByName("Lora"))(stat)); // [{ name: "Lora", score: 1.003 }, { name: "Lora", score: 1.003 }, { name: "Lora", score: 2 }]
-console.log(compose(findStatsByScore(1.003), findStatsByName("Lora"))(stats)); // [{ name: "Lora", score: 1.003 }, { name: "Lora", score: 1.003 }]
-console.log(compose(sortStats, findStatsByName("Lora"))(stats)); // [{ name: "Lora", score: 2 }, { name: "Lora", score: 1.003 }, { name: "Lora", score: 1.003 }]
-```
-
-`compose` function is a self-invoking\* function that can take any number of parameters and execute right-to-left, in other words, performs right-to-left function composition. So, you can compose functions the way you need. There is a possibility to use `findStatsByName` and `sortStats` in one part of the application and `findStatsByName` and `findStatsByScore` in another without any duplication, by composing small reusable parts.
-
-\* **self-invoking** function is a nameless (anonymous) function that is invoked immediately after its definition.
+But this method isn't perfect, and if everything works on parameters, it can lead us to **parameters hell** which isn't maintainable and scalable. Fortunately, there is also another, more powerful technic for dealing with side effects called `Effect Functor` that we will review in the next chapters. 
