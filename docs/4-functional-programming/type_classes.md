@@ -81,6 +81,8 @@ const byStudentScore: Ord<Student> = {
 
 Great! But such a way of creating new instances of `Ord` is exhausting, and thanks to a such simple abstraction of `Ord`, we can handle it. Let's create a `contramap` utility  (_Contravariant Functor_: https://ncatlab.org/nlab/show/contravariant+functor).
 
+Try in playground: [Listing 4.1.8 Creating Ord with contramap constructor](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgKIEcA8AVAfMgbwChlkJ0BXOAGwGcAKOALmWwBpkAjF7AShc4B7QdQhwQAbiIBfIkQggKAW2QB5KABNooAOaESyADKoAyieQBeZAFoAjGwOoAigFUAgofNWADA9IBxACVUN2xUQMtkexk5UEhYRBR1DRx8CAAPSBANWjQsPH1SBEElAAc4KAgWRh4OblZeS3xk7RAdB1kiYpBaMGRBTQA5ZU5oFmTMRSVRqHwrYiKS8srquDrGi3w4SwsrTgNSAH41TVadADpnd08D5BZt-H3SZ+Rjlqhdc6CQsMDb0nGpw+bXOxjMfjIlBotFW6yayG2uz2HSkRAA9GjkABNQQUZDlWi5MAACxQMAoIAQYGAghAyBgA2QYCg4loDKgSl0yDcTMEyAAQhxxBomaS6RN+bhzshBoIAO7IACeuOQxLgADckppMG5cF1ab1kN1mXAlHBSpEdRxJfQYKsWG4Nvh+U7kPQBhpASlJfwTildfD6AtIVQ6LCuK6PedyKGGDBGLwOPHOLxEwZimUKlU3WsI-CoxnlhBbQmk-QU2npLxUWBFaUUCYwBQtOBIgRkCBTdnesD2shaMUVh2RtBkNIpN1DZxFY3mwowCZB9mJrOW2A5kbaSazaV6AZ6L05+AWKv567D2vzgOBigMfSKVSaXSwHyd8hT63rPgpjMiLx3UMI5QNWyB3sk9KMoWFRcmAcp8j+0C0HIk59Be865FYADaBjtp2SjZgA5AAUoIxIgARHDXkOtjeGOEK4V2LDEeIEAUf2S4sAArHROEdoxyDMQgADWbFUdmADsPEALoTgaqEDJAIpYecKloeAtBSVeCnljOTZrouN7nFBlTVshBoiBA5zUIIOgHgpEAaLwQA)
+
 ```ts title="Listing 4.1.8 - Creating Ord with contramap constructor"
 const ordNumber: Ord<number> = {
   compare: (a, b) => a === b
@@ -93,22 +95,23 @@ const ordNumber: Ord<number> = {
 
 // You pass the function for transforming A to B, and then Ord<B>. Now you have Ord<A>
 const contramap = <A, B>(f: (a: A) => B) => (ord: Ord<B>): Ord<A> => ({
-  equals: (a, b) => f(a) === f(b),
-  compare: (a, b) => {
-    // The most important part
-    const [fa, fb] = [f(a), f(b)];
-    return fa === fb
-      ? Ordering.EQUALS
-      : fa > fb
-        ? Ordering.GREATER
-        : Ordering.LESS;
-  }
+  equals: (a, b) => ord.equals(f(a), f(b)),
+  compare: (a, b) => ord.compare(f(a), f(b)),
 });
 
 const byStudentScore: Ord<Student> = contramap(
   (student) => student.score // function to map Student -> number
 )(ordNumber); // Ord for comparing two numbers
+
+const students = [
+  { name: 'John', score: 10 },
+  { name: 'Jane', score: 5 },
+  { name: 'Jack', score: 7 },
+];
+const sorted = [...students].sort(byStudentScore.compare);
 ```
+
+Some info about `contramap`: It's a [contravariant](https://en.wikipedia.org/wiki/Covariance_and_contravariance_of_vectors) of `Functor.map`. When `map` makes a F<A> -> F<B> using morphism A -> B, `contramap` makes a F<A> -> F<B> using morphism B -> A. Here's a very shown example of how contravariance works: [stackoverflow](https://stackoverflow.com/questions/66410115/difference-between-variance-covariance-contravariance-and-bivariance-in-typesc).
 
 And this is only a small part of the huge number of possibilities that these abstractions provide.
 

@@ -14,10 +14,11 @@ As we have seen from examples before - JS supports main functional principles, b
 
 But, some features are missed:
 
-* Higher kinded types
+* Higher-kinded types
 * Tail call optimizations
 * Built-in pattern matching
 * Built-in algebraic data types
+* In general, syntax of JS is not so convenient for FP, as for instance in Haskell or Scala 
 
 ## 5.1 Widespread functional JS libraries
 
@@ -61,7 +62,12 @@ More info - [Lodash](https://lodash.com/).
 
 ### 5.1.3 FP-TS
 
-fp-ts provides developers with popular patterns and reliable abstractions from typed functional languages in TypeScript. Allows you to make from TypeScript full-featured FP language, provides a lot of new abstractions and implements a full set of algebraic data structures.
+fp-ts provides developers with popular patterns and reliable abstractions from typed functional languages in TypeScript. In contrast to other libraries enlisted above, fp-ts provides lacked features of JS/TS, such as:
+* Higher-kinded types
+* Type-classes (Functors, Monads, Setoids), algebraic data types (Either, Option, IO), and basic utils for them
+* Tool for functional composition, pattern matching, and other FP features
+
+And on the other side, it does not provide some special utils, for example, `head`, `groupBy`, `drop`, `multiply`, etc. You should implement them by yourself, or use some library from the [ecosystem](https://gcanti.github.io/fp-ts/ecosystem/). You can as well use other libraries, such as lodash, ramda, etc. But try not to mix them a lot, and prefer more natural to fp-ts approaches.
 
 ```ts title="Listing 5.1.3 - transform first element of array"
 import * as O from 'fp-ts/Option';

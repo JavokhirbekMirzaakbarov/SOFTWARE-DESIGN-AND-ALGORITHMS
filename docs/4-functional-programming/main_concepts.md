@@ -100,9 +100,6 @@ We don't care what these functions do and what real types they take. This is an 
 
 We pass some value `A` to the function `ab`, and as result, we get the `B` value. `const b = ab(a)`. But what if we want to pass this value further, and receive `C` from `bc`? We can pass the result of `ab` directly to `bc`: `bc(ab(a))`. We can go further to receive `D` from `cd`: `cd(bc(ab(a)))`.
 
-Here is a diagram of this process (but there are other names in use, `X` is for an `A`, and `f` is for an `ab`):
-![commutative diagram](img/commutative_diagram_for_morphism.svg)
-
 This becomes a little complex. Let's imagine something more real based on `Listing 1.2`:
 
 Try in the playground: [Listing 2.3.2 - Sequence of arrows](https://www.typescriptlang.org/play?jsx=0#code/JYOwLgpgTgZghgYwgAgMpgK4BMLmQbwChlkQ4BbCALmQGcwpQBzAbmLoQHsprSNyARtDYkEAGzi1aNeoxCtCAXzZcQ9OphzhpyAIJQocAJ4AedNlxgAfMgC8yANrt8pCrwDkAKU4ALEO4AaZHFJHXddQI5uXgBWAAZkRQDnV0oaLzdaSJCpdIig2i4eGhiAZkTkkhcyNOR3AHEIbiYIbIlcuvyo4uQADgA2CpSaj28-NtD0gCFIwuiaAHYYoYBdNkJCAHpNkl29-YPDg90D2xsDqeRCVXUYYDFIKCmjAGF22hP7AAp6C20afSGUzmLTWACUAIMxjMmksNjOGj+YFoADo7g9oD9YXgEb9QSicrQ7LZ7OF3GC2NtkABNCC0IInOAgLDIS4IJnIITIMA+FC0NzcowABwgQWAYHcRLgYjEyAAVhh1By4AJZIgwMBOCANlSjnr9SRLvsEQcXtctepaNwwM9UEUUN88ZYdIDoSC4RC9FDgdjrHYbA4UUGndoViirVAwF8sUiAIwFX0AJjB-sRoNj4ftyAAtGnLInM9EKVsdgay+X9i9TucDgARc1qMDIFpgABiwCg9F0zIAMpIwO7tCRHb6Xd6YUirJ6HIOwEFZytUw4Q8iHHEVgmkbRl6OUWJcEweTnkLGVmsdaWK1frzfkLW9iZc3sqw+n3sjbtH7tdA31A4xJwADudIDvas5BD4wBMLy9B2tEC52M2EBth2Xa9v2s60D81q2vaXzoo8zxvKEugxqCtBgpRKgWpw+57pwTBfABwGwWBvoQVBMGgfBvpgkAA)
@@ -121,9 +118,6 @@ const getFirstAndLastStudents  = (students: Array<Student>): [Student, Student] 
 const [lowestScoreStudent, highestScoreStudent] = getFirstAndLastStudents(sortByScore(filterByClassA(students)));
 ```
 
-Here's another diagram representation of this process:
-![composition of two functions](img/composition_of_two_functions.svg)
-
 But from the example above, what if we want to create one new function, for directly mapping from `A` to `D`? (from `Array<Student>` to filtered, sorted tuple of `[lowestScoreStudent, highestScoreStudent]`). Can we do this? Yes, we can! This would be a composition! In mathematics, the operator `∘` is used for creating a composition, and functions(morphisms) are written from right to left (just like how we did it above):
 
 ```title="Listing 2.3.3 - For A -> B -> C -> D sequence we can create a composition from A -> D"
@@ -132,11 +126,15 @@ ad(a) -> D
 
 getLowestAndHighestScoreStudents = getFirstAndLastStudents ∘ sortByScore ∘ filterByClassA
 getLowestAndHighestScoreStudents(students) -> [Student, Student]
-``` 
+```
 
-Let's try to implement this in TypeScript:
+Here is a diagram of this process (`X`, `Y`, `Z` represents some types, and `f`, `g`, `h` are functions from `X` to `Y`, `Y` to `Z` respectively)
 
-```ts title="Listing 2.3.4 - \"compose\" function"
+![commutative diagram](img/commutative_diagram_for_morphism.svg)
+
+Let's try to implement this compose function in TypeScript:
+
+```ts title="Listing 2.3.4 - the compose function"
 type AnyFunction = (...args: Array<any>) => any;
 
 // For two functions:     B -> C           A -> B            the composition from A -> C
@@ -154,7 +152,7 @@ function compose(...fns: Array<AnyFunction>) {
 
 Now we can rewrite our example:
 
-```ts title="Listing 2.3.5 - Usage of \"compose\" function"
+```ts title="Listing 2.3.5 - Usage of compose function"
 const getLowestAndHighestScoreStudents = compose(
   getFirstAndLastStudents,
   sortByScore,
@@ -163,6 +161,9 @@ const getLowestAndHighestScoreStudents = compose(
 
 const [lowestScore, highestScore] = getLowestAndHighestScoreStudents(students);
 ```
+
+Here's another diagram representation of this process, but with actual data:
+![composition of two functions](img/composition_of_two_functions.svg)
 
 ## 2.4 Pure functions
 
@@ -190,7 +191,7 @@ impureMultiply('hello '); // logs: "hello hello "
 
 This function is not pure because it fires a side effect, and relies on the outer variable. So, how to make this function pure? Let's inject the dependencies as function parameters:
 
-```ts title="Listing 2.4.2 - \"Pure\" code"
+```ts title="Listing 2.4.2 - 'Pure' code"
 const appConfig = {
   timesToRepeat: 2,
 };
