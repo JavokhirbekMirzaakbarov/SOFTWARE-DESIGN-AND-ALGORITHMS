@@ -105,7 +105,7 @@ type Student = {
 
 type NonEmptyArray<T> = Array<T> & { 0: T }
 
-const students = [
+const students: Array<Student> = [
   { name: 'Jhon', score: 70, class: 'B' },
   { name: 'James', score: 60, class: 'A' },
   { name: 'Jones', score: 67, class: 'A' },
