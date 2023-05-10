@@ -163,6 +163,8 @@ In the code above, there are three components `Input`, `ShowButton`, and `Main`.
 
 You can run this code here: https://codesandbox.io/s/app-zi9cxr.
 
+React is an excellent example of abstracting the side effects of the application. As we know, writing to the DOM and screen is a side effect. And in React, we are not doing it! The logic of our application is fully abstracted, and we define how our UI would look. How it will be rendered is not our concern. Purely to the HTML string? Directly applied to the DOM? Or to the native mobile application? You can choose any variant, and the main logic of your application wouldn't change.
+
 More info - [React](https://reactjs.org/).
 
 ## 4.4 Pros and Cons of FP
@@ -175,6 +177,6 @@ Pros
 - Much easier to write high cohesion and low coupled code
 
 Cons
-- Some languages are not optimized for functional programming and code might be less effective
+- Some languages are not optimized for functional programming and code might be less effective and readable
 - The very steep learning curve
 - It is not so widespread as imperative programming, so it's way harder to find novice-friendly resources

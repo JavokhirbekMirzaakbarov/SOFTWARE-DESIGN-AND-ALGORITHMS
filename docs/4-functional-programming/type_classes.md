@@ -175,7 +175,7 @@ Yeah, we have already seen this before, and now let's look deeply into it. Here,
 
 Type classes and Algebraic data types are essential, but complex aspects of functional programming and an explanation above can give you only a blurry understanding of them. If you are interested to learn more - we recommend you to read [this series of articles](https://jrsinclair.com/articles/2019/what-i-wish-someone-had-explained-about-functional-programming/)
 
-Also, you are ready to learn about another technique for handling side effects. It's an `Effect` functor! In simple terms, it's an ADT for eventually computed values.
+Also, you are ready to learn about another technique for handling side effects which I mentioned in the begining. It's the `Effect` functor! In simple terms, it's an ADT for eventually computed values.
 
 Try in on sandbox: [Listing 4.3.1 - Effect ADT](https://codesandbox.io/s/effect-functor-kcriyr?file=/src/index.ts)
 
@@ -231,6 +231,8 @@ const onlyAbove18 = pipe(users, effectFunctor.map(filter((user) => user.age >= 1
 ```
 
 So, what is it all about? The trick is that we already have a list of `users`, an `oldestUser`, and a list of all users above 18, BUT! No side effect was called! If you run this code and look at the console, there would be no output. Database call would be called only when `.run` would be called. With this Functor, we can do whatever we want with impure values without even having them. Our code is pure until the moment when we call `run`.
+
+Such an effect system gives us so much power, but it is not evident at first glance. It allows us to make `programs as values`. Every piece of our logic is just a value, and these values are composed into programs, which are values as well, and we can compose these small programs together to create other programs; they would be pure and predictable. And then, at the end of the program, in an isolated place, it runs.
 
 This is a hard topic as well, so if you are interested, we recommend you to read [this article](https://jrsinclair.com/articles/2018/how-to-deal-with-dirty-side-effects-in-your-pure-functional-javascript/).
 
@@ -306,3 +308,19 @@ An average score is ${average}`
 
 console.log(main(students));
 ```
+
+## 4.5 What's the point of all of it?
+
+We have learned many things about functional programming, and let's try to answer this question: Why is FP used in the real world? Why a lot of production companies are using it? What problems does it solve?
+
+Let's look back at the procedural and OOP programming. It has many conventions, patterns, and principles; using them is the only possible way to write an extensive, growing and maintainable production-grade application. Why do they appear in the first place? Because one of the main problems with OOP - it's too low-level in the architectural sense. We control every bit of the program; we should decide how every connection would be organised and structured by ourselves. What is the result of it? We have these MVC, SOLID, DRY, GRASS, YAGNI, KISS, and a large zoo of patterns. Their only purpose is to restrict, structure and formulate how we build applications. It's too hard to develop something in such a way without extensive experience.
+
+But can functional programming resolve this problem? All these concepts are already baked into it! Let's elaborate on the most ambitious of them - SOLID.
+
+1. Single Responsibility - Our functions are pure and reference transparent; we're composing some other functions to create a new one and combining them in type classes.
+2. Open-Closed - We have one function which does only one most primitive thing. We can create new functions via composition. We may have different base-type classes and monoids, and we can derive new ones from them.
+3. Liskov Substitution - The most intriguing one! All this hierarchy of type classes like Monoids, Functors and others allows us to construct programs abstractly. Does my function accept Monoid? I can pass whatever Monoid of any type I want! If my application relies on some Effect Functor, and with time I find out that I need to use another one, more performant and async - I can change it at the beginning of the program, and everything would work as expected! Because it would obey the same laws as the previous one.
+4. Interface Segregation - Type classes segregated by their purpose. We might have some function, and it accepts the parameter of Functor, but with time we also want it to be, for example, Applicative - you're welcome, extend it, and nothing will break!
+5. Dependency Inversion - The essence of Functional Programming. We always have absolute control over what is going on during computations. Computational flow is abstract, and every function obeys strict laws, so we can be sure of what it does by looking at its type signature.
+
+Now you can look back on the code examples and concepts we discussed, and you will see that it works! Of course, this course only gives you some theoretics and practise you need to build something valuable in FP languages like Haskell or Scala. But the purpose was to introduce you to the world of FP, to demystify its shape, and to intrigue you to go down deep into it if you found such concepts close to you. If so, here you can see a comprehensive glossary of the most FP terms you can find on your way: https://degoes.net/articles/fp-glossary
