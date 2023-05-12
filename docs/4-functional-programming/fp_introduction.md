@@ -48,7 +48,7 @@ if (students.length === 0) {
 let highestScoreStudent: Student | null = null;
 let lowestScoreStudent: Student | null = null;
 let currentStudent: Student | null = null;
-let avarageScore = 0;
+let averageScore = 0;
 let countOfStudents = 0;
 
 while ((currentStudent = students.pop()) !== undefined) {
@@ -62,7 +62,7 @@ while ((currentStudent = students.pop()) !== undefined) {
     }
 
     countOfStudents++;
-    avarageScore += currentStudent.score;
+    averageScore += currentStudent.score;
   }
 }
 
@@ -70,11 +70,11 @@ if (countOfStudents === 0) {
   throw new Error('There is no students from the "A" class');
 }
 
-avarageScore /= countOfStudents;
+averageScore /= countOfStudents;
 
 console.log(`The highest score has: ${highestScoreStudent.name}, score: ${highestScoreStudent.score}`);
 console.log(`The lowest score has: ${lowestScoreStudent.name}, score: ${lowestScoreStudent.score}`);
-console.log(`An avarage score in the class "A" is ${avarageScore}`);
+console.log(`An avarage score in the class "A" is ${averageScore}`);
 ```
 
 So, what are the steps of this program above?
@@ -105,7 +105,7 @@ type Student = {
 
 type NonEmptyArray<T> = Array<T> & { 0: T }
 
-const students = [
+const students: Array<Student> = [
   { name: 'Jhon', score: 70, class: 'B' },
   { name: 'James', score: 60, class: 'A' },
   { name: 'Jones', score: 67, class: 'A' },
