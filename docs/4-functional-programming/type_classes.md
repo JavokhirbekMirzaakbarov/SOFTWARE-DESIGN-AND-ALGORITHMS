@@ -175,7 +175,7 @@ Yeah, we have already seen this before, and now let's look deeply into it. Here,
 
 Type classes and Algebraic data types are essential, but complex aspects of functional programming and an explanation above can give you only a blurry understanding of them. If you are interested to learn more - we recommend you to read [this series of articles](https://jrsinclair.com/articles/2019/what-i-wish-someone-had-explained-about-functional-programming/)
 
-Also, you are ready to learn about another technique for handling side effects that we mentioned in the beginning. It's the `Effect` functor! In simple terms, it's an ADT for eventually computed values. It's the `Effect` functor! In simple terms, it's an ADT for eventually computed values.
+Also, you are ready to learn about another technique for handling side effects that we mentioned in the beginning. It's the `Effect` functor! In simple terms, it's an ADT for eventually computed values.
 
 Try in on sandbox: [Listing 4.3.1 - Effect ADT](https://codesandbox.io/s/effect-functor-kcriyr?file=/src/index.ts)
 
@@ -317,10 +317,10 @@ Let's look back at the procedural and OOP programming. It has many conventions, 
 
 But can functional programming resolve this problem? All these concepts are already baked into it! Let's elaborate on the most ambitious of them - SOLID.
 
-1. Single Responsibility - Our functions are pure and reference transparent; we're composing some other functions to create a new one and combining them in type classes. With such a restriction, we cannot even potentially make them do something different than they should.
+1. Single Responsibility - Our functions are pure and referentially transparent; we're composing functions to create a new one and combining them in type classes. With such a restriction, we cannot even potentially make them do something different than they should.
 2. Open-Closed - We have one function which does only one most primitive thing. We can create new functions via composition. We may have different base-type classes and monoids, and we can derive new ones from them. We never change the existing ones; we only extend them.
-3. Liskov Substitution - The most intriguing one! All this hierarchy of type classes like Monoids, Functors and others allows us to construct programs abstractly. Does my function accept Monoid? I can pass whatever Monoid of any type I want! If my application relies on some Effect Functor, and with time I find out that I need to use another one, more performant and async - I can change it at the beginning of the program, and everything would work as expected! Because it would obey the same laws as the previous one.
-4. Interface Segregation - Type classes segregated by their purpose. We might have some function, and it accepts the parameter of Functor, but with time we also want it to be, for example, Applicative - you're welcome, extend it, and nothing breaks!
+3. Liskov Substitution - The most intriguing one! All this hierarchy of type classes like Monoids, Functors and others allows us to construct programs abstractly. Does my function accept Monoid? I can pass whatever Monoid of any type we want! If our application relies on some Effect Functor, and with time we need to use another one, more performant and async - we can change it at the beginning of the program, and everything would work as expected! Because it would obey the same laws as the previous one.
+4. Interface Segregation - Type classes segregated by their purpose. We might have some function that accepts the parameter of Functor, but with time we also want it to be, for example, Applicative - you're welcome, extend it, and nothing breaks!
 5. Dependency Inversion - The essence of Functional Programming. We always have absolute control over what is going on during computations. Computational flow is abstract, and every function obeys strict laws, so we can be sure of what it does by looking at its type signature.
 
 Now you can look back on the code examples and concepts we discussed, and you will see that it works! Of course, this course only gives you some theoretics and practice, and it is absolutely not enough to build something valuable in FP languages like Haskell or Scala. But the purpose was to introduce you to the world of FP, to demystify its shape, and to intrigue you to go down deep into it if you found such concepts close to you. If so, here you can see a comprehensive glossary of the most FP terms you can find on your way: https://degoes.net/articles/fp-glossary.
