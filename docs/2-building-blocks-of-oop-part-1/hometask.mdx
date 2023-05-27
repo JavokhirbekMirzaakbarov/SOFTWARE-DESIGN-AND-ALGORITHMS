@@ -4,6 +4,8 @@ sidebar_position: 8
 
 # 7. 📚 Home Task
 
+import { TableForMentors } from '@site/src/components';
+
 The home task should be done using TypeScript.
 
 :::info
@@ -12,7 +14,7 @@ The starter code for the home task is located in _docs/2-building-blocks-of-oop-
 
 ## Specific Steps
 
-1. Create a `Point` class, which creates 2 dimensional point with coordinates. It
+1. Create a `Point` class, which creates 2-dimensional point with coordinates. It
    should contain:
   - two instance variables `x` and `y`;
   - default constructor which creates a point at the location of (0, 0);
@@ -53,7 +55,26 @@ The starter code for the home task is located in _docs/2-building-blocks-of-oop-
 
 ## Evaluation criteria
 
-2. Only some classes were implemented.
-3. Some classes were not implemented.
-4. Some required methods are missing. All `@ts-nocheck` comments are removed and there are no TypeScript warnings exist after that.
-5. All tasks are implemented to a full extent and all tests are passed successfully (`npm run test`). All `@ts-nocheck` comments are removed and there are no TypeScript warnings exist after that.
+<TableForMentors data={[
+  {
+    title: "Common",
+    items: [
+      {
+        text: "All @ts-nocheck comments are removed and there are no TypeScript warnings exist after that",
+        points: 1,
+      },
+      {
+        text: "All required methods for all classes are implemented",
+        points: 1,
+      },
+      {
+        text: "All classes are implemented to full extent",
+        points: 3,
+      },
+      {
+        text: "All tests are passed successfully (npm run test)",
+        points: 3,
+      },
+    ]
+  },
+]}/>

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 3
 ---
-import CodeEmbedLink from '@site/src/components/CodeEmbedLink';
+import { CodeEmbedLink } from '@site/src/components';
 
 # 2. Binary Search Tree
 
@@ -26,12 +26,10 @@ The binary search tree property allows us to print out all the values in a binar
 
 Listing 2.1 - Binary Tree Traversal
 
-````mdx-code-block
 <CodeEmbedLink
   title="Binary Tree Traversal"
   src="https://codesandbox.io/embed/binary-tree-traversal-zhenx4?expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark"
 />
-````
 
 Figure 2.2
 
@@ -52,23 +50,19 @@ Because of the BST properties, it's very easy to search for an element with a fo
 
 Listing 2.2 - searchTree
 
-````mdx-code-block
 <CodeEmbedLink
   title="Binary Tree - searchTree"
   src="https://codesandbox.io/embed/binary-tree-searchtree-mq2g4g?expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark"
 />
-````
 
 We can always find an element in a binary search tree whose value is a minimum by following left child pointers from the root until we encounter a `null`. The search of a tree's maximum is a symmetric procedure:
 
 Listing 2.3 - treeMinimum and treeMaximum
 
-````mdx-code-block
 <CodeEmbedLink
   title="Binary Tree - treeMinimum and treeMaximum"
   src="https://codesandbox.io/embed/binary-tree-treeminimum-and-treemaximum-s0bg2g?expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark"
 />
-````
 
 Given a node in a binary search tree, sometimes we need to find its successor in the sorted order determined by an inorder tree walk. If all values are distinct, the successor of a node `node` is the node with the smallest value greater than `node.value`. The strategy has three basic cases:
 - in case `tree` and `node` are the same the `null` should be returned
@@ -77,12 +71,10 @@ Given a node in a binary search tree, sometimes we need to find its successor in
 
 Listing 2.4 - getSuccessor
 
-````mdx-code-block
 <CodeEmbedLink
   title="Binary Tree - getSuccessor"
   src="https://codesandbox.io/embed/binary-tree-getsuccessor-qmk6le?expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark"
 />
-````
 
 For an example for Figure 2.2 the inorder successor of `6` is `9`, the inorder successor of `5` is `6` and inorder successor of `3` is `5`.
 
@@ -92,12 +84,10 @@ To insert a new value `value` into a binary search tree `tree`, we use the funct
 
 Listing 2.5 - insertNode
 
-````mdx-code-block
 <CodeEmbedLink
   title="Binary Tree - insertNode"
   src="https://codesandbox.io/embed/binary-tree-insertnode-rl1ytj?expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark"
 />
-````
 
 In the Figure 2.2, we want to insert `7`. We look at `9` and go left, we look at `5` and go right for `6` and insert `7` into its right subtree.
 
@@ -128,11 +118,9 @@ In the third case, we are removing element `20`. Node `20` has 2 children. To de
 
 Listing 2.6 - deleteNode
 
-````mdx-code-block
 <CodeEmbedLink
   title="Binary Tree - deleteNode"
   src="https://codesandbox.io/embed/binary-tree-deletenode-cstjdj?expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark"
 />
-````
 
 The worst-case time complexity of search, insert, and delete operations is `O(h)` where `h` is the height of the Binary Search Tree. In the worst case, we may have to travel from root to the deepest leaf node. The height of a skewed tree may become `n` (number of nodes), and the time complexity of search and insert operation may become `O(n)`.

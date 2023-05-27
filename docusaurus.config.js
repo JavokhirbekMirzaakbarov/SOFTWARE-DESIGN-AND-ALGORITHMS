@@ -1,7 +1,7 @@
 // @ts-check
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
+const lightCodeTheme = require("prism-react-renderer/themes/github");
+const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -22,7 +22,7 @@ const config = {
         docs: {
           sidebarPath: require.resolve("./sidebars.js"),
           editUrl: undefined,
-          exclude: ['**/hometask/node_modules/**']
+          exclude: ["**/hometask/node_modules/**"],
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
@@ -60,32 +60,7 @@ const config = {
         ],
       },
       footer: {
-        style: "dark",
         copyright: `Copyright © ${new Date().getFullYear()} Software Designs and Algorithms, Built with Docusaurus.`,
-        links: [
-          {
-            title: "Docs",
-            items: [
-              {
-                label: "Start learning",
-                to: "/docs/contents",
-              },
-              {
-                to: "docs/Introduction/help",
-                label: "Help",
-              },
-            ],
-          },
-          {
-            title: "Sources",
-            items: [
-              {
-                href: "https://git.epam.com/viktor_soroka/software-designs-and-algorithms",
-                label: "Gitlab",
-              },
-            ],
-          }
-        ],
       },
       prism: {
         theme: lightCodeTheme,

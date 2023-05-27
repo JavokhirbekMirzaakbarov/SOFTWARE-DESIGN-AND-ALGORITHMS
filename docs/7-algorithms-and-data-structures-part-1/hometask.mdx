@@ -4,6 +4,8 @@ sidebar_position: 7
 
 # 6. 📚 Home Task
 
+import { TableForMentors } from '@site/src/components';
+
 The home task should be done using TypeScript.
 
 ## Graph generator
@@ -88,7 +90,26 @@ Your application should work with much more complex graphs. The one provided abo
 
 ## Evaluation criteria
 
-2. Only graph generator is implemented.
-3. Graph generator is implemented and only one of the methods of `Dijkstra` interface is implemented correctly.
-4. Graph generator is implemented and both methods of `Dijkstra` interface are implemented correctly with minor issues with regard to edge cases.
-5. Graph generator is implemented and both methods of `Dijkstra` interface are implemented correctly without any issue.
+<TableForMentors data={[
+  {
+    title: "Common",
+    items: [
+      {
+        text: "Graph generator is implemented correctly",
+        points: 1,
+      },
+      {
+        text: "`findShortestPath` method is implemented correctly",
+        points: 1,
+      },
+      {
+        text: "`findAllShortestPaths` method is implemented correctly",
+        points: 1,
+      },
+      {
+        text: "`findShortestPath` and `findAllShortestPaths` work for edge cases (for case when no path can be found, for small and big datasets)",
+        points: 2,
+      },
+    ]
+  },
+]}/>

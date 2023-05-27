@@ -4,6 +4,8 @@ sidebar_position: 7
 
 # 6. 📚 Home Task
 
+import { TableForMentors } from '@site/src/components';
+
 The home task should be done using TypeScript.
 
 :::info
@@ -24,7 +26,7 @@ The line from `Item` to `Comparable` indicates that `Item` must implement the `C
 
 The `Item` class is the common ancestor to the various types of items.
 
-- All instances of `Item` should be given a unique id number. It has to be assigned in the constructor. The first instance of an item should be assigned an id of 1; the next should be assigned an id of 2, etc. 
+- All instances of `Item` should be given a unique id number. It has to be assigned in the constructor. The first instance of an item should be assigned an id of 1; the next should be assigned an id of 2, etc.
 
 - `compareTo(other: Item)`: The `Item` class implements the `Comparable` interface. This requires adding the `compareTo(other: Item)` method to the class. The `compareTo(other: Item)` method takes in another instance of `Item` and compares it to the current instance. If the current instance's value field is greater than other's value field then the method should return 1. If the current instance's value field is less than other's value field then the method should return a -1. If both items are equal, then compare the name field of the items lexicographically (meaning, compare each character in the strings based on its value, ignoring case. i.e. `A` would equal to  `a`), returning the appropriate value. 0 should be returned if name fields are equal.
 - `toString()`: for an `Item` with the name of "ring", a value of 3000, and a weight of 0.013, the method should return a string in the following format:
@@ -133,7 +135,26 @@ The `Consumable` class describes items that can be consumed. `Consumable`s also 
 
 ## Evaluation criteria
 
-2. Only some classes were implemented.
-3. Some classes were not implemented.
-4. Some required methods are missing. All `@ts-nocheck` comments are removed and there are no TypeScript warnings exist after that.
-5. All tasks are implemented to a full extent and all tests are passed successfully (`npm run test`). All `@ts-nocheck` comments are removed and there are no TypeScript warnings exist after that.
+<TableForMentors data={[
+  {
+    title: "Common",
+    items: [
+      {
+        text: "All @ts-nocheck comments are removed and there are no TypeScript warnings exist after that",
+        points: 1,
+      },
+      {
+        text: "All required methods for all classes are implemented",
+        points: 1,
+      },
+      {
+        text: "All classes are implemented to full extent",
+        points: 3,
+      },
+      {
+        text: "All tests are passed successfully (npm run test)",
+        points: 3,
+      },
+    ]
+  },
+]}/>

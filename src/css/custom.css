@@ -15,6 +15,8 @@
   --ifm-color-primary-lightest: rgb(146, 224, 208);
   --ifm-code-font-size: 95%;
   --doc-sidebar-width: 360px !important;
+  --ifm-footer-padding-vertical: 16px;
+  --ifm-footer-padding-horizontal: 16px;
 }
 
 .docusaurus-highlight-code-line {
@@ -24,11 +26,11 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
-html[data-theme='dark'] .docusaurus-highlight-code-line {
+html[data-theme="dark"] .docusaurus-highlight-code-line {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-html[data-theme='dark'] .formula {
+html[data-theme="dark"] .formula {
   filter: invert(100%);
 }
 

@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-import CodeEmbedLink from '@site/src/components/CodeEmbedLink';
+import { CodeEmbedLink } from '@site/src/components';
 
 # 1. Programming Paradigm
 
@@ -75,12 +75,10 @@ It is safe to say that object-oriented paradigm is well-suited for big projects 
 
 Listing 1.3 - Example of OOP code
 
-````mdx-code-block
 <CodeEmbedLink
   title="Example of OOP code"
   src="https://codesandbox.io/embed/example-of-oop-code-48mtqp?expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark"
 />
-````
 
 ## 1.4 Functional Programming
 - Treats computations as the evaluation of functions and avoids changing state and mutable data
@@ -91,12 +89,10 @@ Last, but not least, **Functional paradigm** describes the program as a set of f
 
 Listing 1.4 - Example of FP code
 
-````mdx-code-block
 <CodeEmbedLink
   title="Example of FP code"
   src="https://codesandbox.io/embed/example-of-fp-code-f799i2?expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark"
 />
-````
 
 In the example we have a certain nesting of certain functions, where the result of the function can be expressed as a list of arguments that are passed to this function. However, arguments can also be functions. By the way, not all programming languages can pass a function as a parameter to another function, this is the so-called first-class citizen function. JavaScript has this capability, that is why it has some concepts of functional programming.
 

@@ -1,14 +1,17 @@
 .main {
   background-color: #282c34;
-  height: calc(100vh - 267px);
-  padding: 3rem
+  background-image: url("/img/image.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: calc(100vh - 119px);
+  padding: 3rem;
 }
 
 .linksContainer {
-  width: 100%;
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+}
+
+footer {
+  padding: 10px;
 }
