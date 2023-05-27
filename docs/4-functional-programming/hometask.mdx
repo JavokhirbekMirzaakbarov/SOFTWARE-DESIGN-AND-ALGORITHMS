@@ -1,7 +1,7 @@
 ---
 sidebar_position: 6
 ---
-import CodeEmbedLink from '@site/src/components/CodeEmbedLink';
+import { TableForMentors } from '@site/src/components';
 
 # 6. 📚 Home Task
 
@@ -84,7 +84,30 @@ The first line of the table should be:
 
 ## Evaluation Criteria
 
-2. Only `main.spec` test is passed.
-3. Some tests not passed.
-4. All tests are passed, and some imperative constructions are in use (like `if`, `while`, `switch` or `for` statements, ternary operator allowed), and no `any` keywords.
-5. All tests are passed, imperative constructions are not in use, and no `any` keyword.
+<TableForMentors data={[
+  {
+    title: "Common",
+    items: [
+      {
+        text: "All tests inside 'main.spec' file are passed",
+        points: 2,
+      },
+      {
+        text: "60% of 'fp/*.spec' tests are passed",
+        points: 0.5,
+      },
+      {
+        text: "All of 'fp/*.spec' tests are passed",
+        points: 1,
+      },
+      {
+        text: "Imperative constructions (like `if`, `while`, `switch` or `for` statements, ternary operator allowed) are not in use",
+        points: 0.5,
+      },
+      {
+        text: "'any' type is used nowhere",
+        points: 1,
+      },
+    ]
+  },
+]}/>

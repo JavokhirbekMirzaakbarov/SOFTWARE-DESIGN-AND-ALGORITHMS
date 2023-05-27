@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-import CodeEmbedLink from '@site/src/components/CodeEmbedLink';
+import { CodeEmbedLink } from '@site/src/components';
 
 # 3. Divide and Conquer
 
@@ -34,12 +34,10 @@ Figure 3.1
 
 Listing 3.1 - Merge sort
 
-````mdx-code-block
 <CodeEmbedLink
   title="Merge sort"
   src="https://codesandbox.io/embed/merge-sort-czb8jn?expanddevtools=1&fontsize=14&hidenavigation=1&theme=dark"
 />
-````
 
 :::info
 The space complexity of Merge Sort implementation above is: `O(n)` It can be improved by implemented in-place merge sort when the sort is applied to the provided array without creating new one and thus saving the memory. More information about can be found [here](https://www.happycoders.eu/algorithms/merge-sort/).

@@ -4,6 +4,8 @@ sidebar_position: 7
 
 # 6. 📚 Home Task
 
+import { TableForMentors } from '@site/src/components';
+
 The home task should be done using TypeScript.
 
 :::info
@@ -130,7 +132,26 @@ You may not strictly follow every UML-diagram. If you want to replace some desig
 
 ## Evaluation criteria
 
-2. Only the step 1 is completed.
-3. Steps 3 and 4 are not completed.
-4. The last step is not completed.
-5. All the steps are completed.
+<TableForMentors data={[
+  {
+    title: "Common",
+    items: [
+      {
+        text: "Step 1 is completed",
+        points: 1,
+      },
+      {
+        text: "Step 2 is completed",
+        points: 1,
+      },
+      {
+        text: "Step 3 is completed",
+        points: 1,
+      },
+      {
+        text: "Step 4 is completed",
+        points: 1,
+      },
+    ]
+  },
+]}/>

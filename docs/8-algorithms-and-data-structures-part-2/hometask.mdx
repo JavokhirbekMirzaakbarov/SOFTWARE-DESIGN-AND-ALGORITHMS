@@ -4,6 +4,8 @@ sidebar_position: 7
 
 # 6. 📚 Home Task
 
+import { TableForMentors } from '@site/src/components';
+
 The home task should be done using TypeScript.
 
 ## Task
@@ -48,7 +50,32 @@ npm run test:scheduler
 
 ## Evaluation Criteria
 
-2. Most of the tests are failed.
-3. Some tests are failed.
-4. All tests are passed. The priority queue is not implemented with the min heap.
-5. All tests are passed. Priority queue is implemented with the min heap.
+<TableForMentors data={[
+  {
+    title: "Common",
+    items: [
+      {
+        text: "50% of tests are passed",
+        points: 1,
+      },
+      {
+        text: "70% of tests are passed",
+        points: 1,
+      },
+      {
+        text: "All tests are passed",
+        points: 2,
+      },
+      {
+        text: "The priority queue is implemented with the min heap",
+        points: 2,
+      },
+      {
+        text: "Scheduler is not recursive",
+        points: 1,
+      },
+    ]
+  },
+]}/>
+
+The priority queue is implemented with the min heap
