@@ -8,7 +8,7 @@ Another important thing in functional programming is type-classes and algebraic 
 
 ## 4.1 Type classes
 
-*Type class* is a pattern used to achieve ad-hoc polymorphism. In general, it allows you to create generic type for provided list of operations, associated with a particular type, and this type is determined by parametric polymorphism.
+*Type class* is a pattern used to achieve ad-hoc polymorphism. In general, it allows us to create generic type for provided list of operations, associated with a particular type, and this type is determined by parametric polymorphism.
 
 Sounds complex, but let's see with examples. Here's an example of a function that compares two strings:
 
@@ -19,7 +19,10 @@ const eqString = (a: string, b: string) => a === b;
 Okay, that's work. But what if we want to create more complex types?
 
 ```ts title="Listing 4.1.2 - Equality function for more complex type"
-type Student = { name: string, score: number };
+type Student = { 
+  name: string;
+  score: number;
+};
 
 const eqStudents = (a: Student, b: Student) => a.score === b.score && a.name === b.name;
 const eqStudentsScore = (a: Student, b: Student) => a.score === b.score;
@@ -238,65 +241,85 @@ This is a hard topic as well, so if you are interested, we recommend you to read
 
 ## 4.4 New version of the initial example
 
-Now, when we know all the basics of functional programming, let's rewrite our `Listing 1.2` to something more _functional_, using functors and ADTs. We will use the [fp-ts](https://gcanti.github.io/fp-ts/) library.
+Now we know the basics of functional programming, let's rewrite our `Listing 1.2` to something more _functional_, using functors and ADTs. We will use the [fp-ts](https://gcanti.github.io/fp-ts/) library.
 
-Try in sandbox: [Listing 4.4.1 - Rework of Listing 1.2](https://codesandbox.io/s/serene-gauss-0r4qvn?file=/src/index.ts)
+You can find the source here: [Listing 4.4.1 - Rework of Listing 1.2](https://codesandbox.io/s/listing-4-4-1-rework-of-listing-1-2-0r4qvn?file=/src/main.ts)
 
-```ts title="Listing 4.4.1 - Rework of Listing 1.2"
-import * as E from 'fp-ts/Either';
-import * as N from 'fp-ts/number';
-import * as NEA from 'fp-ts/NonEmptyArray';
-import * as A from 'fp-ts/Array';
-import { contramap } from 'fp-ts/Ord';
-import { pipe, flow } from 'fp-ts/function';
+This code might seem very complex at first glance, but it represents real-world functional programming well.
 
-type Student = {
+The project consists of 2 main parts: `main.ts` and `index.ts`. The main logic of the program is in the `main.ts` file; it has a `main` function which implements desired behaviour by taking `Student[]` and returning `string`. There are a lot of interesting examples of using functors, monads and ADTs, so we recommend you read them carefully.
+
+```ts title="file: main.ts"
+import * as E from "fp-ts/Either";
+import * as N from "fp-ts/number";
+import * as NEA from "fp-ts/NonEmptyArray";
+import * as A from "fp-ts/Array";
+import { contramap } from "fp-ts/Ord";
+import { pipe, flow } from "fp-ts/function";
+
+// Data
+
+export type Student = {
   name: string;
   score: number;
-  class: 'A' | 'B'
+  class: "A" | "B";
 };
 
-export const students: Array<Student> = [
-  { name: 'Jhon', score: 70, class: 'B' },
-  { name: 'James', score: 60, class: 'A' },
-  { name: 'Jones', score: 67, class: 'A' },
-  { name: 'Raul', score: 55, class: 'A' }
-];
+// Utils
 
 const byStudentScore = pipe(
   N.Ord,
+  // Contramap is suited for building Ord for different types. Like here, we build Ord<Student>
   // https://gcanti.github.io/fp-ts/modules/Ord.ts.html#contramap
   contramap((student: Student) => student.score)
 );
+
 const toNonEmptyArray = <L, R>(onEmpty: () => L) => (
   arr: Array<R>
-): E.Either<L, NEA.NonEmptyArray<R>> => (
-  arr.length === 0 ? E.left(onEmpty()) : E.right(arr as NEA.NonEmptyArray<R>)
+): E.Either<L, NEA.NonEmptyArray<R>> =>
+  pipe(NEA.fromArray(arr), E.fromOption(onEmpty));
+
+const sumScore = pipe(
+  (student: Student) => student.score, // student -> number
+  NEA.foldMap(N.SemigroupSum) // reducing and maping at the same time!
 );
-const getTailAndHead = <T>(list: NEA.NonEmptyArray<T>): [T, T] => [
+
+const tailAndHead = <T>(list: NEA.NonEmptyArray<T>): [T, T] => [
   list[0],
   list[list.length - 1]!
 ];
 
-export const main = flow(
-  toNonEmptyArray<string, Student>(() => 'The list of students is empty!'),
-  E.chain(
+// Implementation
+
+export const main: (
+  students: Array<Student>
+) => E.Either<string, string> = flow(
+  // Converting list from input to the NonEmptyArray
+  toNonEmptyArray<string, Student>(() => "The list of students is empty!"),
+  // Filtering by class A. Since we might face the issue when after filtering, there is no students - a new error might appear
+  // That's why we use flatMap to flat Either<*emptyListErr, Either<noAClassStudents, students>> to just Either<emptyListErr|noAClassStudents, students>
+  // That is what the Monad is
+  // * It's not the real types, just the meaning of the value inside the Either 
+  E.flatMap(
     flow(
-      A.filter((student) => student.class === 'A'),
-      toNonEmptyArray(() => 'There are no students from the "A" class')
+      A.filter((student) => student.class === "A"),
+      toNonEmptyArray(() => 'There is no students from the "A" class')
     )
   ),
+  // And then we map our Either<err, _students_> to Either<err, _message_>
   E.map(
     flow(
+      // Firstly we sort students
       NEA.sort(byStudentScore),
-      (sortedStudents) => (
+      // Then create a tuple of (averageScore, (lowestPerformer, highestPerformer))
+      (sortedStudents) =>
         [
           // Average score
-          sortedStudents.reduce((sum, student) => sum + student.score, 0) / sortedStudents.length,
+          (sumScore(sortedStudents) / sortedStudents.length).toFixed(2),
           // Highest and lowest performers
-          getTailAndHead(sortedStudents)
-        ] as const
-      ),
+          tailAndHead(sortedStudents)
+        ] as const,
+      // And finally produce the resulting message
       ([average, [lowest, highest]]) => `\
 Class "A":
 The highest score has: ${highest.name}, score: ${highest.score}
@@ -305,9 +328,117 @@ An average score is ${average}`
     )
   )
 );
-
-console.log(main(students));
 ```
+
+The `index.ts` file is a place where we run our program. It implements asking the "database", calling the `main` function, and printing the result to the browser (in DOM) or the console based on the passed parameter. You can find here a good example of using the `Effect` (in the context of fp-ts `IO`) and `Task` monad and the overall approach of writing effect-full code `purely`.
+
+```ts title="file: index.ts"
+import { flow, pipe } from "fp-ts/function";
+import * as T from "fp-ts/Task";
+import * as TE from "fp-ts/TaskEither";
+import * as IO from "fp-ts/IO";
+import * as IOE from "fp-ts/lib/IOEither";
+import * as E from "fp-ts/Either";
+
+import { Student, main } from "./main";
+
+const fetchFromDB: TE.TaskEither<string, Array<Student>> = T.delay(200)(
+  TE.right([
+    { name: "Jhon", score: 70, class: "B" },
+    { name: "James", score: 60, class: "A" },
+    { name: "Jones", score: 67, class: "A" },
+    { name: "Raul", score: 55, class: "A" }
+  ])
+  // You can replace it with the "left" to see an error message
+  // TE.left('DB: connection refused')
+);
+
+// DOM manipulation
+const getEl = (id: string): IOE.IOEither<string, HTMLElement> =>
+  flow(
+    () => document.getElementById(id),
+    E.fromNullable(`DOM: There is no such #${id} element`)
+  );
+
+const printTo = (id: string) => (content: string) =>
+  pipe(
+    getEl(id),
+    IOE.map((el) => {
+      el.innerText = content;
+    })
+  );
+
+// console manipulation
+const logAs = (type: "message" | "error") => (
+  message: string
+): IO.IO<void> => () => {
+  // Since all this function is an effect, it's absolutely okay to use imperative constructions like "if"
+  if (type === "error") console.error(message);
+  else console.log(message);
+};
+const logMessage = logAs("message");
+const logError = logAs("error");
+// You can as well change output channel to the DOM
+/*
+const logError = flow(
+  printTo("error"),
+  // Since accessing the DOM can produce error, we need to reduce our IOEither to IO
+  IOE.getOrElse(logAs("error")),
+);
+*/
+
+const print = (to: "DOM" | "console") => (
+  content: string
+): IOE.IOEither<string, void> =>
+  to === "DOM"
+    ? // You can try to replace "app" with another non-existing ID and see an error in the console
+    printTo("app")(content)
+    : // We need to lift IO to IOEither here
+    IOE.fromIO(logMessage(content));
+
+// The program
+
+// The essence of the program - it returns some IO, effectful computation, in our case it's printing to the console or the DOM 
+// Here we just fetch the data from the "database", push it to the "main" function and then print the result
+const program: T.Task<IO.IO<void>> = pipe(
+  // fetch our students from "database"
+  fetchFromDB,
+  TE.match(
+    // In case of db error return error logger
+    logError,
+    flow(
+      main,
+      // In case if everything was okay - print result to the DOM
+      E.map(print("DOM")),
+      // At this moment, we have Either<studentsError, IOEither<printError, void>>
+      // We need to transoform it to IOEither<studentsError, IOEither<printError, void>>
+      IOE.fromEither,
+      // And then flatten to the IOEither<studentsError|printError, void>
+      IOE.flatten,
+      // In case of error in "print" or "main" function return the error logger
+      IOE.getOrElse(logError)
+    )
+  )
+);
+
+// Dead Zone: executing
+
+const run = (io: IO.IO<void>) => io();
+run(pipe(program, T.map(run)));
+
+/**
+ * Try to play around with the data and see how the app behaves
+ * For example, replace the DB response with an error (uncomment the corresponding line)
+ * Or make a list of students empty, or remove all students from class "A"
+ * Or you can remove the element with the "app" id from the index.html
+ */
+```
+
+:::info
+We still have not explained what a Monad is, but we used it in the description and the example. It's an advanced topic; you can explore it if you want to deepen your FP knowledge.
+
+But in straightforward terms, it's a functor with a `flatMap`(sometimes called `chain`) method. `flatMap` unwraps the mapping result; you might be familiar with this from the `Array.prototype.flatMap`. Yes, `Array` is a monad as well!
+:::
 
 ## 4.5 What's the point of all of it?
 
@@ -319,7 +450,7 @@ But can functional programming resolve this problem? All these concepts are alre
 
 1. Single Responsibility - Our functions are pure and referentially transparent; we're composing functions to create a new one and combining them in type classes. With such a restriction, we cannot even potentially make them do something different than they should.
 2. Open-Closed - We have one function which does only one most primitive thing. We can create new functions via composition. We may have different base-type classes and monoids, and we can derive new ones from them. We never change the existing ones; we only extend them.
-3. Liskov Substitution - The most intriguing one! All this hierarchy of type classes like Monoids, Functors and others allows us to construct programs abstractly. Does my function accept Monoid? I can pass whatever Monoid of any type we want! If our application relies on some Effect Functor, and with time we need to use another one, more performant and async - we can change it at the beginning of the program, and everything would work as expected! Because it would obey the same laws as the previous one.
+3. Liskov Substitution - The most intriguing one! All this hierarchy of type classes like Monoids, Functors and others allows us to construct programs abstractly. Does our function accept Monoid? We can pass whatever Monoid of any type we want! If our application relies on some Effect Functor, and with time we need to use another one, more performant and async - we can change it at the beginning of the program, and everything would work as expected! Because it would obey the same laws as the previous one.
 4. Interface Segregation - Type classes segregated by their purpose. We might have some function that accepts the parameter of Functor, but with time we also want it to be, for example, Applicative - you're welcome, extend it, and nothing breaks!
 5. Dependency Inversion - The essence of Functional Programming. We always have absolute control over what is going on during computations. Computational flow is abstract, and every function obeys strict laws, so we can be sure of what it does by looking at its type signature.
 

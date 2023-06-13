@@ -15,10 +15,17 @@ As we have seen from examples before - JS supports main functional principles, b
 But, some features are missed:
 
 * Higher-kinded types
-* Tail call optimizations
-* Built-in pattern matching
+* Tail call optimisations
+* Pattern matching
 * Built-in algebraic data types
-* In general, syntax of TS is not so convenient for FP, as for instance in Haskell or Scala 
+* Built-in Immutable data structures
+* Lazy evaluation
+* No built-in support for type-classes. You can only emulate them
+* Type system is less powerful than in Haskell or Scala. It's partially strong and not sound - it's possible to bypass the compiler, and types are not always guaranteed to be correct
+* Less powerful abstractions for polymorphism
+* In general, the syntax of TS is not so convenient for FP, as, for instance, in Haskell or Scala
+
+You can as well explore this fascinating official introduction to TypeScript for functional programmers - [TypeScript for Functional Programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes-func.html)
 
 ## 5.1 Widespread functional JS libraries
 
