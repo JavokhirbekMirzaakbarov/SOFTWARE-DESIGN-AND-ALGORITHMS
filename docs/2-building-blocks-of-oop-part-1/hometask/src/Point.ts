@@ -10,9 +10,9 @@ export class Point {
   constructor(x: number, y: number);
 
   // Common implementation
-  constructor(x?: number, y?: number) {
-    this.x = x || 0;
-    this.y = y || 0;
+  constructor(x: number = 0, y: number = 0) {
+    this.x = x;
+    this.y = y;
   }
 
   private calculateDistance(x1: number, x2: number, y1: number, y2: number): number {

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Triangle } from "./Triangle";
 import { Point } from "./Point";
 
