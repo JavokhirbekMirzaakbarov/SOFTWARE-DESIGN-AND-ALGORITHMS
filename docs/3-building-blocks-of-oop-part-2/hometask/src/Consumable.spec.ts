@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { Consumable } from "./Consumable";
 
 // @ts-expect-error

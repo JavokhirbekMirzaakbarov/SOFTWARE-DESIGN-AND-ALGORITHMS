@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { Bow } from "./Bow";
 
 describe("Bow", () => {

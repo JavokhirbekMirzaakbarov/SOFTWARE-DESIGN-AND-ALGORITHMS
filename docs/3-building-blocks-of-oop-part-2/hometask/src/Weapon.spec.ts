@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { Weapon } from "./Weapon";
 
 // @ts-expect-error
