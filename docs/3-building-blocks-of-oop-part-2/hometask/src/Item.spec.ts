@@ -1,5 +1,3 @@
-// @ts-nocheck
-
 import { Item } from "./Item";
 
 // @ts-expect-error
