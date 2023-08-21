@@ -6,14 +6,14 @@ import {
   left,
   getOrElse,
   flatten,
-} from "./fp/either";
-import { pipe } from "./fp/utils";
-import { fetchClient, fetchExecutor } from "./fetching";
-import { ClientUser, ExecutorUser, Demand, Point } from "./types";
-import { Maybe, isSome } from "./fp/maybe";
-import { fromNullable } from "./fp/maybe";
-import { fromCompare, ordNumber } from "./fp/ord";
-import { sort } from "./fp/array";
+} from './fp/either';
+import { pipe } from './fp/utils';
+import { fetchClient, fetchExecutor } from './fetching';
+import { ClientUser, ExecutorUser, Demand, Point } from './types';
+import { Maybe, isSome } from './fp/maybe';
+import { fromNullable } from './fp/maybe';
+import { fromCompare, ordNumber } from './fp/ord';
+import { sort } from './fp/array';
 
 type Response<R> = Promise<Either<string, R>>;
 
@@ -30,8 +30,8 @@ const getClients = (): Response<Array<ClientUser>> => {
 };
 
 export enum SortBy {
-  distance = "distance",
-  reward = "reward",
+  distance = 'distance',
+  reward = 'reward',
 }
 
 const getDistance = (point1: Point, point2: Point) => {
@@ -52,7 +52,7 @@ export const show =
         : client;
     });
 
-    const clientSordOrd =
+    const clientSortOrd =
       sortBy === SortBy.reward
         ? fromCompare((client2: ClientUser, client1: ClientUser) =>
             ordNumber.compare(client1[sortBy], client2[sortBy])
@@ -73,7 +73,7 @@ export const show =
         clients.length
       } clients\n
 Available clients sorted by ${
-        sortBy === SortBy.reward ? "highest reward" : "distance to executor"
+        sortBy === SortBy.reward ? 'highest reward' : 'distance to executor'
       }:`;
 
     const getSortedClientsString = (sortedClients: Array<ClientUser>) =>
@@ -83,21 +83,21 @@ Available clients sorted by ${
           executor.position
         )}, reward: ${client.reward}`;
         return acc;
-      }, "");
+      }, '');
 
     return clientsFilteredByDemand.length > 0
       ? clientsFilteredByDemand.length === clients.length
-        ? right("This executor meets all demands of all clients!")
+        ? right('This executor meets all demands of all clients!')
         : right(
             `${getFullMessage(
               clientsFilteredByDemand,
               clients,
               sortBy
             )}${getSortedClientsString(
-              sort(clientSordOrd)(clientsFilteredByDemand)
+              sort(clientSortOrd)(clientsFilteredByDemand)
             )}`
           )
-      : left("This executor cannot meet the demands of any client!");
+      : left('This executor cannot meet the demands of any client!');
   };
 
 export const main = (sortBy: SortBy): Promise<string> =>

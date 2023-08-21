@@ -1,4 +1,4 @@
-import { Maybe, none, some } from "./maybe";
+import { Maybe, none, some } from './maybe';
 
 export const constant =
   <A>(a: A) =>
@@ -20,8 +20,8 @@ export function flow<A, B, C, D, E>(
   fc: (c: C) => D,
   fd: (d: D) => E
 ): (a: A) => E;
-export function flow(...fns: Array<(...args: Array<any>) => any>) {
-  return (a: any) => fns.reduce((acc, fn) => fn(acc), a);
+export function flow<T>(...fns: Array<(arg: T) => T>): (arg: T) => T {
+  return (a: T) => fns.reduce((acc, fn) => fn(acc), a);
 }
 
 /**
