@@ -1,9 +1,9 @@
 export type Left<E> = {
-  _tag: "Left";
+  _tag: 'Left';
   left: E;
 };
 export type Right<A> = {
-  _tag: "Right";
+  _tag: 'Right';
   right: A;
 };
 
@@ -19,7 +19,7 @@ export type Either<E, A> = Left<E> | Right<A>;
  * Creates Right (correct) instance
  */
 export const right = <E = never, A = never>(val: A): Either<E, A> => ({
-  _tag: "Right",
+  _tag: 'Right',
   right: val,
 });
 
@@ -27,14 +27,14 @@ export const right = <E = never, A = never>(val: A): Either<E, A> => ({
  * Creates Left (error) instance
  */
 export const left = <E = never, A = never>(val: E): Either<E, A> => ({
-  _tag: "Left",
+  _tag: 'Left',
   left: val,
 });
 
 export const isRight = <E, A>(val: Either<E, A>): val is Right<A> =>
-  val._tag === "Right";
+  val._tag === 'Right';
 export const isLeft = <E, A>(val: Either<E, A>): val is Left<E> =>
-  val._tag === "Left";
+  val._tag === 'Left';
 
 /**
  * Add possibility to act as a Functor https://en.wikipedia.org/wiki/Functor

@@ -21,20 +21,19 @@ export interface Ord<A> extends Setoid<A> {
  */
 export const ordNumber: Ord<number> = {
   equals: (x: number, y: number) => x === y,
-  compare: (x: number, y: number) => x < y
-    ? Ordering.less
-    : x > y
-      ? Ordering.greater
-      : Ordering.equal,
+  compare: (x: number, y: number) =>
+    x < y ? Ordering.less : x > y ? Ordering.greater : Ordering.equal,
 };
 
 /**
  * Creates instance of Ord based on passed the predicate
  * See examples in the tests
  */
-export const fromCompare = <A>(predicate: (x: A, y: A) => Ordering): Ord<A> => ({
+export const fromCompare = <A>(
+  predicate: (x: A, y: A) => Ordering
+): Ord<A> => ({
   equals: (x: A, y: A) => predicate(x, y) === Ordering.equal,
-  compare: (x: A, y: A) => predicate(x, y)
+  compare: (x: A, y: A) => predicate(x, y),
 });
 
 /**
@@ -42,5 +41,5 @@ export const fromCompare = <A>(predicate: (x: A, y: A) => Ordering): Ord<A> => (
  */
 export const revert = <A>(ord: Ord<A>): Ord<A> => ({
   equals: ord.equals,
-  compare: (x: A, y: A) => ord.compare(y, x)
+  compare: (x: A, y: A) => ord.compare(y, x),
 });

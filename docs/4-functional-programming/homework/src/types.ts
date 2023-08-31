@@ -1,4 +1,4 @@
-import { Maybe } from "./fp/maybe";
+import { Maybe } from './fp/maybe';
 
 export interface Point {
   x: number;
@@ -11,9 +11,9 @@ export interface User {
 }
 
 export enum Demand {
-  Driving = "Driving",
-  Fighting = "Fighting",
-  Fishing = "Fishing",
+  Driving = 'Driving',
+  Fighting = 'Fighting',
+  Fishing = 'Fishing',
 }
 
 export interface ClientUser extends User {

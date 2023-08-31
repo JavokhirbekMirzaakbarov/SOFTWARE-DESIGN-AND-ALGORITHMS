@@ -15,6 +15,5 @@ export interface Setoid<A> {
 }
 
 export const setoidString: Setoid<string> = {
-  equals: (x, y) => x === y
+  equals: (x, y) => x === y,
 };
-
